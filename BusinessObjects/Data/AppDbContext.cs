@@ -27,9 +27,13 @@ namespace BusinessObjects.Data
         public virtual DbSet<Order>? Orders { get; set; }
         public virtual DbSet<OrderDetail>? OrderDetails { get; set; }
         public virtual DbSet<User>? Members { get; set; }
-        protected override void OnModelCreating(ModelBuilder optionsBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            optionsBuilder.Entity<OrderDetail>().HasKey(order => new { order.Id, order.ProductId });
+            modelBuilder.Entity<Order>()
+                .HasOne(order => order.OrderDetail)
+                .WithOne(orderDetail => orderDetail.Order)
+                .HasForeignKey<OrderDetail>(orderDetail => orderDetail.OrderForeignKey);
         }
     }
 }

@@ -10,13 +10,13 @@ namespace BusinessObjects.Model
     public class Order
     {
         [Key]
-        public int Id { get; set; }
+        public int OrderId { get; set; }
         public int? UserId { get; set; }
         public DateTime? OrderDate { get; set; }
         public DateTime? RequiredDate { get; set; }
         public DateTime? ShippedDate { get; set; }
         public decimal? Freight { get; set; }
-        public virtual User? user { get; set; }
+        public virtual User? User { get; set; }
         public virtual OrderDetail? OrderDetail { get; set; }
     }
 }
