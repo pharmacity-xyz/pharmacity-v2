@@ -1,0 +1,264 @@
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\appsettings.Development.json
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\appsettings.json
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.exe
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.deps.json
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.runtimeconfig.json
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.pdb
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\System.Drawing.Common.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\System.Runtime.Caching.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\System.Windows.Extensions.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\BusinessObjects.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\DataAccess.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Repositories.dll
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\DataAccess.pdb
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\Repositories.pdb
+F:\.NET\_PRN\assignment1\StoreAPI\bin\Debug\net6.0\BusinessObjects.pdb
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.AssemblyReference.cache
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.GeneratedMSBuildEditorConfig.editorconfig
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.AssemblyInfoInputs.cache
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.AssemblyInfo.cs
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.CoreCompileInputs.cache
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.MvcApplicationPartsAssemblyInfo.cs
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.MvcApplicationPartsAssemblyInfo.cache
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\staticwebassets.build.json
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\staticwebassets.development.json
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\scopedcss\bundle\StoreAPI.styles.css
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.CopyComplete
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.dll
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\refint\StoreAPI.dll
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.pdb
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.genruntimeconfig.cache
+F:\.NET\_PRN\assignment1\StoreAPI\obj\Debug\net6.0\ref\StoreAPI.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\appsettings.Development.json
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\appsettings.json
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.exe
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.deps.json
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.runtimeconfig.json
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.pdb
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\System.Runtime.Caching.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\System.Windows.Extensions.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\BusinessObjects.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\DataAccess.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Repositories.dll
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\DataAccess.pdb
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\Repositories.pdb
+D:\FPT Courses\assignment1\StoreAPI\bin\Debug\net6.0\BusinessObjects.pdb
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.AssemblyReference.cache
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.AssemblyInfoInputs.cache
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.AssemblyInfo.cs
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.CoreCompileInputs.cache
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.MvcApplicationPartsAssemblyInfo.cs
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\staticwebassets.build.json
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\staticwebassets.development.json
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\scopedcss\bundle\StoreAPI.styles.css
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.CopyComplete
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.dll
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\refint\StoreAPI.dll
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.pdb
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.genruntimeconfig.cache
+D:\FPT Courses\assignment1\StoreAPI\obj\Debug\net6.0\ref\StoreAPI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\appsettings.Development.json
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\appsettings.json
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.exe
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.deps.json
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.runtimeconfig.json
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Drawing.Common.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Runtime.Caching.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Windows.Extensions.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\BusinessObjects.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\DataAccess.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Repositories.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\DataAccess.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Repositories.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\BusinessObjects.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.AssemblyReference.cache
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.AssemblyInfoInputs.cache
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.AssemblyInfo.cs
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.CoreCompileInputs.cache
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.MvcApplicationPartsAssemblyInfo.cs
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.MvcApplicationPartsAssemblyInfo.cache
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\staticwebassets.build.json
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\staticwebassets.development.json
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\scopedcss\bundle\StoreAPI.styles.css
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.CopyComplete
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\refint\StoreAPI.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.genruntimeconfig.cache
+D:\Code\Web\Fullstack\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\ref\StoreAPI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\appsettings.json
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.exe
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.deps.json
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.runtimeconfig.json
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\StoreAPI.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.OpenApi.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Runtime.Caching.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\BusinessObjects.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\DataAccess.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Repositories.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\DataAccess.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\Repositories.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\bin\Debug\net6.0\BusinessObjects.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.AssemblyReference.cache
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.AssemblyInfoInputs.cache
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.AssemblyInfo.cs
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.CoreCompileInputs.cache
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\scopedcss\bundle\StoreAPI.styles.css
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.csproj.CopyComplete
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\refint\StoreAPI.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\StoreAPI.genruntimeconfig.cache
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\StoreAPI\obj\Debug\net6.0\ref\StoreAPI.dll

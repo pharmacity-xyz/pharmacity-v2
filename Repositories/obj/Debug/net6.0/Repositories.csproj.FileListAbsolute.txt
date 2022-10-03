@@ -1,0 +1,72 @@
+F:\.NET\_PRN\assignment1\Repositories\bin\Debug\net6.0\appsettings.json
+F:\.NET\_PRN\assignment1\Repositories\bin\Debug\net6.0\Repositories.deps.json
+F:\.NET\_PRN\assignment1\Repositories\bin\Debug\net6.0\Repositories.dll
+F:\.NET\_PRN\assignment1\Repositories\bin\Debug\net6.0\Repositories.pdb
+F:\.NET\_PRN\assignment1\Repositories\bin\Debug\net6.0\BusinessObjects.dll
+F:\.NET\_PRN\assignment1\Repositories\bin\Debug\net6.0\DataAccess.dll
+F:\.NET\_PRN\assignment1\Repositories\bin\Debug\net6.0\BusinessObjects.pdb
+F:\.NET\_PRN\assignment1\Repositories\bin\Debug\net6.0\DataAccess.pdb
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.AssemblyReference.cache
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\Repositories.AssemblyInfoInputs.cache
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\Repositories.AssemblyInfo.cs
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.CoreCompileInputs.cache
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.CopyComplete
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\Repositories.dll
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\refint\Repositories.dll
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\Repositories.pdb
+F:\.NET\_PRN\assignment1\Repositories\obj\Debug\net6.0\ref\Repositories.dll
+D:\FPT Courses\assignment1\Repositories\bin\Debug\net6.0\appsettings.json
+D:\FPT Courses\assignment1\Repositories\bin\Debug\net6.0\Repositories.deps.json
+D:\FPT Courses\assignment1\Repositories\bin\Debug\net6.0\Repositories.dll
+D:\FPT Courses\assignment1\Repositories\bin\Debug\net6.0\Repositories.pdb
+D:\FPT Courses\assignment1\Repositories\bin\Debug\net6.0\BusinessObjects.dll
+D:\FPT Courses\assignment1\Repositories\bin\Debug\net6.0\DataAccess.dll
+D:\FPT Courses\assignment1\Repositories\bin\Debug\net6.0\BusinessObjects.pdb
+D:\FPT Courses\assignment1\Repositories\bin\Debug\net6.0\DataAccess.pdb
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.AssemblyReference.cache
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\Repositories.AssemblyInfoInputs.cache
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\Repositories.AssemblyInfo.cs
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.CoreCompileInputs.cache
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.CopyComplete
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\Repositories.dll
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\refint\Repositories.dll
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\Repositories.pdb
+D:\FPT Courses\assignment1\Repositories\obj\Debug\net6.0\ref\Repositories.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\bin\Debug\net6.0\appsettings.json
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\bin\Debug\net6.0\Repositories.deps.json
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\bin\Debug\net6.0\Repositories.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\bin\Debug\net6.0\Repositories.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\bin\Debug\net6.0\BusinessObjects.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\bin\Debug\net6.0\DataAccess.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\bin\Debug\net6.0\BusinessObjects.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\bin\Debug\net6.0\DataAccess.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.AssemblyReference.cache
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.AssemblyInfoInputs.cache
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.AssemblyInfo.cs
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.CoreCompileInputs.cache
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.CopyComplete
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\refint\Repositories.dll
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.pdb
+D:\Code\Web\Fullstack\eFishShop\assignment1\Repositories\obj\Debug\net6.0\ref\Repositories.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\bin\Debug\net6.0\appsettings.json
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\bin\Debug\net6.0\Repositories.deps.json
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\bin\Debug\net6.0\Repositories.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\bin\Debug\net6.0\Repositories.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\bin\Debug\net6.0\BusinessObjects.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\bin\Debug\net6.0\DataAccess.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\bin\Debug\net6.0\BusinessObjects.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\bin\Debug\net6.0\DataAccess.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.AssemblyReference.cache
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.AssemblyInfoInputs.cache
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.AssemblyInfo.cs
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.CoreCompileInputs.cache
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.csproj.CopyComplete
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\refint\Repositories.dll
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\Repositories.pdb
+C:\Users\peter\Downloads\eFishShop\eFishShop\assignment1\Repositories\obj\Debug\net6.0\ref\Repositories.dll
