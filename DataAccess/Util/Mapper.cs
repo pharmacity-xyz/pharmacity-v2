@@ -10,19 +10,19 @@ namespace DataAccess.Util
 {
     public class Mapper
     {
-        public static MemberDTO mapToDTO(Member member)
+        public static MemberDTO mapToDTO(User user)
         {
-            if (member != null)
+            if (user != null)
             {
                 MemberDTO memberDTO = new MemberDTO
                 {
-                    MemberId = member.MemberId,
-                    Email = member.Email,
-                    Country = member.Country,
-                    CompanyName = member.CompanyName,
-                    City = member.City,
-                    Password = member.Password,
-                    Role = member.Role
+                    UserId = user.UserId,
+                    Email = user.Email,
+                    Country = user.Country,
+                    CompanyName = user.CompanyName,
+                    City = user.City,
+                    Password = user.Password,
+                    Role = user.Role
                 };
                 return memberDTO;
             }
@@ -37,7 +37,7 @@ namespace DataAccess.Util
         {
             OrderDTO orderDTO = new OrderDTO
             {
-                MemberId = order.MemberId,
+                UserId = order.UserId,
                 OrderDate = order.OrderDate,
                 OrderId = order.OrderId,
                 RequiredDate = order.RequiredDate,
@@ -52,7 +52,7 @@ namespace DataAccess.Util
             OrderDetailDTO orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
             {
                 Discount = (double)orderDetail.Discount,
-                OrderId = orderDetail.OrderId,
+                OrderId = orderDetail.OrderDetailId,
                 ProductId = orderDetail.ProductId,
                 ProductName = orderDetail.Product.ProductName,
                 Quantity = orderDetail.Quantity,
@@ -88,11 +88,11 @@ namespace DataAccess.Util
             return categoryDTO;
         }
 
-        public static Member mapToEntity(MemberDTO memberDTO)
+        public static User mapToEntity(MemberDTO memberDTO)
         {
-            Member member = new Member
+            User user = new User
             {
-                MemberId = memberDTO.MemberId,
+                UserId = memberDTO.UserId,
                 Email = memberDTO.Email,
                 Country = memberDTO.Country,
                 CompanyName = memberDTO.CompanyName,
@@ -101,14 +101,14 @@ namespace DataAccess.Util
                 Role = memberDTO.Role.ToString()
             };
 
-            return member;
+            return user;
         }
 
         public static Order mapToEntity(OrderDTO orderDTO)
         {
             Order order = new Order
             {
-                MemberId = orderDTO.MemberId,
+                UserId = orderDTO.UserId,
                 OrderDate = orderDTO.OrderDate,
                 OrderId = orderDTO.OrderId,
                 RequiredDate = orderDTO.RequiredDate,
