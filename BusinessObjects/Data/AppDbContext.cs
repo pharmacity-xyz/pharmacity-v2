@@ -26,10 +26,10 @@ namespace BusinessObjects.Data
         public virtual DbSet<Product>? Products { get; set; }
         public virtual DbSet<Order>? Orders { get; set; }
         public virtual DbSet<OrderDetail>? OrderDetails { get; set; }
-        public virtual DbSet<Member>? Members { get; set; }
+        public virtual DbSet<User>? Members { get; set; }
         protected override void OnModelCreating(ModelBuilder optionsBuilder)
         {
-            optionsBuilder.Entity<OrderDetail>().HasKey(o => new { o.OrderId, o.ProductId });
+            optionsBuilder.Entity<OrderDetail>().HasKey(order => new { order.Id, order.ProductId });
         }
     }
 }
