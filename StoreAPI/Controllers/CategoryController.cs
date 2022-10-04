@@ -45,7 +45,7 @@ namespace StoreAPI.Controllers
                 }
                 else if (user.Role != Role.ADMIN.ToString())
                 {
-                    throw new Exception("Please login with admin account");
+                    throw new Exception("Please login with admin");
                 }
 
                 categoryRepository.Add(category);
@@ -74,7 +74,7 @@ namespace StoreAPI.Controllers
                         orderRepository.Delete(order.OrderId);
                     }
                 }
-                return Ok("SUCCESS");
+                return Ok("Successfully deleted");
             }
             catch (Exception e)
             {
@@ -90,9 +90,13 @@ namespace StoreAPI.Controllers
             {
                 UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null || user.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
+                }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
                 }
 
                 categoryRepository.Update(category);
