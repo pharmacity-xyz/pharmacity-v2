@@ -113,7 +113,7 @@ namespace DataAccess
                 }
                 else
                 {
-                    throw new Exception("Order detail does not exist!!!");
+                    throw new Exception("Order detail does not exist");
                 }
             }
             catch (Exception e)
