@@ -15,24 +15,22 @@ namespace StoreAPI.Controllers
         private readonly IOrderRepository orderRepository;
         private readonly IOrderDetailRepository orderDetailRepository;
 
-        public ProductController(IProductRepository productRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
+        public ProductController(
+            IProductRepository productRepository,
+            IOrderRepository orderRepository,
+            IOrderDetailRepository orderDetailRepository
+        )
         {
             this.productRepository = productRepository;
             this.orderRepository = orderRepository;
             this.orderDetailRepository = orderDetailRepository;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("get_all")]
         public IActionResult GetAll()
         {
             try
             {
-                //MemberDTO member = LoggedUser.Instance.User;
-
-                //if (member == null)
-                //{
-                //    throw new Exception("Can't do this action");
-                //}
                 return Ok(productRepository.GetProducts());
             }
             catch (Exception e)
@@ -42,7 +40,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("GetById/{id}")]
+        [HttpGet("get_by_id/{id}")]
         public IActionResult GetId(int id)
         {
             try
@@ -56,7 +54,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("GetByCategory/{id}")]
+        [HttpGet("get_by_category/{id}")]
         public IActionResult GetCategoryId(int id)
         {
             try
@@ -70,12 +68,12 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("Add")]
+        [HttpPost("add")]
         public IActionResult Add(ProductDTO product)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
                 if (user == null || user.Role != Role.ADMIN.ToString())
                 {
@@ -92,12 +90,12 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut("update")]
         public IActionResult Update(ProductDTO product)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
                 if (user == null || user.Role != Role.ADMIN.ToString())
                 {
@@ -113,12 +111,12 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
                 if (user == null || user.Role != Role.ADMIN.ToString())
                 {
