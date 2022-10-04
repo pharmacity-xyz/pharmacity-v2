@@ -78,7 +78,7 @@ namespace StoreAPI.Controllers
                 foreach (OrderDTO order in orderList)
                 {
                     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                    order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
+                    // order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
                 }
                 return Ok(orderList);
             }

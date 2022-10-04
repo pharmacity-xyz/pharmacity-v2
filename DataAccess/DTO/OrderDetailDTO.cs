@@ -17,6 +17,6 @@ namespace DataAccess.DTO
         public double Discount { get; set; }
         public double TotalPrice { get; set; }
         public int OrderForeignKey { get; set; }
-        public int CategoryId { get; set; }
+        // public int CategoryId { get; set; }
     }
 }
