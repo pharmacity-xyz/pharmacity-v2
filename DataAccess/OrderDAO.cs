@@ -54,7 +54,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                orders = db.Orders.ToList().FindAll(c => c.MemberId == id);
+                orders = db.Orders.ToList().FindAll(c => c.UserId == id);
             }
             catch (Exception e)
             {
