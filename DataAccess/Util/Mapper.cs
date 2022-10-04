@@ -69,7 +69,7 @@ namespace DataAccess.Util
                 Price = product.Price,
                 UnitsInStock = product.UnitInStock,
                 CategoryId = product.CategoryId,
-                CategoryName = product.Category?.Name
+                // CategoryName = product.Category?.Name
             };
             return productDTO;
         }
