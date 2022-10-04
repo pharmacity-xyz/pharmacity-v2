@@ -10,11 +10,11 @@ namespace DataAccess.Util
 {
     public class Mapper
     {
-        public static UserDTO mapToDTO(User user)
+        public static UserDTO? mapToDTO(User user)
         {
             if (user != null)
             {
-                UserDTO memberDTO = new UserDTO
+                return new UserDTO
                 {
                     UserId = user.UserId,
                     Email = user.Email,
@@ -24,7 +24,6 @@ namespace DataAccess.Util
                     Password = user.Password,
                     Role = user.Role
                 };
-                return memberDTO;
             }
             else
             {

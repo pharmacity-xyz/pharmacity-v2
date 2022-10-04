@@ -4,14 +4,14 @@ namespace StoreAPI.Storage
 {
     internal class LoggedUser
     {
-        private static LoggedUser instance = null;
+        private static LoggedUser? instance = null;
         private static readonly object iLock = new object();
         public LoggedUser()
         {
 
         }
 
-        public static LoggedUser Instance
+        public static LoggedUser? Instance
         {
             get
             {
@@ -25,6 +25,6 @@ namespace StoreAPI.Storage
                 }
             }
         }
-        public UserDTO User { get; set; }
+        public UserDTO? User { get; set; }
     }
 }
