@@ -54,7 +54,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                orderDetail = db.OrderDetails.Include(c => c.Product).SingleOrDefault(c => c.OrderId == id);
+                orderDetail = db.OrderDetails.Include(c => c.Product).SingleOrDefault(c => c.OrderForeignKey == id);
             }
             catch (Exception e)
             {
@@ -81,7 +81,7 @@ namespace DataAccess
         {
             try
             {
-                OrderDetail _orderDetail = GetById((int)orderDetail.OrderId);
+                OrderDetail _orderDetail = GetById((int)orderDetail.OrderDetailId);
                 if (_orderDetail != null)
                 {
                     var db = new AppDbContext();
