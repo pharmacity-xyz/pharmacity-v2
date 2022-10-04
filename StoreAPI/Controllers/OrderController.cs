@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using StoreAPI.Storage;
+using NpgsqlTypes;
 
 namespace StoreAPI.Controllers
 {
@@ -11,13 +12,12 @@ namespace StoreAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository orderRepository;
-        private readonly IOrderDetailRepository orderDetailRepository;
+        // private readonly IOrderDetailRepository orderDetailRepository;
         private readonly IProductRepository productRepository;
 
-        public OrderController(IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IProductRepository productRepository)
+        public OrderController(IOrderRepository orderRepository, IProductRepository productRepository)
         {
             this.orderRepository = orderRepository;
-            this.orderDetailRepository = orderDetailRepository;
             this.productRepository = productRepository;
         }
 
@@ -27,10 +27,10 @@ namespace StoreAPI.Controllers
             try
             {
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
-                foreach (OrderDTO order in orderList)
-                {
-                    order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                }
+                // foreach (OrderDTO order in orderList)
+                // {
+                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
+                // }
                 return Ok(orderList);
             }
             catch (Exception e)
@@ -53,7 +53,7 @@ namespace StoreAPI.Controllers
                 }
 
                 OrderDTO order = orderRepository.GetOrderById(id);
-                order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
+                // order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
                 return Ok(order);
             }
             catch (Exception e)
@@ -75,11 +75,11 @@ namespace StoreAPI.Controllers
                 }
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrdersByUserId(userid);
-                foreach (OrderDTO order in orderList)
-                {
-                    order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                    // order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
-                }
+                // foreach (OrderDTO order in orderList)
+                // {
+                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
+                // order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
+                // }
                 return Ok(orderList);
             }
             catch (Exception e)
@@ -93,20 +93,8 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                ProductDTO orderProduct = productRepository.GetProductById((int)newOrder.OrderDetail!.ProductId!);
-
-                if (orderProduct.UnitsInStock < newOrder.OrderDetail.Quantity)
-                {
-                    throw new Exception("Units in stock of " + orderProduct.ProductName + " not enough");
-                }
-
-                newOrder.OrderedDate = DateTime.Now;
-                newOrder.OrderDetail.ProductName = orderProduct.ProductName;
-                newOrder.OrderDetail.Price = orderProduct.Price;
-
-                orderProduct.UnitsInStock -= (int)newOrder.OrderDetail.Quantity!;
-
-                productRepository.UpdateProduct(orderProduct);
+                newOrder.OrderedDate = DateTime.UtcNow;
+                newOrder.ShipDate = DateTime.UtcNow;
                 orderRepository.Add(newOrder);
 
                 return Ok("Successfully added");
@@ -122,7 +110,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                orderDetailRepository.Delete(id);
+                // orderDetailRepository.Delete(id);
                 orderRepository.Delete(id);
                 return Ok("Successfully deleted");
             }

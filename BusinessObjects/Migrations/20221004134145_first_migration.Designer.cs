@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221004093322_secondmigration")]
-    partial class secondmigration
+    [Migration("20221004134145_first_migration")]
+    partial class first_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,36 +64,6 @@ namespace BusinessObjects.Migrations
                     b.ToTable("Orders");
                 });
 
-            modelBuilder.Entity("BusinessObjects.Model.OrderDetail", b =>
-                {
-                    b.Property<int?>("OrderDetailId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int?>("OrderDetailId"));
-
-                    b.Property<int>("OrderForeignKey")
-                        .HasColumnType("integer");
-
-                    b.Property<decimal?>("Price")
-                        .HasColumnType("numeric");
-
-                    b.Property<int?>("ProductId")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("Quantity")
-                        .HasColumnType("integer");
-
-                    b.HasKey("OrderDetailId");
-
-                    b.HasIndex("OrderForeignKey")
-                        .IsUnique();
-
-                    b.HasIndex("ProductId");
-
-                    b.ToTable("OrderDetails");
-                });
-
             modelBuilder.Entity("BusinessObjects.Model.Product", b =>
                 {
                     b.Property<int>("ProductId")
@@ -103,6 +73,9 @@ namespace BusinessObjects.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
 
                     b.Property<int>("CategoryId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("OrderId")
                         .HasColumnType("integer");
 
                     b.Property<decimal>("Price")
@@ -117,6 +90,8 @@ namespace BusinessObjects.Migrations
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
                 });
@@ -161,23 +136,6 @@ namespace BusinessObjects.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("BusinessObjects.Model.OrderDetail", b =>
-                {
-                    b.HasOne("BusinessObjects.Model.Order", "Order")
-                        .WithOne("OrderDetail")
-                        .HasForeignKey("BusinessObjects.Model.OrderDetail", "OrderForeignKey")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("BusinessObjects.Model.Product", "Product")
-                        .WithMany("OrderDetails")
-                        .HasForeignKey("ProductId");
-
-                    b.Navigation("Order");
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("BusinessObjects.Model.Product", b =>
                 {
                     b.HasOne("BusinessObjects.Model.Category", "Category")
@@ -186,7 +144,13 @@ namespace BusinessObjects.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("BusinessObjects.Model.Order", "Order")
+                        .WithMany("Products")
+                        .HasForeignKey("OrderId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("BusinessObjects.Model.Category", b =>
@@ -196,12 +160,7 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Model.Order", b =>
                 {
-                    b.Navigation("OrderDetail");
-                });
-
-            modelBuilder.Entity("BusinessObjects.Model.Product", b =>
-                {
-                    b.Navigation("OrderDetails");
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("BusinessObjects.Model.User", b =>

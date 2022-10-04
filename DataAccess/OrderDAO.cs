@@ -1,11 +1,6 @@
 ﻿using BusinessObjects.Data;
 using BusinessObjects.Model;
 using Microsoft.EntityFrameworkCore;
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Text;
-// using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -39,7 +34,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                orders = db.Orders!.Include(o => o.OrderDetail).ToList();
+                orders = db.Orders!.ToList();
             }
             catch (Exception e)
             {

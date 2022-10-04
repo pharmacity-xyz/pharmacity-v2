@@ -11,11 +11,12 @@ namespace BusinessObjects.Model
     {
         [Key]
         public int OrderId { get; set; }
-        public int? UserId { get; set; }
         public DateTime? OrderedDate { get; set; }
         public DateTime? ShipDate { get; set; }
+
+        public int? UserId { get; set; }
         public virtual User? User { get; set; }
 
-        public virtual OrderDetail? OrderDetail { get; set; }
+        public List<Product>? Products { get; set; }
     }
 }
