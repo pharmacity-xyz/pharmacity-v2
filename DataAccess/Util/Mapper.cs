@@ -50,13 +50,14 @@ namespace DataAccess.Util
         {
             OrderDetailDTO? orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
             {
-                Discount = (double)orderDetail.Discount!,
-                OrderId = orderDetail.OrderDetailId,
+                OrderDetailId = orderDetail.OrderDetailId,
                 ProductId = orderDetail.ProductId,
+                UnitPrice = orderDetail.UnitPrice,
                 ProductName = orderDetail.Product!.ProductName,
                 Quantity = orderDetail.Quantity,
-                UnitPrice = orderDetail.UnitPrice,
-                TotalPrice = (double)orderDetail.UnitPrice! * (double)orderDetail.Quantity! * (1d - (double)orderDetail.Discount)
+                Discount = (double)orderDetail.Discount!,
+                TotalPrice = (double)orderDetail.UnitPrice! * (double)orderDetail.Quantity! * (1d - (double)orderDetail.Discount),
+                OrderForeignKey = orderDetail.OrderForeignKey,
             };
 
             return orderDetailDTO!;
@@ -123,10 +124,11 @@ namespace DataAccess.Util
             OrderDetail orderDetail = new OrderDetail
             {
                 Discount = (float?)orderDetailDTO.Discount,
-                OrderDetailId = orderDetailDTO.OrderId,
+                OrderDetailId = orderDetailDTO.OrderDetailId,
                 ProductId = orderDetailDTO.ProductId,
                 Quantity = orderDetailDTO.Quantity,
-                UnitPrice = orderDetailDTO.UnitPrice
+                UnitPrice = orderDetailDTO.UnitPrice,
+                OrderForeignKey = orderDetailDTO.OrderForeignKey,
             };
 
             return orderDetail;
