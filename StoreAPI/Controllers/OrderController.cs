@@ -100,9 +100,9 @@ namespace StoreAPI.Controllers
                     throw new Exception("Units in stock of " + orderProduct.ProductName + " not enough");
                 }
 
-                newOrder.OrderDate = DateTime.Now;
+                newOrder.OrderedDate = DateTime.Now;
                 newOrder.OrderDetail.ProductName = orderProduct.ProductName;
-                newOrder.OrderDetail.UnitPrice = orderProduct.UnitPrice;
+                newOrder.OrderDetail.Price = orderProduct.Price;
 
                 orderProduct.UnitsInStock -= (int)newOrder.OrderDetail.Quantity!;
 
