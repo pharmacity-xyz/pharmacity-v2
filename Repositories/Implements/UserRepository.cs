@@ -18,7 +18,7 @@ namespace Repositories.Implements
 
         public List<UserDTO> GetAll()
         {
-            return UserDAO.Instance.FindAll().Select(m => Mapper.mapToDTO(m)).ToList();
+            return UserDAO.Instance.FindAll().Select(m => Mapper.mapToDTO(m)).ToList()!;
         }
 
         public UserDTO GetLoggedAccount()
@@ -28,7 +28,7 @@ namespace Repositories.Implements
 
         public UserDTO Login(string email, string password)
         {
-            return Mapper.mapToDTO(UserDAO.Instance.FindMemberByEmailPassword(email, password));
+            return Mapper.mapToDTO(UserDAO.Instance.FindMemberByEmailPassword(email, password))!;
         }
 
         public void Update(UserDTO user)
