@@ -92,20 +92,20 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                ProductDTO orderProduct = productRepository.GetProductById((int)newOrder.OrderDetail!.ProductId!);
+                // ProductDTO orderProduct = productRepository.GetProductById((int)newOrder.OrderDetail!.ProductId!);
 
-                if (orderProduct.UnitsInStock < newOrder.OrderDetail.Quantity)
-                {
-                    throw new Exception("Units in stock of " + orderProduct.ProductName + " not enough");
-                }
+                // if (orderProduct.UnitsInStock < newOrder.OrderDetail.Quantity)
+                // {
+                //     throw new Exception("Units in stock of " + orderProduct.ProductName + " not enough");
+                // }
 
                 newOrder.OrderedDate = DateTime.Now;
-                newOrder.OrderDetail.ProductName = orderProduct.ProductName;
-                newOrder.OrderDetail.Price = orderProduct.Price;
+                // newOrder.OrderDetail.ProductName = orderProduct.ProductName;
+                // newOrder.OrderDetail.Price = orderProduct.Price;
 
-                orderProduct.UnitsInStock -= (int)newOrder.OrderDetail.Quantity!;
+                // orderProduct.UnitsInStock -= (int)newOrder.OrderDetail.Quantity!;
 
-                productRepository.UpdateProduct(orderProduct);
+                // productRepository.UpdateProduct(orderProduct);
                 orderRepository.Add(newOrder);
 
                 return Ok("Successfully added");

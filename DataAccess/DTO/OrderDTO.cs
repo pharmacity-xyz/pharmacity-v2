@@ -9,10 +9,9 @@ namespace DataAccess.DTO
     public class OrderDTO
     {
         public int OrderId { get; set; }
-        public int? UserId { get; set; }
         public DateTime? OrderedDate { get; set; }
         public DateTime? ShipDate { get; set; }
 
-        public OrderDetailDTO? OrderDetail { get; set; }
+        public int? UserId { get; set; }
     }
 }
