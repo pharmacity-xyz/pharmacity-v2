@@ -75,9 +75,9 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                MemberDTO member = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance.User;
 
-                if (member == null || member.Role != Role.ADMIN.ToString())
+                if (user == null || user.Role != Role.ADMIN.ToString())
                 {
                     throw new Exception("Can't do this action");
                 }
@@ -97,9 +97,9 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                MemberDTO member = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance.User;
 
-                if (member == null || member.Role != Role.ADMIN.ToString())
+                if (user == null || user.Role != Role.ADMIN.ToString())
                 {
                     throw new Exception("Can't do this action");
                 }
@@ -118,9 +118,9 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                MemberDTO member = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance.User;
 
-                if (member == null || member.Role != Role.ADMIN.ToString())
+                if (user == null || user.Role != Role.ADMIN.ToString())
                 {
                     throw new Exception("Can't do this action");
                 }
@@ -131,7 +131,7 @@ namespace StoreAPI.Controllers
                 foreach (OrderDTO order in orderList)
                 {
                     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                    if(order.OrderDetail == null)
+                    if (order.OrderDetail == null)
                     {
                         orderRepository.Delete(order.OrderId);
                     }

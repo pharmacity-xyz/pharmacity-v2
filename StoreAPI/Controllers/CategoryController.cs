@@ -33,7 +33,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                MemberDTO member = LoggedUser.Instance.User;
+                UserDTO member = LoggedUser.Instance.User;
 
                 if (member == null || member.Role != Role.ADMIN.ToString())
                 {
@@ -44,7 +44,7 @@ namespace StoreAPI.Controllers
 
                 return Ok("Success");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -86,9 +86,9 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                MemberDTO member = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance.User;
 
-                if (member == null || member.Role != Role.ADMIN.ToString())
+                if (user == null || user.Role != Role.ADMIN.ToString())
                 {
                     throw new Exception("Can't do this action");
                 }

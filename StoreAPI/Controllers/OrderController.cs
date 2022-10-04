@@ -40,7 +40,7 @@ namespace StoreAPI.Controllers
                 }
                 return Ok(orderList);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -52,9 +52,9 @@ namespace StoreAPI.Controllers
 
             try
             {
-                MemberDTO member = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance.User;
 
-                if (member == null)
+                if (user == null)
                 {
                     throw new Exception("Can't do this action");
                 }
@@ -63,7 +63,7 @@ namespace StoreAPI.Controllers
                 order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
                 return Ok(order);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -74,9 +74,9 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                MemberDTO member = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance.User;
 
-                if (member == null)
+                if (user == null)
                 {
                     throw new Exception("Can't do this action");
                 }
@@ -85,11 +85,11 @@ namespace StoreAPI.Controllers
                 foreach (OrderDTO order in orderList)
                 {
                     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                    order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId).CategoryId;
+                    order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
                 }
                 return Ok(orderList);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
@@ -112,7 +112,7 @@ namespace StoreAPI.Controllers
 
                 ProductDTO orderProduct = productRepository.GetProductById((int)newOrder.OrderDetail.ProductId);
 
-                if(orderProduct.UnitsInStock < newOrder.OrderDetail.Quantity)
+                if (orderProduct.UnitsInStock < newOrder.OrderDetail.Quantity)
                 {
                     throw new Exception("Units in stock of " + orderProduct.ProductName + " not enough");
                 }
@@ -121,7 +121,7 @@ namespace StoreAPI.Controllers
                 newOrder.OrderDetail.ProductName = orderProduct.ProductName;
                 newOrder.OrderDetail.UnitPrice = orderProduct.UnitPrice;
 
-                orderProduct.UnitsInStock -= (int)newOrder.OrderDetail.Quantity;
+                orderProduct.UnitsInStock -= (int)newOrder.OrderDetail.Quantity!;
 
                 productRepository.UpdateProduct(orderProduct);
                 orderRepository.Add(newOrder);

@@ -10,19 +10,19 @@ namespace DataAccess.Util
 {
     public class Mapper
     {
-        public static MemberDTO mapToDTO(Member member)
+        public static UserDTO mapToDTO(User user)
         {
-            if (member != null)
+            if (user != null)
             {
-                MemberDTO memberDTO = new MemberDTO
+                UserDTO memberDTO = new UserDTO
                 {
-                    MemberId = member.MemberId,
-                    Email = member.Email,
-                    Country = member.Country,
-                    CompanyName = member.CompanyName,
-                    City = member.City,
-                    Password = member.Password,
-                    Role = member.Role
+                    UserId = user.UserId,
+                    Email = user.Email,
+                    Country = user.Country,
+                    CompanyName = user.CompanyName,
+                    City = user.City,
+                    Password = user.Password,
+                    Role = user.Role
                 };
                 return memberDTO;
             }
@@ -37,7 +37,7 @@ namespace DataAccess.Util
         {
             OrderDTO orderDTO = new OrderDTO
             {
-                MemberId = order.MemberId,
+                UserId = order.UserId,
                 OrderDate = order.OrderDate,
                 OrderId = order.OrderId,
                 RequiredDate = order.RequiredDate,
@@ -52,7 +52,7 @@ namespace DataAccess.Util
             OrderDetailDTO orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
             {
                 Discount = (double)orderDetail.Discount,
-                OrderId = orderDetail.OrderId,
+                OrderId = orderDetail.OrderDetailId,
                 ProductId = orderDetail.ProductId,
                 ProductName = orderDetail.Product.ProductName,
                 Quantity = orderDetail.Quantity,
@@ -73,7 +73,7 @@ namespace DataAccess.Util
                 UnitsInStock = product.UnitInStock,
                 Weight = product.Weight,
                 CategoryId = product.CategoryId,
-                CategoryName = product.Category.CategoryName
+                CategoryName = product.Category?.Name
             };
             return productDTO;
         }
@@ -83,32 +83,32 @@ namespace DataAccess.Util
             CategoryDTO categoryDTO = new CategoryDTO
             {
                 CategoryId = category.CategoryId,
-                CategoryName = category.CategoryName
+                CategoryName = category.Name
             };
             return categoryDTO;
         }
 
-        public static Member mapToEntity(MemberDTO memberDTO)
+        public static User mapToEntity(UserDTO userDTO)
         {
-            Member member = new Member
+            User user = new User
             {
-                MemberId = memberDTO.MemberId,
-                Email = memberDTO.Email,
-                Country = memberDTO.Country,
-                CompanyName = memberDTO.CompanyName,
-                City = memberDTO.City,
-                Password = memberDTO.Password,
-                Role = memberDTO.Role.ToString()
+                UserId = userDTO.UserId,
+                Email = userDTO.Email,
+                Country = userDTO.Country,
+                CompanyName = userDTO.CompanyName,
+                City = userDTO.City,
+                Password = userDTO.Password,
+                Role = userDTO.Role?.ToString()
             };
 
-            return member;
+            return user;
         }
 
         public static Order mapToEntity(OrderDTO orderDTO)
         {
             Order order = new Order
             {
-                MemberId = orderDTO.MemberId,
+                UserId = orderDTO.UserId,
                 OrderDate = orderDTO.OrderDate,
                 OrderId = orderDTO.OrderId,
                 RequiredDate = orderDTO.RequiredDate,
@@ -124,7 +124,7 @@ namespace DataAccess.Util
             OrderDetail orderDetail = new OrderDetail
             {
                 Discount = (float?)orderDetailDTO.Discount,
-                OrderId = orderDetailDTO.OrderId,
+                OrderDetailId = orderDetailDTO.OrderId,
                 ProductId = orderDetailDTO.ProductId,
                 Quantity = orderDetailDTO.Quantity,
                 UnitPrice = orderDetailDTO.UnitPrice
@@ -152,7 +152,7 @@ namespace DataAccess.Util
             Category category = new Category
             {
                 CategoryId = categoryDTO.CategoryId,
-                CategoryName = categoryDTO.CategoryName
+                Name = categoryDTO.CategoryName
             };
             return category;
         }
