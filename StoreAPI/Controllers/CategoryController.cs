@@ -15,7 +15,11 @@ namespace StoreAPI.Controllers
         private readonly IOrderRepository orderRepository;
         private readonly IOrderDetailRepository orderDetailRepository;
 
-        public CategoryController(ICategoryRepository categoryRepository, IOrderDetailRepository orderDetailRepository, IOrderRepository orderRepository)
+        public CategoryController(
+            ICategoryRepository categoryRepository,
+            IOrderDetailRepository orderDetailRepository,
+            IOrderRepository orderRepository
+        )
         {
             this.categoryRepository = categoryRepository;
             this.orderDetailRepository = orderDetailRepository;
@@ -33,7 +37,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO member = LoggedUser.Instance.User;
+                UserDTO member = LoggedUser.Instance!.User!;
 
                 if (member == null || member.Role != Role.ADMIN.ToString())
                 {
@@ -55,12 +59,6 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                //MemberDTO member = LoggedUser.Instance.User;
-
-                //if (member == null || member.Role != Role.ADMIN.ToString())
-                //{
-                //    throw new Exception("Can't do this action");
-                //}
                 categoryRepository.Delete(id);
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
@@ -86,7 +84,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
                 if (user == null || user.Role != Role.ADMIN.ToString())
                 {
