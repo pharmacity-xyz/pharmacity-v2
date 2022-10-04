@@ -57,7 +57,7 @@ namespace DataAccess.Util
                 Quantity = orderDetail.Quantity,
                 Discount = (double)orderDetail.Discount!,
                 TotalPrice = (double)orderDetail.UnitPrice! * (double)orderDetail.Quantity! * (1d - (double)orderDetail.Discount),
-                OrderForeignKey = orderDetail.OrderForeignKey,
+                OrderForeignKey = orderDetail.OrderForeignKey
             };
 
             return orderDetailDTO!;
