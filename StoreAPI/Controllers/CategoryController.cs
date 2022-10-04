@@ -37,16 +37,20 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO member = LoggedUser.Instance!.User!;
+                UserDTO user = LoggedUser.Instance!.User!;
 
-                if (member == null || member.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
+                }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin account");
                 }
 
                 categoryRepository.Add(category);
 
-                return Ok("Success");
+                return Ok("Successfully added");
             }
             catch (Exception e)
             {
