@@ -101,15 +101,13 @@ namespace DataAccess.Util
 
         public static Order mapToEntity(OrderDTO orderDTO)
         {
-            Order order = new Order
+            return new Order
             {
-                UserId = orderDTO.UserId,
-                OrderedDate = orderDTO.OrderedDate,
                 OrderId = orderDTO.OrderId,
+                OrderedDate = orderDTO.OrderedDate,
                 ShipDate = orderDTO.ShipDate,
-                // OrderDetail = mapToEntity(orderDTO.OrderDetail!)
+                UserId = orderDTO.UserId,
             };
-            return order;
         }
 
         // public static OrderDetail mapToEntity(OrderDetailDTO orderDetailDTO)
