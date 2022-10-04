@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using StoreAPI.Storage;
+using NpgsqlTypes;
 
 namespace StoreAPI.Controllers
 {
@@ -92,20 +93,8 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                // ProductDTO orderProduct = productRepository.GetProductById((int)newOrder.OrderDetail!.ProductId!);
-
-                // if (orderProduct.UnitsInStock < newOrder.OrderDetail.Quantity)
-                // {
-                //     throw new Exception("Units in stock of " + orderProduct.ProductName + " not enough");
-                // }
-
-                newOrder.OrderedDate = DateTime.Now;
-                // newOrder.OrderDetail.ProductName = orderProduct.ProductName;
-                // newOrder.OrderDetail.Price = orderProduct.Price;
-
-                // orderProduct.UnitsInStock -= (int)newOrder.OrderDetail.Quantity!;
-
-                // productRepository.UpdateProduct(orderProduct);
+                newOrder.OrderedDate = DateTime.UtcNow;
+                newOrder.ShipDate = DateTime.UtcNow;
                 orderRepository.Add(newOrder);
 
                 return Ok("Successfully added");
