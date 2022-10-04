@@ -25,6 +25,6 @@ namespace StoreAPI.Storage
                 }
             }
         }
-        public MemberDTO User { get; set; }
+        public UserDTO User { get; set; }
     }
 }
