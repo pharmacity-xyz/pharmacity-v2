@@ -12,7 +12,6 @@ namespace StoreAPI.Controllers;
 [Route("/api/[controller]")]
 public class HealthCheckController : ControllerBase
 {
-
     public HealthCheckController()
     {
     }
@@ -22,6 +21,5 @@ public class HealthCheckController : ControllerBase
     {
         return Ok();
     }
-
 }
 

@@ -15,24 +15,22 @@ namespace StoreAPI.Controllers
         private readonly IOrderRepository orderRepository;
         private readonly IOrderDetailRepository orderDetailRepository;
 
-        public ProductController(IProductRepository productRepository, IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository)
+        public ProductController(
+            IProductRepository productRepository,
+            IOrderRepository orderRepository,
+            IOrderDetailRepository orderDetailRepository
+        )
         {
             this.productRepository = productRepository;
             this.orderRepository = orderRepository;
             this.orderDetailRepository = orderDetailRepository;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("get_all")]
         public IActionResult GetAll()
         {
             try
             {
-                //MemberDTO member = LoggedUser.Instance.User;
-
-                //if (member == null)
-                //{
-                //    throw new Exception("Can't do this action");
-                //}
                 return Ok(productRepository.GetProducts());
             }
             catch (Exception e)
@@ -42,7 +40,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("GetById/{id}")]
+        [HttpGet("get_by_id/{id}")]
         public IActionResult GetId(int id)
         {
             try
@@ -56,7 +54,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("GetByCategory/{id}")]
+        [HttpGet("get_by_category/{id}")]
         public IActionResult GetCategoryId(int id)
         {
             try
@@ -70,20 +68,25 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("Add")]
+        [HttpPost("add")]
         public IActionResult Add(ProductDTO product)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null || user.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
+                }
+
                 productRepository.SaveProduct(product);
 
-                return Ok("SUCCESS");
+                return Ok("Successfully added");
             }
             catch (Exception e)
             {
@@ -92,38 +95,47 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut("update")]
         public IActionResult Update(ProductDTO product)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null || user.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
+                }
+
                 productRepository.UpdateProduct(product);
-                return Ok("SUCCESS");
+                return Ok("Successfully updated");
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null || user.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
+                }
+
                 productRepository.DeleteProduct(id);
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
@@ -137,11 +149,10 @@ namespace StoreAPI.Controllers
                     }
                 }
 
-                return Ok("SUCCESS");
+                return Ok("Successfully deleted");
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
