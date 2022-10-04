@@ -22,13 +22,13 @@ namespace StoreAPI.Controllers
             this.orderRepository = orderRepository;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("get_all")]
         public IActionResult GetAll()
         {
             return Ok(categoryRepository.GetCategory());
         }
 
-        [HttpPost("Add")]
+        [HttpPost("add")]
         public IActionResult Add(CategoryDTO category)
         {
             try
@@ -50,7 +50,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
             try
@@ -81,7 +81,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut("update")]
         public IActionResult Update(CategoryDTO category)
         {
             try
