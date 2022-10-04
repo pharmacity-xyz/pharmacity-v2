@@ -34,7 +34,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                orders = db.Orders!.Include(o => o.OrderDetail).ToList();
+                orders = db.Orders!.ToList();
             }
             catch (Exception e)
             {

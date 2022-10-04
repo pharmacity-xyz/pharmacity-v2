@@ -44,21 +44,21 @@ namespace DataAccess.Util
             return orderDTO;
         }
 
-        public static OrderDetailDTO mapToDTO(OrderDetail orderDetail)
-        {
-            OrderDetailDTO? orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
-            {
-                OrderDetailId = orderDetail.OrderDetailId,
-                ProductId = orderDetail.ProductId,
-                Price = orderDetail.Price,
-                ProductName = orderDetail.Product!.ProductName,
-                Quantity = orderDetail.Quantity,
-                TotalPrice = (double)orderDetail.Price! * (double)orderDetail.Quantity!,
-                OrderForeignKey = orderDetail.OrderForeignKey
-            };
+        // public static OrderDetailDTO mapToDTO(OrderDetail orderDetail)
+        // {
+        //     OrderDetailDTO? orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
+        //     {
+        //         OrderDetailId = orderDetail.OrderDetailId,
+        //         ProductId = orderDetail.ProductId,
+        //         Price = orderDetail.Price,
+        //         ProductName = orderDetail.Product!.ProductName,
+        //         Quantity = orderDetail.Quantity,
+        //         TotalPrice = (double)orderDetail.Price! * (double)orderDetail.Quantity!,
+        //         OrderForeignKey = orderDetail.OrderForeignKey
+        //     };
 
-            return orderDetailDTO!;
-        }
+        //     return orderDetailDTO!;
+        // }
 
         public static ProductDTO mapToDTO(Product product)
         {
@@ -113,19 +113,19 @@ namespace DataAccess.Util
             return order;
         }
 
-        public static OrderDetail mapToEntity(OrderDetailDTO orderDetailDTO)
-        {
-            OrderDetail orderDetail = new OrderDetail
-            {
-                OrderDetailId = orderDetailDTO.OrderDetailId,
-                ProductId = orderDetailDTO.ProductId,
-                Quantity = orderDetailDTO.Quantity,
-                Price = orderDetailDTO.Price,
-                OrderForeignKey = orderDetailDTO.OrderForeignKey,
-            };
+        // public static OrderDetail mapToEntity(OrderDetailDTO orderDetailDTO)
+        // {
+        //     OrderDetail orderDetail = new OrderDetail
+        //     {
+        //         OrderDetailId = orderDetailDTO.OrderDetailId,
+        //         ProductId = orderDetailDTO.ProductId,
+        //         Quantity = orderDetailDTO.Quantity,
+        //         Price = orderDetailDTO.Price,
+        //         OrderForeignKey = orderDetailDTO.OrderForeignKey,
+        //     };
 
-            return orderDetail;
-        }
+        //     return orderDetail;
+        // }
 
         public static Product mapToEntity(ProductDTO productDTO)
         {
