@@ -13,17 +13,16 @@ namespace StoreAPI.Controllers
     {
         private readonly IProductRepository productRepository;
         private readonly IOrderRepository orderRepository;
-        private readonly IOrderDetailRepository orderDetailRepository;
+        // private readonly IOrderDetailRepository orderDetailRepository;
 
         public ProductController(
             IProductRepository productRepository,
-            IOrderRepository orderRepository,
-            IOrderDetailRepository orderDetailRepository
+            IOrderRepository orderRepository
         )
         {
             this.productRepository = productRepository;
             this.orderRepository = orderRepository;
-            this.orderDetailRepository = orderDetailRepository;
+            // this.orderDetailRepository = orderDetailRepository;
         }
 
         [HttpGet("get_all")]
@@ -140,14 +139,14 @@ namespace StoreAPI.Controllers
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
 
-                foreach (OrderDTO order in orderList)
-                {
-                    order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                    if (order.OrderDetail == null)
-                    {
-                        orderRepository.Delete(order.OrderId);
-                    }
-                }
+                // foreach (OrderDTO order in orderList)
+                // {
+                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
+                //     if (order.OrderDetail == null)
+                //     {
+                //         orderRepository.Delete(order.OrderId);
+                //     }
+                // }
 
                 return Ok("Successfully deleted");
             }
