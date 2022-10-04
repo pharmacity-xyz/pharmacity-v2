@@ -75,13 +75,18 @@ namespace StoreAPI.Controllers
             {
                 UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null || user.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
+                }
+
                 productRepository.SaveProduct(product);
 
-                return Ok("SUCCESS");
+                return Ok("Successfully added");
             }
             catch (Exception e)
             {
@@ -97,16 +102,20 @@ namespace StoreAPI.Controllers
             {
                 UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null || user.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
+                }
+
                 productRepository.UpdateProduct(product);
-                return Ok("SUCCESS");
+                return Ok("Successfully updated");
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
@@ -118,10 +127,15 @@ namespace StoreAPI.Controllers
             {
                 UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null || user.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
+                }
+
                 productRepository.DeleteProduct(id);
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
@@ -135,11 +149,10 @@ namespace StoreAPI.Controllers
                     }
                 }
 
-                return Ok("SUCCESS");
+                return Ok("Successfully deleted");
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
