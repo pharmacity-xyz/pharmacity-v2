@@ -40,7 +40,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    p = context.Members?.SingleOrDefault(x => x.Email == email && x.Password == password);
+                    p = context.Users?.SingleOrDefault(x => x.Email == email && x.Password == password);
 
                     if (p == null)
                     {
@@ -61,7 +61,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    context.Members?.Add(user);
+                    context.Users?.Add(user);
                     context.SaveChanges();
                 }
             }
@@ -94,7 +94,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    p = context.Members?.ToList();
+                    p = context.Users?.ToList();
 
                     if (p == null)
                     {

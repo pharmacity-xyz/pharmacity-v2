@@ -21,18 +21,11 @@ namespace StoreAPI.Controllers
             this.productRepository = productRepository;
         }
 
-        [HttpGet("GetAllOrder")]
+        [HttpGet("get_all")]
         public IActionResult GetAll()
         {
             try
             {
-                //MemberDTO member = LoggedUser.Instance.User;
-
-                //if (member == null)
-                //{
-                //    throw new Exception("Can't do this action");
-                //}
-
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
                 foreach (OrderDTO order in orderList)
                 {
@@ -46,17 +39,17 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("GetOrder/{id}")]
+        [HttpGet("get_by_id/{id}")]
         public IActionResult GetId(int id)
         {
 
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
                 if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
 
                 OrderDTO order = orderRepository.GetOrderById(id);
@@ -69,23 +62,23 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("GetAllMemberOrder/{userid}")]
+        [HttpGet("get_all_by_userid/{userid}")]
         public IActionResult GetAll(int userid)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
                 if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrdersByUserId(userid);
                 foreach (OrderDTO order in orderList)
                 {
                     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                    order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
+                    // order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
                 }
                 return Ok(orderList);
             }
@@ -95,38 +88,28 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("AddOrder")]
-        public IActionResult Add(
-            OrderDTO newOrder
-        )
+        [HttpPost("add")]
+        public IActionResult Add(OrderDTO newOrder)
         {
-
             try
             {
-                //memberdto member = loggeduser.instance.user;
-
-                //if (member == null)
-                //{
-                //    throw new exception("can't do this action");
-                //}
-
-                ProductDTO orderProduct = productRepository.GetProductById((int)newOrder.OrderDetail.ProductId);
+                ProductDTO orderProduct = productRepository.GetProductById((int)newOrder.OrderDetail!.ProductId!);
 
                 if (orderProduct.UnitsInStock < newOrder.OrderDetail.Quantity)
                 {
                     throw new Exception("Units in stock of " + orderProduct.ProductName + " not enough");
                 }
 
-                newOrder.OrderDate = DateTime.Now;
+                newOrder.OrderedDate = DateTime.Now;
                 newOrder.OrderDetail.ProductName = orderProduct.ProductName;
-                newOrder.OrderDetail.UnitPrice = orderProduct.UnitPrice;
+                newOrder.OrderDetail.Price = orderProduct.Price;
 
                 orderProduct.UnitsInStock -= (int)newOrder.OrderDetail.Quantity!;
 
                 productRepository.UpdateProduct(orderProduct);
                 orderRepository.Add(newOrder);
 
-                return Ok("SUCCESS");
+                return Ok("Successfully added");
             }
             catch (Exception e)
             {
@@ -134,20 +117,14 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
-                //MemberDTO member = LoggedUser.Instance.User;
-
-                //if (member == null || member.Role != Role.ADMIN.ToString())
-                //{
-                //    throw new Exception("Can't do this action");
-                //}
                 orderDetailRepository.Delete(id);
                 orderRepository.Delete(id);
-                return Ok("SUCCESS");
+                return Ok("Successfully deleted");
             }
             catch (Exception e)
             {

@@ -11,7 +11,7 @@ namespace DataAccess
 {
     public class OrderDetailDAO
     {
-        private static OrderDetailDAO instance = null;
+        private static OrderDetailDAO? instance = null;
         private static readonly object iLock = new object();
         public OrderDetailDAO()
         {
@@ -39,7 +39,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                orderDetails = db.OrderDetails.ToList();
+                orderDetails = db.OrderDetails!.ToList();
             }
             catch (Exception e)
             {
@@ -50,11 +50,11 @@ namespace DataAccess
 
         public OrderDetail GetById(int? id)
         {
-            OrderDetail orderDetail = null;
+            OrderDetail? orderDetail = null;
             try
             {
                 var db = new AppDbContext();
-                orderDetail = db.OrderDetails.Include(c => c.Product).SingleOrDefault(c => c.OrderForeignKey == id);
+                orderDetail = db.OrderDetails!.Include(c => c.Product).SingleOrDefault(c => c.OrderForeignKey == id)!;
             }
             catch (Exception e)
             {
@@ -68,7 +68,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                db.OrderDetails.Add(orderDetail);
+                db.OrderDetails!.Add(orderDetail);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -81,12 +81,12 @@ namespace DataAccess
         {
             try
             {
-                OrderDetail _orderDetail = GetById((int)orderDetail.OrderDetailId);
+                OrderDetail _orderDetail = GetById((int)orderDetail.OrderDetailId!);
                 if (_orderDetail != null)
                 {
                     var db = new AppDbContext();
                     //db.Entry<OrderDetail>(orderDetail).State = EntityState.Modified;
-                    db.OrderDetails.Update(orderDetail);
+                    db.OrderDetails!.Update(orderDetail);
                     db.SaveChanges();
                 }
                 else
@@ -108,12 +108,12 @@ namespace DataAccess
                 if (_orderDetail != null)
                 {
                     var db = new AppDbContext();
-                    db.OrderDetails.Remove(_orderDetail);
+                    db.OrderDetails!.Remove(_orderDetail);
                     db.SaveChanges();
                 }
                 else
                 {
-                    throw new Exception("Order detail does not exist!!!");
+                    throw new Exception("Order detail does not exist");
                 }
             }
             catch (Exception e)

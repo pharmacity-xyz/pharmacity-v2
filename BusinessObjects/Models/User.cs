@@ -20,8 +20,3 @@ namespace BusinessObjects.Model
         public virtual ICollection<Order>? Orders { get; set; }
     }
 }
-
-
-
-
-

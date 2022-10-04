@@ -37,29 +37,27 @@ namespace DataAccess.Util
             OrderDTO orderDTO = new OrderDTO
             {
                 UserId = order.UserId,
-                OrderDate = order.OrderDate,
+                OrderedDate = order.OrderedDate,
                 OrderId = order.OrderId,
-                RequiredDate = order.RequiredDate,
-                ShippedDate = order.ShippedDate,
-                Freight = order.Freight,
+                ShipDate = order.ShipDate,
             };
             return orderDTO;
         }
 
         public static OrderDetailDTO mapToDTO(OrderDetail orderDetail)
         {
-            OrderDetailDTO orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
+            OrderDetailDTO? orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
             {
-                Discount = (double)orderDetail.Discount,
-                OrderId = orderDetail.OrderDetailId,
+                OrderDetailId = orderDetail.OrderDetailId,
                 ProductId = orderDetail.ProductId,
-                ProductName = orderDetail.Product.ProductName,
+                Price = orderDetail.Price,
+                ProductName = orderDetail.Product!.ProductName,
                 Quantity = orderDetail.Quantity,
-                UnitPrice = orderDetail.UnitPrice,
-                TotalPrice = (double)orderDetail.UnitPrice * (double)orderDetail.Quantity * (1d - (double)orderDetail.Discount)
+                TotalPrice = (double)orderDetail.Price! * (double)orderDetail.Quantity!,
+                OrderForeignKey = orderDetail.OrderForeignKey
             };
 
-            return orderDetailDTO;
+            return orderDetailDTO!;
         }
 
         public static ProductDTO mapToDTO(Product product)
@@ -68,9 +66,8 @@ namespace DataAccess.Util
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
-                UnitPrice = product.UnitPrice,
+                Price = product.Price,
                 UnitsInStock = product.UnitInStock,
-                Weight = product.Weight,
                 CategoryId = product.CategoryId,
                 CategoryName = product.Category?.Name
             };
@@ -108,12 +105,10 @@ namespace DataAccess.Util
             Order order = new Order
             {
                 UserId = orderDTO.UserId,
-                OrderDate = orderDTO.OrderDate,
+                OrderedDate = orderDTO.OrderedDate,
                 OrderId = orderDTO.OrderId,
-                RequiredDate = orderDTO.RequiredDate,
-                ShippedDate = orderDTO.ShippedDate,
-                Freight = orderDTO.Freight,
-                OrderDetail = mapToEntity(orderDTO.OrderDetail)
+                ShipDate = orderDTO.ShipDate,
+                // OrderDetail = mapToEntity(orderDTO.OrderDetail!)
             };
             return order;
         }
@@ -122,11 +117,11 @@ namespace DataAccess.Util
         {
             OrderDetail orderDetail = new OrderDetail
             {
-                Discount = (float?)orderDetailDTO.Discount,
-                OrderDetailId = orderDetailDTO.OrderId,
+                OrderDetailId = orderDetailDTO.OrderDetailId,
                 ProductId = orderDetailDTO.ProductId,
                 Quantity = orderDetailDTO.Quantity,
-                UnitPrice = orderDetailDTO.UnitPrice
+                Price = orderDetailDTO.Price,
+                OrderForeignKey = orderDetailDTO.OrderForeignKey,
             };
 
             return orderDetail;
@@ -138,9 +133,8 @@ namespace DataAccess.Util
             {
                 ProductId = productDTO.ProductId,
                 ProductName = productDTO.ProductName,
-                UnitPrice = productDTO.UnitPrice,
+                Price = productDTO.Price,
                 UnitInStock = productDTO.UnitsInStock,
-                Weight = productDTO.Weight,
                 CategoryId = productDTO.CategoryId
             };
             return product;
