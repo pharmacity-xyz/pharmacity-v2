@@ -15,34 +15,42 @@ namespace StoreAPI.Controllers
         private readonly IOrderRepository orderRepository;
         private readonly IOrderDetailRepository orderDetailRepository;
 
-        public CategoryController(ICategoryRepository categoryRepository, IOrderDetailRepository orderDetailRepository, IOrderRepository orderRepository)
+        public CategoryController(
+            ICategoryRepository categoryRepository,
+            IOrderDetailRepository orderDetailRepository,
+            IOrderRepository orderRepository
+        )
         {
             this.categoryRepository = categoryRepository;
             this.orderDetailRepository = orderDetailRepository;
             this.orderRepository = orderRepository;
         }
 
-        [HttpGet("GetAll")]
+        [HttpGet("get_all")]
         public IActionResult GetAll()
         {
             return Ok(categoryRepository.GetCategory());
         }
 
-        [HttpPost("Add")]
+        [HttpPost("add")]
         public IActionResult Add(CategoryDTO category)
         {
             try
             {
-                UserDTO member = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
-                if (member == null || member.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
+                }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
                 }
 
                 categoryRepository.Add(category);
 
-                return Ok("Success");
+                return Ok("Successfully added");
             }
             catch (Exception e)
             {
@@ -50,17 +58,11 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("delete/{id}")]
         public IActionResult Delete(int id)
         {
             try
             {
-                //MemberDTO member = LoggedUser.Instance.User;
-
-                //if (member == null || member.Role != Role.ADMIN.ToString())
-                //{
-                //    throw new Exception("Can't do this action");
-                //}
                 categoryRepository.Delete(id);
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
@@ -72,7 +74,7 @@ namespace StoreAPI.Controllers
                         orderRepository.Delete(order.OrderId);
                     }
                 }
-                return Ok("SUCCESS");
+                return Ok("Successfully deleted");
             }
             catch (Exception e)
             {
@@ -81,16 +83,20 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPut("Update")]
+        [HttpPut("update")]
         public IActionResult Update(CategoryDTO category)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null || user.Role != Role.ADMIN.ToString())
+                if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
+                }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
                 }
 
                 categoryRepository.Update(category);

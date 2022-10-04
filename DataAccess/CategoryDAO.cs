@@ -10,7 +10,7 @@ namespace DataAccess
 {
     public class CategoryDAO
     {
-        private static CategoryDAO instance = null;
+        private static CategoryDAO? instance = null;
         private static readonly object iLock = new object();
         public CategoryDAO()
         {
@@ -39,12 +39,12 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    listCategories = context.Categories.ToList();
+                    listCategories = context.Categories!.ToList();
                 }
             }
             catch (Exception e)
             {
-                  throw new Exception(e.Message);
+                throw new Exception(e.Message);
             }
             return listCategories;
         }
@@ -54,7 +54,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                db.Categories.Add(category);
+                db.Categories!.Add(category);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -69,7 +69,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    
+
                     context.Entry<Category>(category).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     context.SaveChanges();
                 }
@@ -86,8 +86,8 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    var cDelete = context.Categories.SingleOrDefault(x => x.CategoryId == id);
-                    context.Categories.Remove(cDelete);
+                    var cDelete = context.Categories!.SingleOrDefault(x => x.CategoryId == id);
+                    context.Categories!.Remove(cDelete!);
                     context.SaveChanges();
                 }
             }
