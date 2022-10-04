@@ -12,11 +12,13 @@ namespace BusinessObjects.Model
         [Key]
         public int ProductId { get; set; }
         public string? ProductName { get; set; }
-        public int CategoryId { get; set; }
         public int UnitInStock { get; set; }
         public decimal Price { get; set; }
 
+        public int CategoryId { get; set; }
         public virtual Category? Category { get; set; }
-        public ICollection<OrderDetail>? OrderDetails { get; set; }
+
+        public int OrderId { get; set; }
+        public Order? Order { get; set; }
     }
 }
