@@ -18,7 +18,6 @@ namespace BusinessObjects.Model
         public int CategoryId { get; set; }
         public virtual Category? Category { get; set; }
 
-        public int OrderId { get; set; }
         public Order? Order { get; set; }
     }
 }
