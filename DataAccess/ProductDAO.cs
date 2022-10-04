@@ -12,7 +12,7 @@ namespace DataAccess
     public class ProductDAO
     {
 
-        private static ProductDAO instance = null;
+        private static ProductDAO? instance = null;
         private static readonly object iLock = new object();
         public ProductDAO()
         {
@@ -41,7 +41,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    listProducts = context.Products.Include(p => p.Category).ToList();
+                    listProducts = context.Products!.Include(p => p.Category).ToList();
                 }
             }
             catch (Exception e)
@@ -58,14 +58,14 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    p = context.Products.Include(p => p.Category).SingleOrDefault(x => x.ProductId == productId);
+                    p = context.Products!.Include(p => p.Category).SingleOrDefault(x => x.ProductId == productId);
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return p;
+            return p!;
         }
 
         public List<Product> FindProductByCategoryId(int CategoryId)
@@ -75,7 +75,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    listProducts = context.Products.Include(p => p.Category).Where(x => x.CategoryId==CategoryId).ToList();
+                    listProducts = context.Products!.Include(p => p.Category).Where(x => x.CategoryId == CategoryId).ToList();
                 }
             }
             catch (Exception e)
@@ -91,7 +91,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    context.Products.Add(p);
+                    context.Products!.Add(p);
                     context.SaveChanges();
                 }
             }
@@ -123,8 +123,8 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    var pDelete = context.Products.SingleOrDefault(x => x.ProductId == id);
-                    context.Products.Remove(pDelete);
+                    var pDelete = context.Products!.SingleOrDefault(x => x.ProductId == id);
+                    context.Products!.Remove(pDelete!);
                     context.SaveChanges();
                 }
             }
