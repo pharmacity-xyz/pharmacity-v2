@@ -10,11 +10,11 @@ namespace DataAccess.Util
 {
     public class Mapper
     {
-        public static MemberDTO mapToDTO(User user)
+        public static UserDTO mapToDTO(User user)
         {
             if (user != null)
             {
-                MemberDTO memberDTO = new MemberDTO
+                UserDTO memberDTO = new UserDTO
                 {
                     UserId = user.UserId,
                     Email = user.Email,
@@ -88,17 +88,17 @@ namespace DataAccess.Util
             return categoryDTO;
         }
 
-        public static User mapToEntity(MemberDTO memberDTO)
+        public static User mapToEntity(UserDTO userDTO)
         {
             User user = new User
             {
-                UserId = memberDTO.UserId,
-                Email = memberDTO.Email,
-                Country = memberDTO.Country,
-                CompanyName = memberDTO.CompanyName,
-                City = memberDTO.City,
-                Password = memberDTO.Password,
-                Role = memberDTO.Role?.ToString()
+                UserId = userDTO.UserId,
+                Email = userDTO.Email,
+                Country = userDTO.Country,
+                CompanyName = userDTO.CompanyName,
+                City = userDTO.City,
+                Password = userDTO.Password,
+                Role = userDTO.Role?.ToString()
             };
 
             return user;
