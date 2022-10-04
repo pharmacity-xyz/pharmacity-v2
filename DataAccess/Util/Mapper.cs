@@ -73,7 +73,7 @@ namespace DataAccess.Util
                 UnitsInStock = product.UnitInStock,
                 Weight = product.Weight,
                 CategoryId = product.CategoryId,
-                CategoryName = product.Category.CategoryName
+                CategoryName = product.Category?.Name
             };
             return productDTO;
         }
@@ -83,7 +83,7 @@ namespace DataAccess.Util
             CategoryDTO categoryDTO = new CategoryDTO
             {
                 CategoryId = category.CategoryId,
-                CategoryName = category.CategoryName
+                CategoryName = category.Name
             };
             return categoryDTO;
         }
@@ -98,7 +98,7 @@ namespace DataAccess.Util
                 CompanyName = memberDTO.CompanyName,
                 City = memberDTO.City,
                 Password = memberDTO.Password,
-                Role = memberDTO.Role.ToString()
+                Role = memberDTO.Role?.ToString()
             };
 
             return user;
@@ -124,7 +124,7 @@ namespace DataAccess.Util
             OrderDetail orderDetail = new OrderDetail
             {
                 Discount = (float?)orderDetailDTO.Discount,
-                OrderId = orderDetailDTO.OrderId,
+                OrderDetailId = orderDetailDTO.OrderId,
                 ProductId = orderDetailDTO.ProductId,
                 Quantity = orderDetailDTO.Quantity,
                 UnitPrice = orderDetailDTO.UnitPrice
@@ -152,7 +152,7 @@ namespace DataAccess.Util
             Category category = new Category
             {
                 CategoryId = categoryDTO.CategoryId,
-                CategoryName = categoryDTO.CategoryName
+                Name = categoryDTO.CategoryName
             };
             return category;
         }
