@@ -11,13 +11,12 @@ namespace StoreAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository orderRepository;
-        private readonly IOrderDetailRepository orderDetailRepository;
+        // private readonly IOrderDetailRepository orderDetailRepository;
         private readonly IProductRepository productRepository;
 
-        public OrderController(IOrderRepository orderRepository, IOrderDetailRepository orderDetailRepository, IProductRepository productRepository)
+        public OrderController(IOrderRepository orderRepository, IProductRepository productRepository)
         {
             this.orderRepository = orderRepository;
-            this.orderDetailRepository = orderDetailRepository;
             this.productRepository = productRepository;
         }
 
@@ -27,10 +26,10 @@ namespace StoreAPI.Controllers
             try
             {
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
-                foreach (OrderDTO order in orderList)
-                {
-                    order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                }
+                // foreach (OrderDTO order in orderList)
+                // {
+                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
+                // }
                 return Ok(orderList);
             }
             catch (Exception e)
@@ -53,7 +52,7 @@ namespace StoreAPI.Controllers
                 }
 
                 OrderDTO order = orderRepository.GetOrderById(id);
-                order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
+                // order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
                 return Ok(order);
             }
             catch (Exception e)
@@ -75,11 +74,11 @@ namespace StoreAPI.Controllers
                 }
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrdersByUserId(userid);
-                foreach (OrderDTO order in orderList)
-                {
-                    order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                    // order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
-                }
+                // foreach (OrderDTO order in orderList)
+                // {
+                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
+                // order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
+                // }
                 return Ok(orderList);
             }
             catch (Exception e)
@@ -122,7 +121,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                orderDetailRepository.Delete(id);
+                // orderDetailRepository.Delete(id);
                 orderRepository.Delete(id);
                 return Ok("Successfully deleted");
             }
