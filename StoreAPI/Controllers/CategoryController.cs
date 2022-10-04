@@ -13,16 +13,16 @@ namespace StoreAPI.Controllers
     {
         private readonly ICategoryRepository categoryRepository;
         private readonly IOrderRepository orderRepository;
-        private readonly IOrderDetailRepository orderDetailRepository;
+        // private readonly IOrderDetailRepository orderDetailRepository;
 
         public CategoryController(
             ICategoryRepository categoryRepository,
-            IOrderDetailRepository orderDetailRepository,
+            // IOrderDetailRepository orderDetailRepository,
             IOrderRepository orderRepository
         )
         {
             this.categoryRepository = categoryRepository;
-            this.orderDetailRepository = orderDetailRepository;
+            // this.orderDetailRepository = orderDetailRepository;
             this.orderRepository = orderRepository;
         }
 
@@ -66,14 +66,14 @@ namespace StoreAPI.Controllers
                 categoryRepository.Delete(id);
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
-                foreach (OrderDTO order in orderList)
-                {
-                    order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                    if (order.OrderDetail == null)
-                    {
-                        orderRepository.Delete(order.OrderId);
-                    }
-                }
+                // foreach (OrderDTO order in orderList)
+                // {
+                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
+                //     if (order.OrderDetail == null)
+                //     {
+                //         orderRepository.Delete(order.OrderId);
+                //     }
+                // }
                 return Ok("Successfully deleted");
             }
             catch (Exception e)
