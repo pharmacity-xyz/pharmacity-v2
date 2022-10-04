@@ -48,18 +48,18 @@ namespace DataAccess.Util
 
         public static OrderDetailDTO mapToDTO(OrderDetail orderDetail)
         {
-            OrderDetailDTO orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
+            OrderDetailDTO? orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
             {
-                Discount = (double)orderDetail.Discount,
+                Discount = (double)orderDetail.Discount!,
                 OrderId = orderDetail.OrderDetailId,
                 ProductId = orderDetail.ProductId,
-                ProductName = orderDetail.Product.ProductName,
+                ProductName = orderDetail.Product!.ProductName,
                 Quantity = orderDetail.Quantity,
                 UnitPrice = orderDetail.UnitPrice,
-                TotalPrice = (double)orderDetail.UnitPrice * (double)orderDetail.Quantity * (1d - (double)orderDetail.Discount)
+                TotalPrice = (double)orderDetail.UnitPrice! * (double)orderDetail.Quantity! * (1d - (double)orderDetail.Discount)
             };
 
-            return orderDetailDTO;
+            return orderDetailDTO!;
         }
 
         public static ProductDTO mapToDTO(Product product)
@@ -113,7 +113,7 @@ namespace DataAccess.Util
                 RequiredDate = orderDTO.RequiredDate,
                 ShippedDate = orderDTO.ShippedDate,
                 Freight = orderDTO.Freight,
-                OrderDetail = mapToEntity(orderDTO.OrderDetail)
+                OrderDetail = mapToEntity(orderDTO.OrderDetail!)
             };
             return order;
         }
