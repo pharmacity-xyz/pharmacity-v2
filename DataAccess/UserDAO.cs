@@ -11,7 +11,7 @@ namespace DataAccess
     public class UserDAO
     {
 
-        private static UserDAO instance = null;
+        private static UserDAO? instance = null;
         private static readonly object iLock = new object();
         public UserDAO()
         {
@@ -40,7 +40,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    p = context.Members.SingleOrDefault(x => x.Email == email && x.Password == password);
+                    p = context.Members?.SingleOrDefault(x => x.Email == email && x.Password == password);
 
                     if (p == null)
                     {
@@ -61,7 +61,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    context.Members.Add(user);
+                    context.Members?.Add(user);
                     context.SaveChanges();
                 }
             }
@@ -94,7 +94,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    p = context.Members.ToList();
+                    p = context.Members?.ToList();
 
                     if (p == null)
                     {

@@ -36,9 +36,9 @@ namespace StoreAPI.Controllers
                 }
 
 
-                UserDTO member = userRepository.Login(userDTO.Email, userDTO.Password);
+                UserDTO user = userRepository.Login(userDTO.Email, userDTO.Password);
 
-                LoggedUser.Instance.User = member;
+                LoggedUser.Instance!.User = user;
 
                 return Ok(LoggedUser.Instance.User);
 
@@ -62,7 +62,7 @@ namespace StoreAPI.Controllers
 
                 userRepository.Update(user);
 
-                LoggedUser.Instance.User = user;
+                LoggedUser.Instance!.User = user;
 
                 return Ok(LoggedUser.Instance.User);
 
@@ -78,7 +78,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                LoggedUser.Instance.User = null;
+                LoggedUser.Instance!.User = null;
 
                 return Ok(LoggedUser.Instance.User);
 
@@ -94,7 +94,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                return Ok(LoggedUser.Instance.User);
+                return Ok(LoggedUser.Instance!.User);
             }
             catch (Exception e)
             {
@@ -107,20 +107,10 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                //if (memberDTO.Email.Equals("") && memberDTO.Password.Equals(""))
-                //{
-                //    throw new Exception("Email and Password cannot be empty");
-                //}
-                //else
-                //{
-                //    if (memberDTO.Email.Equals("")) throw new Exception("Email cannot be empty");
-                //    if (memberDTO.Password.Equals("")) throw new Exception("Password cannot be empty");
-                //}
-
                 userDTO.Role = Role.USER.ToString();
                 userRepository.Add(userDTO);
 
-                return Ok(LoggedUser.Instance.User);
+                return Ok(LoggedUser.Instance!.User);
 
             }
             catch (Exception e)
@@ -138,7 +128,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance.User;
+                UserDTO user = LoggedUser.Instance!.User!;
 
                 if (user == null)
                 {
