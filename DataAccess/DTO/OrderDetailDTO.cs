@@ -11,10 +11,9 @@ namespace DataAccess.DTO
     {
         public int? OrderDetailId { get; set; }
         public int? ProductId { get; set; }
-        public decimal? UnitPrice { get; set; }
+        public decimal? Price { get; set; }
         public string? ProductName { get; set; }
         public int? Quantity { get; set; }
-        public double Discount { get; set; }
         public double TotalPrice { get; set; }
         public int OrderForeignKey { get; set; }
         // public int CategoryId { get; set; }
