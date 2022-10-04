@@ -108,7 +108,7 @@ namespace DataAccess.Util
                 OrderedDate = orderDTO.OrderedDate,
                 OrderId = orderDTO.OrderId,
                 ShipDate = orderDTO.ShipDate,
-                OrderDetail = mapToEntity(orderDTO.OrderDetail!)
+                // OrderDetail = mapToEntity(orderDTO.OrderDetail!)
             };
             return order;
         }
