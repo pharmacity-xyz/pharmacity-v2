@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class MemberDAO
+    public class UserDAO
     {
 
-        private static MemberDAO instance = null;
+        private static UserDAO instance = null;
         private static readonly object iLock = new object();
-        public MemberDAO()
+        public UserDAO()
         {
 
         }
 
-        public static MemberDAO Instance
+        public static UserDAO Instance
         {
             get
             {
@@ -26,16 +26,16 @@ namespace DataAccess
                 {
                     if (instance == null)
                     {
-                        instance = new MemberDAO();
+                        instance = new UserDAO();
                     }
                     return instance;
                 }
             }
         }
 
-        public Member FindMemberByEmailPassword(string email, string password)
+        public User FindMemberByEmailPassword(string email, string password)
         {
-            var p = new Member();
+            var p = new User();
             try
             {
                 using (var context = new AppDbContext())
@@ -55,13 +55,13 @@ namespace DataAccess
             return p;
         }
 
-        public void SaveMember(Member member)
+        public void SaveMember(User user)
         {
             try
             {
                 using (var context = new AppDbContext())
                 {
-                    context.Members.Add(member);
+                    context.Members.Add(user);
                     context.SaveChanges();
                 }
             }
@@ -71,13 +71,13 @@ namespace DataAccess
             }
         }
 
-        public void UpdateMember(Member member)
+        public void UpdateMember(User user)
         {
             try
             {
                 using (var context = new AppDbContext())
                 {
-                    context.Entry<Member>(member).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.Entry<User>(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     context.SaveChanges();
                 }
             }
@@ -87,9 +87,9 @@ namespace DataAccess
             }
         }
 
-        public List<Member> FindAll()
+        public List<User> FindAll()
         {
-            var p = new List<Member>();
+            var p = new List<User>();
             try
             {
                 using (var context = new AppDbContext())
