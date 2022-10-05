@@ -60,15 +60,10 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                // UserDTO user = userRepository.Login(email, password);
-
                 if (!confirmNewPassword.Equals(newPassword))
                 {
                     throw new Exception("Confirm password does not match new password");
                 }
-
-                // user.Password = newPassword;
-
                 UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
 
                 LoggedUser.Instance!.User = user;
