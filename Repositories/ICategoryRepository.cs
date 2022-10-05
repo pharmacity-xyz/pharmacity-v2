@@ -12,7 +12,7 @@ namespace Repositories
     {
         List<CategoryDTO> GetCategory();
         void Add(CategoryDTO categoryDTO);
-        void Delete(int id);
+        void Delete(Guid id);
         void Update(CategoryDTO categoryDTO);
     }
 }

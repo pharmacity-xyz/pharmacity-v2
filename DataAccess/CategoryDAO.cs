@@ -12,6 +12,7 @@ namespace DataAccess
     {
         private static CategoryDAO? instance = null;
         private static readonly object iLock = new object();
+
         public CategoryDAO()
         {
 
@@ -80,7 +81,7 @@ namespace DataAccess
             }
         }
 
-        public void DeleteCategory(int id)
+        public void DeleteCategory(Guid id)
         {
             try
             {

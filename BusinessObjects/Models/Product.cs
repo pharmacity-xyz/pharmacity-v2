@@ -15,7 +15,7 @@ namespace BusinessObjects.Model
         public int UnitInStock { get; set; }
         public decimal Price { get; set; }
 
-        public int CategoryId { get; set; }
+        public Guid CategoryId { get; set; }
         public virtual Category? Category { get; set; }
 
         public Order? Order { get; set; }

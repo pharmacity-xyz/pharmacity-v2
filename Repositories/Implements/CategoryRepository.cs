@@ -16,7 +16,7 @@ namespace Repositories.Implements
             CategoryDAO.Instance.Add(Mapper.mapToEntity(categoryDTO));
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             CategoryDAO.Instance.DeleteCategory(id);
         }

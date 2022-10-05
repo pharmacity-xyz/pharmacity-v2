@@ -68,7 +68,7 @@ namespace DataAccess
             return p!;
         }
 
-        public List<Product> FindProductByCategoryId(int CategoryId)
+        public List<Product> FindProductByCategoryId(Guid CategoryId)
         {
             var listProducts = new List<Product>();
             try
