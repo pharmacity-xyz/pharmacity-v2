@@ -42,6 +42,28 @@ namespace DataAccess
             }
         }
 
+        public Category GetCategoryById(Guid id)
+        {
+            var category = new Category();
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    category = context.Categories?.SingleOrDefault(c => c.CategoryId == id);
+
+                    if (category == null)
+                    {
+                        throw new Exception("Can not find the category with " + id);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return category;
+        }
+
         public List<Category> GetCategories()
         {
             var listCategories = new List<Category>();
