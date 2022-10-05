@@ -13,7 +13,6 @@ namespace StoreAPI.Controllers
     {
         private readonly IProductRepository productRepository;
         private readonly IOrderRepository orderRepository;
-        // private readonly IOrderDetailRepository orderDetailRepository;
 
         public ProductController(
             IProductRepository productRepository,
@@ -22,7 +21,6 @@ namespace StoreAPI.Controllers
         {
             this.productRepository = productRepository;
             this.orderRepository = orderRepository;
-            // this.orderDetailRepository = orderDetailRepository;
         }
 
         [HttpGet("get_all")]
@@ -40,7 +38,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("get_by_id/{id}")]
-        public IActionResult GetId(int id)
+        public IActionResult GetId(Guid id)
         {
             try
             {
@@ -120,7 +118,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             try
             {
