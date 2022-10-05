@@ -7,24 +7,32 @@ namespace Repositories.Implements
 {
     public class ProductRepository : IProductRepository
     {
-        public void SaveProduct(ProductDTO p)
+        public void SaveProduct(ProductDTO productDTO)
         {
-            ProductDAO.Instance.SaveProduct(Mapper.mapToEntity(p));
+            Product new_product = new Product
+            {
+                ProductId = Guid.NewGuid(),
+                ProductName = productDTO.ProductName,
+                Price = productDTO.Price,
+                UnitInStock = productDTO.UnitsInStock,
+                CategoryId = productDTO.CategoryId
+            };
+            ProductDAO.Instance.SaveProduct(new_product);
         }
 
         public ProductDTO GetProductById(Guid id)
         {
-            return Mapper.mapToDTO(ProductDAO.Instance.FindProductById(id));
+            return ProductMapper.mapToDTO(ProductDAO.Instance.FindProductById(id));
         }
 
         public List<ProductDTO> GetProducts()
         {
-            return ProductDAO.Instance.GetProducts().Select(p => Mapper.mapToDTO(p)).ToList();
+            return ProductDAO.Instance.GetProducts().Select(p => ProductMapper.mapToDTO(p)).ToList();
         }
 
         public List<ProductDTO> GetProductsByCategory(Guid id)
         {
-            return ProductDAO.Instance.FindProductByCategoryId(id).Select(p => Mapper.mapToDTO(p)).ToList();
+            return ProductDAO.Instance.FindProductByCategoryId(id).Select(p => ProductMapper.mapToDTO(p)).ToList();
         }
 
         public void UpdateProduct(ProductDTO p)

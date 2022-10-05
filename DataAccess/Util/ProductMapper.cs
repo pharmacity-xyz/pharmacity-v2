@@ -18,18 +18,18 @@ namespace DataAccess.Util
             return productDTO;
         }
 
-        public static Product mapToEntity(ProductDTO productDTO)
-        {
-            Product product = new Product
-            {
-                ProductId = productDTO.ProductId,
-                ProductName = productDTO.ProductName,
-                Price = productDTO.Price,
-                UnitInStock = productDTO.UnitsInStock,
-                CategoryId = productDTO.CategoryId
-            };
-            return product;
-        }
+        // public static Product mapToEntity(ProductDTO productDTO)
+        // {
+        //     Product product = new Product
+        //     {
+        //         ProductId = productDTO.ProductId,
+        //         ProductName = productDTO.ProductName,
+        //         Price = productDTO.Price,
+        //         UnitInStock = productDTO.UnitsInStock,
+        //         CategoryId = productDTO.CategoryId
+        //     };
+        //     return product;
+        // }
 
     }
 }
