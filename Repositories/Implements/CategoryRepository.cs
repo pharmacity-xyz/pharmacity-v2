@@ -25,13 +25,8 @@ namespace Repositories.Implements
 
         public void Update(CategoryDTO categoryDTO)
         {
-            Category category = new Category
-            {
-                CategoryId = categoryDTO.CategoryId,
-                Name = categoryDTO.CategoryName,
-            };
-
-            CategoryDAO.Instance.Update(Mapper.mapToEntity(categoryDTO));
+            Category category = CategoryDAO.Instance.GetCategoryById(categoryDTO.CategoryId);
+            CategoryDAO.Instance.Update(category);
         }
 
         public void Delete(Guid id)

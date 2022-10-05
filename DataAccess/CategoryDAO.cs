@@ -42,7 +42,7 @@ namespace DataAccess
             }
         }
 
-        public Category GetCategoryById(Guid id)
+        public Category GetCategoryById(Guid? id)
         {
             var category = new Category();
             try
