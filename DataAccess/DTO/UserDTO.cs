@@ -9,7 +9,7 @@ namespace DataAccess.DTO
 {
     public class UserDTO
     {
-        // public Guid UserId { get; set; }
+        public Guid? UserId { get; set; }
         public string? Email { get; set; }
         public string? CompanyName { get; set; }
         public string? City { get; set; }
