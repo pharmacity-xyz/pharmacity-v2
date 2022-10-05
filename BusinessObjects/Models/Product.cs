@@ -10,7 +10,7 @@ namespace BusinessObjects.Model
     public class Product
     {
         [Key]
-        public int ProductId { get; set; }
+        public Guid ProductId { get; set; }
         public string? ProductName { get; set; }
         public int UnitInStock { get; set; }
         public decimal Price { get; set; }
