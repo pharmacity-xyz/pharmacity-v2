@@ -1,6 +1,6 @@
 ﻿using DataAccess;
 using DataAccess.DTO;
-using DataAccess.Util.UserMapper;
+using DataAccess.Util;
 using BusinessObjects.Model;
 
 namespace Repositories.Implements
