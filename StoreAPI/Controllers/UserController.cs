@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using BusinessObjects.Model;
 using DataAccess.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -49,22 +50,25 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("changePassword")]
-        public IActionResult changePass(string email, string password, string newPassword, string confirmNewPassword)
+        [HttpPost("change_password")]
+        public IActionResult changePass(
+            string email,
+            string password,
+            string newPassword,
+            string confirmNewPassword
+        )
         {
             try
             {
-                UserDTO user = userRepository.Login(email, password);
-
-                if (!confirmNewPassword.Equals(newPassword)) throw new Exception("Confirm password does not match new password");
-
-                user.Password = newPassword;
-
-                userRepository.Update(user);
+                if (!confirmNewPassword.Equals(newPassword))
+                {
+                    throw new Exception("Confirm password does not match new password");
+                }
+                UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
 
                 LoggedUser.Instance!.User = user;
 
-                return Ok(LoggedUser.Instance.User);
+                return Ok("Successfully changed");
 
             }
             catch (Exception e)
@@ -89,7 +93,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("loggedMember")]
+        [HttpGet("logged_member")]
         public IActionResult loggedUser()
         {
             try
@@ -132,14 +136,9 @@ namespace StoreAPI.Controllers
 
                 if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
-
-                user.City = newCity;
-                user.Country = newCountry;
-                user.CompanyName = newCompany;
-
-                userRepository.Update(user);
+                userRepository.Update(user, newCity, newCountry, newCompany);
 
                 LoggedUser.Instance.User = user;
 
@@ -152,7 +151,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("get_all")]
         public IActionResult GetAll()
         {
             try

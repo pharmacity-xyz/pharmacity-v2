@@ -1,11 +1,7 @@
 ﻿using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessObjects.Model;
 
 namespace Repositories.Implements
 {
@@ -21,19 +17,31 @@ namespace Repositories.Implements
             return UserDAO.Instance.FindAll().Select(m => Mapper.mapToDTO(m)).ToList()!;
         }
 
-        public UserDTO GetLoggedAccount()
-        {
-            throw new NotImplementedException();
-        }
-
         public UserDTO Login(string email, string password)
         {
             return Mapper.mapToDTO(UserDAO.Instance.FindMemberByEmailPassword(email, password))!;
         }
 
-        public void Update(UserDTO user)
+        public UserDTO GetLoggedAccount()
         {
-            UserDAO.Instance.UpdateMember(Mapper.mapToEntity(user));
+            throw new NotImplementedException();
+        }
+
+        public void Update(UserDTO user, string newCity, string newCountry, string newCompany)
+        {
+            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(user.Email!, user.Password!);
+            temp_user.City = newCity;
+            temp_user.Country = newCountry;
+            temp_user.CompanyName = newCompany;
+            UserDAO.Instance.UpdateMember(temp_user);
+        }
+
+        public UserDTO UpdatePassword(string email, string password, string newPassword)
+        {
+            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(email!, password!);
+            temp_user.Password = newPassword;
+            UserDAO.Instance.UpdateMember(temp_user);
+            return Mapper.mapToDTO(temp_user)!;
         }
     }
 }

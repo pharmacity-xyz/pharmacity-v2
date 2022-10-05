@@ -43,13 +43,14 @@ namespace DataAccess
             return orders;
         }
 
-        public IEnumerable<Order> SearchByUserId(int id)
+        public IEnumerable<Order> SearchByUserId(Guid id)
         {
             List<Order> orders;
             try
             {
                 var db = new AppDbContext();
-                orders = db.Orders!.ToList().FindAll(c => c.UserId == id);
+                orders = db.Orders!.ToList().FindAll(order => order.UserId == id);
+
             }
             catch (Exception e)
             {

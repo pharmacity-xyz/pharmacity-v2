@@ -44,22 +44,6 @@ namespace DataAccess.Util
             return orderDTO;
         }
 
-        // public static OrderDetailDTO mapToDTO(OrderDetail orderDetail)
-        // {
-        //     OrderDetailDTO? orderDetailDTO = orderDetail == null ? null : new OrderDetailDTO
-        //     {
-        //         OrderDetailId = orderDetail.OrderDetailId,
-        //         ProductId = orderDetail.ProductId,
-        //         Price = orderDetail.Price,
-        //         ProductName = orderDetail.Product!.ProductName,
-        //         Quantity = orderDetail.Quantity,
-        //         TotalPrice = (double)orderDetail.Price! * (double)orderDetail.Quantity!,
-        //         OrderForeignKey = orderDetail.OrderForeignKey
-        //     };
-
-        //     return orderDetailDTO!;
-        // }
-
         public static ProductDTO mapToDTO(Product product)
         {
             ProductDTO productDTO = new ProductDTO
@@ -87,7 +71,7 @@ namespace DataAccess.Util
         {
             User user = new User
             {
-                UserId = userDTO.UserId,
+                UserId = Guid.NewGuid(),
                 Email = userDTO.Email,
                 Country = userDTO.Country,
                 CompanyName = userDTO.CompanyName,
@@ -109,20 +93,6 @@ namespace DataAccess.Util
                 UserId = orderDTO.UserId,
             };
         }
-
-        // public static OrderDetail mapToEntity(OrderDetailDTO orderDetailDTO)
-        // {
-        //     OrderDetail orderDetail = new OrderDetail
-        //     {
-        //         OrderDetailId = orderDetailDTO.OrderDetailId,
-        //         ProductId = orderDetailDTO.ProductId,
-        //         Quantity = orderDetailDTO.Quantity,
-        //         Price = orderDetailDTO.Price,
-        //         OrderForeignKey = orderDetailDTO.OrderForeignKey,
-        //     };
-
-        //     return orderDetail;
-        // }
 
         public static Product mapToEntity(ProductDTO productDTO)
         {

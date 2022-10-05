@@ -12,7 +12,6 @@ namespace StoreAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository orderRepository;
-        // private readonly IOrderDetailRepository orderDetailRepository;
         private readonly IProductRepository productRepository;
 
         public OrderController(IOrderRepository orderRepository, IProductRepository productRepository)
@@ -27,10 +26,6 @@ namespace StoreAPI.Controllers
             try
             {
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
-                // foreach (OrderDTO order in orderList)
-                // {
-                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                // }
                 return Ok(orderList);
             }
             catch (Exception e)
@@ -49,11 +44,10 @@ namespace StoreAPI.Controllers
 
                 if (user == null)
                 {
-                    throw new Exception("Can not find the user");
+                    throw new Exception("Please login");
                 }
 
                 OrderDTO order = orderRepository.GetOrderById(id);
-                // order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
                 return Ok(order);
             }
             catch (Exception e)
@@ -63,7 +57,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("get_all_by_userid/{userid}")]
-        public IActionResult GetAll(int userid)
+        public IActionResult GetAll(Guid userid)
         {
             try
             {
@@ -71,15 +65,10 @@ namespace StoreAPI.Controllers
 
                 if (user == null)
                 {
-                    throw new Exception("Can not find the user");
+                    throw new Exception("Please login");
                 }
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrdersByUserId(userid);
-                // foreach (OrderDTO order in orderList)
-                // {
-                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                // order.OrderDetail.CategoryId = productRepository.GetProductById((int)order.OrderDetail.ProductId!).CategoryId;
-                // }
                 return Ok(orderList);
             }
             catch (Exception e)
@@ -110,13 +99,11 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                // orderDetailRepository.Delete(id);
                 orderRepository.Delete(id);
                 return Ok("Successfully deleted");
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }

@@ -26,7 +26,7 @@ namespace Repositories.Implements
             return OrderDAO.Instance.GetList().Select(p => Mapper.mapToDTO(p)).ToList();
         }
 
-        public IEnumerable<OrderDTO> GetAllOrdersByUserId(int id)
+        public IEnumerable<OrderDTO> GetAllOrdersByUserId(Guid id)
         {
             return OrderDAO.Instance.SearchByUserId(id).Select(p => Mapper.mapToDTO(p)).ToList();
         }

@@ -12,6 +12,6 @@ namespace DataAccess.DTO
         public DateTime? OrderedDate { get; set; }
         public DateTime? ShipDate { get; set; }
 
-        public int? UserId { get; set; }
+        public Guid UserId { get; set; }
     }
 }
