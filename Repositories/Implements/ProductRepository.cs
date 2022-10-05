@@ -35,9 +35,10 @@ namespace Repositories.Implements
             return ProductDAO.Instance.FindProductByCategoryId(id).Select(p => ProductMapper.mapToDTO(p)).ToList();
         }
 
-        public void UpdateProduct(ProductDTO p)
+        public void UpdateProduct(ProductDTO productDTO)
         {
-            ProductDAO.Instance.UpdateProduct(Mapper.mapToEntity(p));
+            Product product = ProductDAO.Instance.FindProductById(productDTO.ProductId);
+            ProductDAO.Instance.UpdateProduct(product);
         }
 
         public void DeleteProduct(Guid id)

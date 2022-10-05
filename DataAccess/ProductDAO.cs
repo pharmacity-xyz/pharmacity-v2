@@ -46,7 +46,7 @@ namespace DataAccess
             return listProducts;
         }
 
-        public Product FindProductById(Guid productId)
+        public Product FindProductById(Guid? productId)
         {
             var p = new Product();
             try
