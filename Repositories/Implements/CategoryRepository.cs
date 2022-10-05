@@ -20,7 +20,7 @@ namespace Repositories.Implements
 
         public List<CategoryDTO> GetCategory()
         {
-            return CategoryDAO.Instance.GetCategories().Select(m => Mapper.mapToDTO(m)).ToList();
+            return CategoryDAO.Instance.GetCategories().Select(m => CategoryMapper.mapToDTO(m)).ToList();
         }
 
         public void Update(CategoryDTO categoryDTO)
