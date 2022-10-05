@@ -1,4 +1,5 @@
 ﻿using BusinessObjects.Models;
+using BusinessObjects.Model;
 using DataAccess.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -50,21 +51,29 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("change_password")]
-        public IActionResult changePass(string email, string password, string newPassword, string confirmNewPassword)
+        public IActionResult changePass(
+            string email,
+            string password,
+            string newPassword,
+            string confirmNewPassword
+        )
         {
             try
             {
-                UserDTO user = userRepository.Login(email, password);
+                User user = userRepository.LoginWithUser(email, password);
 
-                if (!confirmNewPassword.Equals(newPassword)) throw new Exception("Confirm password does not match new password");
+                if (!confirmNewPassword.Equals(newPassword))
+                {
+                    throw new Exception("Confirm password does not match new password");
+                }
 
                 user.Password = newPassword;
 
-                userRepository.Update(user);
+                userRepository.UpdatePassword(user);
 
-                LoggedUser.Instance!.User = user;
+                // LoggedUser.Instance!.User = user;
 
-                return Ok(LoggedUser.Instance.User);
+                return Ok("Successfully changed");
 
             }
             catch (Exception e)
