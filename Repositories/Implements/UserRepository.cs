@@ -32,10 +32,12 @@ namespace Repositories.Implements
             UserDAO.Instance.UpdateMember(Mapper.mapToEntity(user));
         }
 
-        public void UpdatePassword(UserDTO user)
+        public UserDTO UpdatePassword(string email, string password, string newPassword)
         {
-            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(user.Email!, user.Password!);
+            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(email!, password!);
+            temp_user.Password = newPassword;
             UserDAO.Instance.UpdateMember(temp_user);
+            return Mapper.mapToDTO(temp_user)!;
         }
     }
 }
