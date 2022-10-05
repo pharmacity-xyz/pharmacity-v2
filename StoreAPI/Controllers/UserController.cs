@@ -60,7 +60,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                User user = userRepository.LoginWithUser(email, password);
+                UserDTO user = userRepository.Login(email, password);
 
                 if (!confirmNewPassword.Equals(newPassword))
                 {
@@ -71,7 +71,7 @@ namespace StoreAPI.Controllers
 
                 userRepository.UpdatePassword(user);
 
-                // LoggedUser.Instance!.User = user;
+                LoggedUser.Instance!.User = user;
 
                 return Ok("Successfully changed");
 
