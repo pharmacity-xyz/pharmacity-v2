@@ -8,7 +8,7 @@ namespace Repositories
         List<UserDTO> GetAll();
         UserDTO Login(string email, string password);
         UserDTO GetLoggedAccount();
-        void Update(UserDTO member);
+        void Update(UserDTO user, string newCity, string newCountry, string newCompany);
         UserDTO UpdatePassword(string email, string password, string newPassword);
     }
 }

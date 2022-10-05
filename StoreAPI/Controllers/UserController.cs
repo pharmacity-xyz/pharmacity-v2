@@ -136,14 +136,9 @@ namespace StoreAPI.Controllers
 
                 if (user == null)
                 {
-                    throw new Exception("Can't do this action");
+                    throw new Exception("Can not find the user");
                 }
-
-                user.City = newCity;
-                user.Country = newCountry;
-                user.CompanyName = newCompany;
-
-                userRepository.Update(user);
+                userRepository.Update(user, newCity, newCountry, newCompany);
 
                 LoggedUser.Instance.User = user;
 

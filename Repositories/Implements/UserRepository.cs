@@ -27,9 +27,13 @@ namespace Repositories.Implements
             throw new NotImplementedException();
         }
 
-        public void Update(UserDTO user)
+        public void Update(UserDTO user, string newCity, string newCountry, string newCompany)
         {
-            UserDAO.Instance.UpdateMember(Mapper.mapToEntity(user));
+            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(user.Email!, user.Password!);
+            temp_user.City = newCity;
+            temp_user.Country = newCountry;
+            temp_user.CompanyName = newCompany;
+            UserDAO.Instance.UpdateMember(temp_user);
         }
 
         public UserDTO UpdatePassword(string email, string password, string newPassword)
