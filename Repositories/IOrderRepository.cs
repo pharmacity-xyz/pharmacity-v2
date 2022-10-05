@@ -10,7 +10,7 @@ namespace Repositories
     public interface IOrderRepository
     {
         IEnumerable<OrderDTO> GetAllOrders();
-        IEnumerable<OrderDTO> GetAllOrdersByUserId(int id);
+        IEnumerable<OrderDTO> GetAllOrdersByUserId(Guid id);
         OrderDTO GetOrderById(int id);
         void Add(OrderDTO order);
         void Update(OrderDTO order);

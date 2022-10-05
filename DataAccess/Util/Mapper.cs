@@ -16,7 +16,7 @@ namespace DataAccess.Util
             {
                 return new UserDTO
                 {
-                    UserId = user.UserId,
+                    // UserId = user.UserId,
                     Email = user.Email,
                     Country = user.Country,
                     CompanyName = user.CompanyName,
@@ -87,7 +87,7 @@ namespace DataAccess.Util
         {
             User user = new User
             {
-                UserId = userDTO.UserId,
+                UserId = Guid.NewGuid(),
                 Email = userDTO.Email,
                 Country = userDTO.Country,
                 CompanyName = userDTO.CompanyName,

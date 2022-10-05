@@ -57,7 +57,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("get_all_by_userid/{userid}")]
-        public IActionResult GetAll(int userid)
+        public IActionResult GetAll(Guid userid)
         {
             try
             {
