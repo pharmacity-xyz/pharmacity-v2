@@ -13,8 +13,8 @@ namespace Repositories
         void SaveProduct(ProductDTO p);
         List<ProductDTO> GetProducts();
         List<ProductDTO> GetProductsByCategory(Guid id);
-        ProductDTO GetProductById(int id);
+        ProductDTO GetProductById(Guid id);
         void UpdateProduct(ProductDTO p);
-        void DeleteProduct(int id);
+        void DeleteProduct(Guid id);
     }
 }

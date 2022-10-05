@@ -1,11 +1,6 @@
 ﻿using BusinessObjects.Data;
 using BusinessObjects.Model;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -51,7 +46,7 @@ namespace DataAccess
             return listProducts;
         }
 
-        public Product FindProductById(int productId)
+        public Product FindProductById(Guid productId)
         {
             var p = new Product();
             try
@@ -117,7 +112,7 @@ namespace DataAccess
             }
         }
 
-        public void DeleteProduct(int id)
+        public void DeleteProduct(Guid id)
         {
             try
             {
