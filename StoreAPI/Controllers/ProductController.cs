@@ -54,7 +54,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("get_by_category/{id}")]
-        public IActionResult GetCategoryId(int id)
+        public IActionResult GetCategoryId(Guid id)
         {
             try
             {
@@ -138,15 +138,6 @@ namespace StoreAPI.Controllers
                 productRepository.DeleteProduct(id);
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
-
-                // foreach (OrderDTO order in orderList)
-                // {
-                //     order.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(order.OrderId);
-                //     if (order.OrderDetail == null)
-                //     {
-                //         orderRepository.Delete(order.OrderId);
-                //     }
-                // }
 
                 return Ok("Successfully deleted");
             }

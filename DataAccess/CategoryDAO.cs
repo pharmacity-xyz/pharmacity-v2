@@ -33,6 +33,20 @@ namespace DataAccess
             }
         }
 
+        public void Add(Category category)
+        {
+            try
+            {
+                var db = new AppDbContext();
+                db.Categories!.Add(category);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public List<Category> GetCategories()
         {
             var listCategories = new List<Category>();
@@ -48,20 +62,6 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return listCategories;
-        }
-
-        public void Add(Category category)
-        {
-            try
-            {
-                var db = new AppDbContext();
-                db.Categories!.Add(category);
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
         }
 
         public void Update(Category category)
