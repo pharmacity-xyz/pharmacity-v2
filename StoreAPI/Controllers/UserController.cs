@@ -1,10 +1,7 @@
 ﻿using BusinessObjects.Models;
-using BusinessObjects.Model;
 using DataAccess.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
-using Repositories.Implements;
 using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers

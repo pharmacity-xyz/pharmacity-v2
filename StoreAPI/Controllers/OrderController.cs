@@ -1,9 +1,7 @@
 ﻿using DataAccess.DTO;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using StoreAPI.Storage;
-using NpgsqlTypes;
 
 namespace StoreAPI.Controllers
 {
