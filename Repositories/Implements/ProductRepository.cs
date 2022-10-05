@@ -27,7 +27,7 @@ namespace Repositories.Implements
             return ProductDAO.Instance.GetProducts().Select(p => Mapper.mapToDTO(p)).ToList();
         }
 
-        public List<ProductDTO> GetProductsByCategory(int id)
+        public List<ProductDTO> GetProductsByCategory(Guid id)
         {
             return ProductDAO.Instance.FindProductByCategoryId(id).Select(p => Mapper.mapToDTO(p)).ToList();
         }

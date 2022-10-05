@@ -1,10 +1,5 @@
 ﻿using BusinessObjects.Data;
 using BusinessObjects.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -12,6 +7,7 @@ namespace DataAccess
     {
         private static CategoryDAO? instance = null;
         private static readonly object iLock = new object();
+
         public CategoryDAO()
         {
 
@@ -32,6 +28,42 @@ namespace DataAccess
             }
         }
 
+        public void Add(Category category)
+        {
+            try
+            {
+                var db = new AppDbContext();
+                db.Categories!.Add(category);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public Category GetCategoryById(Guid? id)
+        {
+            var category = new Category();
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    category = context.Categories?.SingleOrDefault(c => c.CategoryId == id);
+
+                    if (category == null)
+                    {
+                        throw new Exception("Can not find the category with " + id);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return category;
+        }
+
         public List<Category> GetCategories()
         {
             var listCategories = new List<Category>();
@@ -47,20 +79,6 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return listCategories;
-        }
-
-        public void Add(Category category)
-        {
-            try
-            {
-                var db = new AppDbContext();
-                db.Categories!.Add(category);
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
         }
 
         public void Update(Category category)
@@ -80,7 +98,7 @@ namespace DataAccess
             }
         }
 
-        public void DeleteCategory(int id)
+        public void DeleteCategory(Guid id)
         {
             try
             {

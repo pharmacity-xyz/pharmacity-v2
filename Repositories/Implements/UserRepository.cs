@@ -9,17 +9,17 @@ namespace Repositories.Implements
     {
         public void Add(UserDTO user)
         {
-            UserDAO.Instance.SaveMember(Mapper.mapToEntity(user));
+            UserDAO.Instance.SaveMember(UserMapper.mapToEntity(user));
         }
 
         public List<UserDTO> GetAll()
         {
-            return UserDAO.Instance.FindAll().Select(m => Mapper.mapToDTO(m)).ToList()!;
+            return UserDAO.Instance.FindAll().Select(m => UserMapper.mapToDTO(m)).ToList()!;
         }
 
         public UserDTO Login(string email, string password)
         {
-            return Mapper.mapToDTO(UserDAO.Instance.FindMemberByEmailPassword(email, password))!;
+            return UserMapper.mapToDTO(UserDAO.Instance.FindMemberByEmailPassword(email, password))!;
         }
 
         public UserDTO GetLoggedAccount()
@@ -41,7 +41,7 @@ namespace Repositories.Implements
             User temp_user = UserDAO.Instance.FindMemberByEmailPassword(email!, password!);
             temp_user.Password = newPassword;
             UserDAO.Instance.UpdateMember(temp_user);
-            return Mapper.mapToDTO(temp_user)!;
+            return UserMapper.mapToDTO(temp_user)!;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Repositories
     {
         void SaveProduct(ProductDTO p);
         List<ProductDTO> GetProducts();
-        List<ProductDTO> GetProductsByCategory(int id);
+        List<ProductDTO> GetProductsByCategory(Guid id);
         ProductDTO GetProductById(int id);
         void UpdateProduct(ProductDTO p);
         void DeleteProduct(int id);

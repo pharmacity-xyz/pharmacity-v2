@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221005011116_change_id")]
-    partial class change_id
+    [Migration("20221005134709_first_migration")]
+    partial class first_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,11 +26,9 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Model.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<Guid>("CategoryId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -72,8 +70,8 @@ namespace BusinessObjects.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid");
 
                     b.Property<int?>("OrderId")
                         .HasColumnType("integer");
