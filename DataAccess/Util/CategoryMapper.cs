@@ -15,14 +15,23 @@ namespace DataAccess.Util
             return categoryDTO;
         }
 
-        public static Category mapToEntity(CategoryDTO categoryDTO)
+        public static Category createNewCategory(CategoryDTO categoryDTO)
         {
-            Category category = new Category
+            return new Category
             {
-                CategoryId = categoryDTO.CategoryId,
+                CategoryId = Guid.NewGuid(),
                 Name = categoryDTO.CategoryName
             };
-            return category;
         }
+
+        // public static Category mapToEntity(CategoryDTO categoryDTO)
+        // {
+        //     Category category = new Category
+        //     {
+        //         CategoryId = categoryDTO.CategoryId,
+        //         Name = categoryDTO.CategoryName
+        //     };
+        //     return category;
+        // }
     }
 }

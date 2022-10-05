@@ -1,11 +1,7 @@
-﻿using DataAccess;
+﻿using BusinessObjects.Model;
+using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Repositories.Implements
 {
@@ -13,12 +9,13 @@ namespace Repositories.Implements
     {
         public void Add(CategoryDTO categoryDTO)
         {
-            CategoryDAO.Instance.Add(Mapper.mapToEntity(categoryDTO));
-        }
+            Category newCategory = new Category
+            {
+                CategoryId = Guid.NewGuid(),
+                Name = categoryDTO.CategoryName,
+            };
 
-        public void Delete(Guid id)
-        {
-            CategoryDAO.Instance.DeleteCategory(id);
+            CategoryDAO.Instance.Add(newCategory);
         }
 
         public List<CategoryDTO> GetCategory()
@@ -29,6 +26,11 @@ namespace Repositories.Implements
         public void Update(CategoryDTO categoryDTO)
         {
             CategoryDAO.Instance.Update(Mapper.mapToEntity(categoryDTO));
+        }
+
+        public void Delete(Guid id)
+        {
+            CategoryDAO.Instance.DeleteCategory(id);
         }
     }
 }
