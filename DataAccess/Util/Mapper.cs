@@ -17,23 +17,6 @@ namespace DataAccess.Util
             return orderDTO;
         }
 
-        public static ProductDTO mapToDTO(Product product)
-        {
-            ProductDTO productDTO = new ProductDTO
-            {
-                ProductId = product.ProductId,
-                ProductName = product.ProductName,
-                Price = product.Price,
-                UnitsInStock = product.UnitInStock,
-                CategoryId = product.CategoryId,
-            };
-            return productDTO;
-        }
-
-
-
-
-
         public static Order mapToEntity(OrderDTO orderDTO)
         {
             return new Order
@@ -45,18 +28,6 @@ namespace DataAccess.Util
             };
         }
 
-        public static Product mapToEntity(ProductDTO productDTO)
-        {
-            Product product = new Product
-            {
-                ProductId = productDTO.ProductId,
-                ProductName = productDTO.ProductName,
-                Price = productDTO.Price,
-                UnitInStock = productDTO.UnitsInStock,
-                CategoryId = productDTO.CategoryId
-            };
-            return product;
-        }
 
 
     }

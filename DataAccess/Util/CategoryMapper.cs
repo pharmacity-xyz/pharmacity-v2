@@ -23,15 +23,5 @@ namespace DataAccess.Util
                 Name = categoryDTO.CategoryName
             };
         }
-
-        // public static Category mapToEntity(CategoryDTO categoryDTO)
-        // {
-        //     Category category = new Category
-        //     {
-        //         CategoryId = categoryDTO.CategoryId,
-        //         Name = categoryDTO.CategoryName
-        //     };
-        //     return category;
-        // }
     }
 }
