@@ -49,7 +49,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("changePassword")]
+        [HttpPost("change_password")]
         public IActionResult changePass(string email, string password, string newPassword, string confirmNewPassword)
         {
             try
@@ -89,7 +89,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("loggedMember")]
+        [HttpGet("logged_member")]
         public IActionResult loggedUser()
         {
             try
@@ -152,7 +152,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("get_all")]
         public IActionResult GetAll()
         {
             try
