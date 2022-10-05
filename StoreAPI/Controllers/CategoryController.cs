@@ -73,7 +73,7 @@ namespace StoreAPI.Controllers
 
                 categoryRepository.Update(category);
 
-                return Ok("Success");
+                return Ok("Successfully updated");
             }
             catch (Exception e)
             {
