@@ -27,8 +27,5 @@ namespace DataAccess.Util
                 UserId = orderDTO.UserId,
             };
         }
-
-
-
     }
 }

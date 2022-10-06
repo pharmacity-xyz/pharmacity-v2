@@ -8,10 +8,16 @@ namespace BusinessObjects.Model
         public Guid OrderId { get; set; }
 
         [Required]
-        public DateTime? OrderedDate { get; set; }
+        public float Amount { get; set; }
 
         [Required]
-        public DateTime? ShipDate { get; set; }
+        public string ShipAddress { get; set; } = default!;
+
+        [Required]
+        public DateTime OrderDate { get; set; }
+
+        [Required]
+        public DateTime ShippedDate { get; set; }
 
         public Guid UserId { get; set; }
         public virtual User? User { get; set; }
