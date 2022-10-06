@@ -9,7 +9,13 @@ namespace Repositories.Implements
     {
         public void AddNewProductImage(ProductImageDTO p)
         {
-            throw new NotImplementedException();
+            ProductImage newProduct = new ProductImage
+            {
+                ProductImageId = Guid.NewGuid(),
+                Image = p.Image,
+                Caption = p.Caption
+            };
+            ProductImageDAO.Instance.AddNewProductImage(newProduct);
         }
 
         public void DeleteProductImage(Guid id)
