@@ -7,25 +7,26 @@ namespace DataAccess.Util
     {
         public static OrderDTO mapToDTO(Order order)
         {
-            OrderDTO orderDTO = new OrderDTO
+            return new OrderDTO
             {
-                UserId = order.UserId,
-                OrderedDate = order.OrderedDate,
                 OrderId = order.OrderId,
-                ShipDate = order.ShipDate,
+                Amount = order.Amount,
+                ShipAddress = order.ShipAddress,
+                OrderDate = order.OrderDate,
+                ShippedDate = order.ShippedDate,
+                UserId = order.UserId,
             };
-            return orderDTO;
         }
 
-        public static Order mapToEntity(OrderDTO orderDTO)
-        {
-            return new Order
-            {
-                OrderId = orderDTO.OrderId,
-                OrderedDate = orderDTO.OrderedDate,
-                ShipDate = orderDTO.ShipDate,
-                UserId = orderDTO.UserId,
-            };
-        }
+        // public static Order mapToEntity(OrderDTO orderDTO)
+        // {
+        //     return new Order
+        //     {
+        //         OrderId = orderDTO.OrderId,
+        //         OrderDate = orderDTO.OrderDate,
+        //         ShipDate = orderDTO.ShipDate,
+        //         UserId = orderDTO.UserId,
+        //     };
+        // }
     }
 }
