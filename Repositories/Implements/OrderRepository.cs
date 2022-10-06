@@ -16,11 +16,6 @@ namespace Repositories.Implements
             OrderDAO.Instance.Add(Mapper.mapToEntity(order));
         }
 
-        public void Delete(int id)
-        {
-            OrderDAO.Instance.Delete(id);
-        }
-
         public IEnumerable<OrderDTO> GetAllOrders()
         {
             return OrderDAO.Instance.GetList().Select(p => Mapper.mapToDTO(p)).ToList();
@@ -31,7 +26,7 @@ namespace Repositories.Implements
             return OrderDAO.Instance.SearchByUserId(id).Select(p => Mapper.mapToDTO(p)).ToList();
         }
 
-        public OrderDTO GetOrderById(int id)
+        public OrderDTO GetOrderById(Guid id)
         {
             return Mapper.mapToDTO(OrderDAO.Instance.GetById(id));
         }
@@ -39,6 +34,11 @@ namespace Repositories.Implements
         public void Update(OrderDTO order)
         {
             OrderDAO.Instance.Update(Mapper.mapToEntity(order));
+        }
+
+        public void Delete(Guid id)
+        {
+            OrderDAO.Instance.Delete(id);
         }
     }
 }

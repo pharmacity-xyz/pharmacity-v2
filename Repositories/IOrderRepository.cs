@@ -9,11 +9,11 @@ namespace Repositories
 {
     public interface IOrderRepository
     {
+        void Add(OrderDTO order);
         IEnumerable<OrderDTO> GetAllOrders();
         IEnumerable<OrderDTO> GetAllOrdersByUserId(Guid id);
-        OrderDTO GetOrderById(int id);
-        void Add(OrderDTO order);
+        OrderDTO GetOrderById(Guid id);
         void Update(OrderDTO order);
-        void Delete(int id);
+        void Delete(Guid id);
     }
 }

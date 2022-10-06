@@ -59,7 +59,7 @@ namespace DataAccess
             return orders;
         }
 
-        public Order GetById(int id)
+        public Order GetById(Guid id)
         {
             Order? order = null;
             try
@@ -110,7 +110,7 @@ namespace DataAccess
             }
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             try
             {
