@@ -12,15 +12,45 @@ namespace StoreAPI.Controllers
     public class ProductController : ControllerBase
     {
         private readonly IProductRepository productRepository;
+        private readonly IProductImageRepository productImageRepository;
         private readonly IOrderRepository orderRepository;
 
         public ProductController(
             IProductRepository productRepository,
+            IProductImageRepository productImageRepository,
             IOrderRepository orderRepository
         )
         {
             this.productRepository = productRepository;
+            this.productImageRepository = productImageRepository;
             this.orderRepository = orderRepository;
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(ProductDTO product)
+        {
+            try
+            {
+                UserDTO user = LoggedUser.Instance!.User!;
+
+                if (user == null)
+                {
+                    throw new Exception("Can not find the user");
+                }
+                else if (user.Role != Role.ADMIN.ToString())
+                {
+                    throw new Exception("Please login with admin");
+                }
+
+                productRepository.AddNewProduct(product);
+
+                return Ok("Successfully added");
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet("get_all")]
@@ -65,32 +95,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(ProductDTO product)
-        {
-            try
-            {
-                UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
-
-                productRepository.AddNewProduct(product);
-
-                return Ok("Successfully added");
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
-        }
 
         [HttpPut("update")]
         public IActionResult Update(ProductDTO product)
