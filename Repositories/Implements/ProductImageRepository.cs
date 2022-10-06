@@ -7,11 +7,12 @@ namespace Repositories.Implements
 {
     public class ProductImageRepository : IProductImageRepository
     {
-        public void AddNewProductImage(ProductImageDTO p)
+        public void AddNewProductImage(ProductImageDTO p, Guid? productId)
         {
+            Product product = ProductDAO.Instance.FindProductById(productId);
             ProductImage newProduct = new ProductImage
             {
-                ProductImageId = Guid.NewGuid(),
+                ProductImageId = product.ProductId,
                 Image = p.Image,
                 Caption = p.Caption
             };

@@ -43,8 +43,7 @@ namespace StoreAPI.Controllers
                 }
 
                 ProductDTO newProductDTO = productRepository.AddNewProduct(product);
-                product.ProductImageDTO!.ProductImageId = newProductDTO.ProductId;
-                productImageRepository.AddNewProductImage(product.ProductImageDTO);
+                productImageRepository.AddNewProductImage(product.ProductImageDTO!, newProductDTO.ProductId);
 
                 return Ok("Successfully added");
             }
