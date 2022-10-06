@@ -28,6 +28,12 @@ namespace Repositories.Implements
         public void UpdateProductImage(ProductImageDTO p)
         {
             ProductImage productImage = ProductImageDAO.Instance.GetProductImage(p.ProductImageId);
+            ProductImage updatedProductImage = new ProductImage
+            {
+                ProductImageId = productImage.ProductImageId,
+                Image = p.Image,
+                Caption = p.Caption
+            };
             ProductImageDAO.Instance.UpdateProductImage(productImage);
         }
 

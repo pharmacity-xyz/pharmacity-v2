@@ -40,7 +40,16 @@ namespace Repositories.Implements
         public void UpdateProduct(ProductDTO productDTO)
         {
             Product product = ProductDAO.Instance.FindProductById(productDTO.ProductId);
-            ProductDAO.Instance.UpdateProduct(product);
+            Product updatedProduct = new Product
+            {
+                ProductId = product.ProductId,
+                ProductName = productDTO.ProductName,
+                ProductDetail = productDTO.ProductDetail,
+                Price = productDTO.Price,
+                UnitInStock = productDTO.UnitsInStock,
+                CategoryId = productDTO.CategoryId
+            };
+            ProductDAO.Instance.UpdateProduct(updatedProduct);
         }
 
         public void DeleteProduct(Guid id)
