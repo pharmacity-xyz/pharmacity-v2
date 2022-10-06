@@ -29,5 +29,13 @@ namespace BusinessObjects.Data
         public virtual DbSet<Product>? Products { get; set; }
         public virtual DbSet<ProductImage>? ProductImages { get; set; }
         public virtual DbSet<Order>? Orders { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.ProductImage)
+                .WithOne(i => i.Product)
+                .HasForeignKey<ProductImage>(pi => pi.ProductImageId);
+        }
     }
 }
