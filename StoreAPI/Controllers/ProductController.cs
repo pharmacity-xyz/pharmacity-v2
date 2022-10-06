@@ -43,7 +43,7 @@ namespace StoreAPI.Controllers
                 }
 
                 ProductDTO newProductDTO = productRepository.AddNewProduct(product);
-                productImageRepository.AddNewProductImage(product.ProductImageDTO!, newProductDTO.ProductId);
+                productImageRepository.AddNewProductImage(product.ProductImage!, newProductDTO.ProductId);
 
                 return Ok("Successfully added");
             }
@@ -62,9 +62,9 @@ namespace StoreAPI.Controllers
                 IEnumerable<ProductDTO> productList = productRepository.GetProducts();
                 foreach (ProductDTO productDTO in productList)
                 {
-                    productDTO.ProductImageDTO = productImageRepository.GetProductImage(productDTO.ProductId);
+                    productDTO.ProductImage = productImageRepository.GetProductImage(productDTO.ProductId);
                 }
-                return Ok(productRepository.GetProducts());
+                return Ok(productList);
             }
             catch (Exception e)
             {

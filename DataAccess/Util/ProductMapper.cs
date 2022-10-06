@@ -10,8 +10,8 @@ namespace DataAccess.Util
             ProductDTO productDTO = new ProductDTO
             {
                 ProductId = product.ProductId,
-                ProductName = product.ProductName,
-                ProductDetail = product.ProductDetail,
+                ProductName = product.ProductName!,
+                ProductDetail = product.ProductDetail!,
                 Price = product.Price,
                 UnitsInStock = product.UnitInStock,
                 CategoryId = product.CategoryId,

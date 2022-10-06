@@ -10,7 +10,7 @@ namespace DataAccess.Util
             return new ProductImageDTO
             {
                 ProductImageId = productImage.ProductImageId,
-                Image = productImage.Image,
+                Image = productImage.Image!,
                 Caption = productImage.Caption,
             };
         }
