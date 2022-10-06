@@ -6,7 +6,7 @@ namespace DataAccess.DTO
         public byte[]? Image { get; set; }
         public string? Caption { get; set; }
 
-        public Guid? ProductId { get; set; }
+        // public Guid? ProductId { get; set; }
     }
 }
 

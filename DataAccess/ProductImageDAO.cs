@@ -82,7 +82,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    var pDelete = context.ProductImages!.SingleOrDefault(pi => pi.ProductId == productId);
+                    var pDelete = context.ProductImages!.SingleOrDefault(pi => pi.ProductImageId == productId);
                     context.ProductImages!.Remove(pDelete!);
                     context.SaveChanges();
                 }

@@ -12,7 +12,6 @@ namespace DataAccess.Util
                 ProductImageId = productImage.ProductImageId,
                 Image = productImage.Image,
                 Caption = productImage.Caption,
-                ProductId = productImage.ProductId,
             };
         }
 
