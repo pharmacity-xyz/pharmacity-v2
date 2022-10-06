@@ -24,6 +24,6 @@ namespace BusinessObjects.Model
 
         public ProductImage? ProductImage { get; set; }
 
-        public Order? Order { get; set; }
+        public ICollection<OrderDetail>? OrderDetails { get; set; }
     }
 }
