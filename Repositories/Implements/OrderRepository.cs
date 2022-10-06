@@ -1,14 +1,24 @@
 ﻿using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
+using BusinessObjects.Model;
 
 namespace Repositories.Implements
 {
     public class OrderRepository : IOrderRepository
     {
-        public void Add(OrderDTO order)
+        public void Add(OrderDTO orderDTO)
         {
-            OrderDAO.Instance.Add(Mapper.mapToEntity(order));
+            Order newOrder = new Order
+            {
+                OrderId = Guid.NewGuid(),
+                Amount = orderDTO.Amount,
+                ShipAddress = orderDTO.ShipAddress,
+                OrderDate = orderDTO.OrderDate,
+                ShippedDate = orderDTO.ShippedDate,
+                UserId = orderDTO.UserId,
+            };
+            OrderDAO.Instance.Add(newOrder);
         }
 
         public IEnumerable<OrderDTO> GetAllOrders()

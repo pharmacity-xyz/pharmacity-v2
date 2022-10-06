@@ -3,7 +3,7 @@ using DataAccess.DTO;
 
 namespace DataAccess.Util
 {
-    public class Mapper
+    public class OrderMapper
     {
         public static OrderDTO mapToDTO(Order order)
         {
