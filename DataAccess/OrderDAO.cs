@@ -59,7 +59,7 @@ namespace DataAccess
             return orders;
         }
 
-        public Order GetById(Guid id)
+        public Order GetById(Guid? id)
         {
             Order? order = null;
             try
