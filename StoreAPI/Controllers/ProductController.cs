@@ -81,7 +81,7 @@ namespace StoreAPI.Controllers
                     throw new Exception("Please login with admin");
                 }
 
-                productRepository.SaveProduct(product);
+                productRepository.AddNewProduct(product);
 
                 return Ok("Successfully added");
             }

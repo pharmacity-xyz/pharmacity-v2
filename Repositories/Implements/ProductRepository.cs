@@ -7,7 +7,7 @@ namespace Repositories.Implements
 {
     public class ProductRepository : IProductRepository
     {
-        public void SaveProduct(ProductDTO productDTO)
+        public void AddNewProduct(ProductDTO productDTO)
         {
             Product new_product = new Product
             {
