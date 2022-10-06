@@ -12,3 +12,5 @@ docker container kill ${container_id}
 
 echo "Remove Migrations folder"
 rm -rf BusinessObjects/Migrations/
+
+echo "Successfully removed the db"
