@@ -12,7 +12,7 @@ namespace Repositories.Implements
             Category newCategory = new Category
             {
                 CategoryId = Guid.NewGuid(),
-                Name = categoryDTO.CategoryName,
+                Name = categoryDTO.CategoryName!,
             };
 
             CategoryDAO.Instance.Add(newCategory);

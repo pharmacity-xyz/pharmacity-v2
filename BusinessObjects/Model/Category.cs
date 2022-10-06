@@ -6,7 +6,10 @@ namespace BusinessObjects.Model
     {
         [Key]
         public Guid CategoryId { get; set; }
-        public string? Name { get; set; }
+
+        [Required]
+        public string Name { get; set; } = default!;
+
         public virtual ICollection<Product>? Products { get; set; }
     }
 }

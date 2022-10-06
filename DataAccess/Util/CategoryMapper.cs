@@ -20,7 +20,7 @@ namespace DataAccess.Util
             return new Category
             {
                 CategoryId = Guid.NewGuid(),
-                Name = categoryDTO.CategoryName
+                Name = categoryDTO.CategoryName!
             };
         }
     }
