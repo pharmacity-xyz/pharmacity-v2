@@ -13,9 +13,9 @@ namespace Repositories.Implements
             {
                 ProductId = Guid.NewGuid(),
                 ProductName = productDTO.ProductName,
-                ProductDetail = productDTO.ProductDetail,
+                ProductDescription = productDTO.ProductDescription,
                 Price = productDTO.Price,
-                UnitInStock = productDTO.UnitsInStock,
+                Stock = productDTO.Stock,
                 CategoryId = productDTO.CategoryId
             };
             ProductDAO.Instance.SaveProduct(new_product);
@@ -44,9 +44,9 @@ namespace Repositories.Implements
             {
                 ProductId = product.ProductId,
                 ProductName = productDTO.ProductName,
-                ProductDetail = productDTO.ProductDetail,
+                ProductDescription = productDTO.ProductDescription,
                 Price = productDTO.Price,
-                UnitInStock = productDTO.UnitsInStock,
+                Stock = productDTO.Stock,
                 CategoryId = productDTO.CategoryId
             };
             ProductDAO.Instance.UpdateProduct(updatedProduct);
