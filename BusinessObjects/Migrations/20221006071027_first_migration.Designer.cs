@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221005134709_first_migration")]
+    [Migration("20221006071027_first_migration")]
     partial class first_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,7 @@ namespace BusinessObjects.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("CategoryId");
@@ -64,11 +65,9 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Model.Product", b =>
                 {
-                    b.Property<int>("ProductId")
+                    b.Property<Guid>("ProductId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ProductId"));
+                        .HasColumnType("uuid");
 
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid");
@@ -79,7 +78,12 @@ namespace BusinessObjects.Migrations
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
+                    b.Property<string>("ProductDetail")
+                        .IsRequired()
+                        .HasColumnType("text");
+
                     b.Property<string>("ProductName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<int>("UnitInStock")
@@ -92,6 +96,23 @@ namespace BusinessObjects.Migrations
                     b.HasIndex("OrderId");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("BusinessObjects.Model.ProductImage", b =>
+                {
+                    b.Property<Guid>("ProductImageId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Caption")
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("Image")
+                        .IsRequired()
+                        .HasColumnType("bytea");
+
+                    b.HasKey("ProductImageId");
+
+                    b.ToTable("ProductImages");
                 });
 
             modelBuilder.Entity("BusinessObjects.Model.User", b =>
@@ -151,6 +172,17 @@ namespace BusinessObjects.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("BusinessObjects.Model.ProductImage", b =>
+                {
+                    b.HasOne("BusinessObjects.Model.Product", "Product")
+                        .WithOne("ProductImage")
+                        .HasForeignKey("BusinessObjects.Model.ProductImage", "ProductImageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("BusinessObjects.Model.Category", b =>
                 {
                     b.Navigation("Products");
@@ -159,6 +191,11 @@ namespace BusinessObjects.Migrations
             modelBuilder.Entity("BusinessObjects.Model.Order", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("BusinessObjects.Model.Product", b =>
+                {
+                    b.Navigation("ProductImage");
                 });
 
             modelBuilder.Entity("BusinessObjects.Model.User", b =>

@@ -2,44 +2,59 @@
 using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Text;
-// using System.Threading.Tasks;
 
 namespace Repositories.Implements
 {
     public class ProductRepository : IProductRepository
     {
-        public void DeleteProduct(int id)
+        public ProductDTO AddNewProduct(ProductDTO productDTO)
         {
-            ProductDAO.Instance.DeleteProduct(id);
+            Product new_product = new Product
+            {
+                ProductId = Guid.NewGuid(),
+                ProductName = productDTO.ProductName,
+                ProductDetail = productDTO.ProductDetail,
+                Price = productDTO.Price,
+                UnitInStock = productDTO.UnitsInStock,
+                CategoryId = productDTO.CategoryId
+            };
+            ProductDAO.Instance.SaveProduct(new_product);
+            return ProductMapper.mapToDTO(new_product);
         }
 
-        public ProductDTO GetProductById(int id)
+        public ProductDTO GetProductById(Guid id)
         {
-            return Mapper.mapToDTO(ProductDAO.Instance.FindProductById(id));
+            return ProductMapper.mapToDTO(ProductDAO.Instance.FindProductById(id));
         }
 
         public List<ProductDTO> GetProducts()
         {
-            return ProductDAO.Instance.GetProducts().Select(p => Mapper.mapToDTO(p)).ToList();
+            return ProductDAO.Instance.GetProducts().Select(p => ProductMapper.mapToDTO(p)).ToList();
         }
 
         public List<ProductDTO> GetProductsByCategory(Guid id)
         {
-            return ProductDAO.Instance.FindProductByCategoryId(id).Select(p => Mapper.mapToDTO(p)).ToList();
+            return ProductDAO.Instance.FindProductByCategoryId(id).Select(p => ProductMapper.mapToDTO(p)).ToList();
         }
 
-        public void SaveProduct(ProductDTO p)
+        public void UpdateProduct(ProductDTO productDTO)
         {
-            ProductDAO.Instance.SaveProduct(Mapper.mapToEntity(p));
+            Product product = ProductDAO.Instance.FindProductById(productDTO.ProductId);
+            Product updatedProduct = new Product
+            {
+                ProductId = product.ProductId,
+                ProductName = productDTO.ProductName,
+                ProductDetail = productDTO.ProductDetail,
+                Price = productDTO.Price,
+                UnitInStock = productDTO.UnitsInStock,
+                CategoryId = productDTO.CategoryId
+            };
+            ProductDAO.Instance.UpdateProduct(updatedProduct);
         }
 
-        public void UpdateProduct(ProductDTO p)
+        public void DeleteProduct(Guid id)
         {
-            ProductDAO.Instance.UpdateProduct(Mapper.mapToEntity(p));
+            ProductDAO.Instance.DeleteProduct(id);
         }
     }
 }

@@ -1,20 +1,14 @@
-﻿// using BusinessObjects.Model;
-using DataAccess.DTO;
-// using System;
-// using System.Collections.Generic;
-// using System.Linq;
-// using System.Text;
-// using System.Threading.Tasks;
+﻿using DataAccess.DTO;
 
 namespace Repositories
 {
     public interface IProductRepository
     {
-        void SaveProduct(ProductDTO p);
+        ProductDTO AddNewProduct(ProductDTO p);
         List<ProductDTO> GetProducts();
         List<ProductDTO> GetProductsByCategory(Guid id);
-        ProductDTO GetProductById(int id);
+        ProductDTO GetProductById(Guid id);
         void UpdateProduct(ProductDTO p);
-        void DeleteProduct(int id);
+        void DeleteProduct(Guid id);
     }
 }

@@ -1,11 +1,6 @@
 ﻿using BusinessObjects.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BusinessObjects.Data
 {
@@ -24,9 +19,18 @@ namespace BusinessObjects.Data
             optionsBuilder.UseNpgsql(configuration.GetConnectionString("MyStoreDB"));
         }
 
+        public virtual DbSet<User>? Users { get; set; }
         public virtual DbSet<Category>? Categories { get; set; }
         public virtual DbSet<Product>? Products { get; set; }
+        public virtual DbSet<ProductImage>? ProductImages { get; set; }
         public virtual DbSet<Order>? Orders { get; set; }
-        public virtual DbSet<User>? Users { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Product>()
+                .HasOne(p => p.ProductImage)
+                .WithOne(i => i.Product)
+                .HasForeignKey<ProductImage>(pi => pi.ProductImageId);
+        }
     }
 }

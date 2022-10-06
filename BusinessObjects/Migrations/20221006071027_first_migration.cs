@@ -15,7 +15,7 @@ namespace BusinessObjects.Migrations
                 columns: table => new
                 {
                     CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
-                    Name = table.Column<string>(type: "text", nullable: true)
+                    Name = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -64,9 +64,9 @@ namespace BusinessObjects.Migrations
                 name: "Products",
                 columns: table => new
                 {
-                    ProductId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    ProductName = table.Column<string>(type: "text", nullable: true),
+                    ProductId = table.Column<Guid>(type: "uuid", nullable: false),
+                    ProductName = table.Column<string>(type: "text", nullable: false),
+                    ProductDetail = table.Column<string>(type: "text", nullable: false),
                     UnitInStock = table.Column<int>(type: "integer", nullable: false),
                     Price = table.Column<decimal>(type: "numeric", nullable: false),
                     CategoryId = table.Column<Guid>(type: "uuid", nullable: false),
@@ -88,6 +88,25 @@ namespace BusinessObjects.Migrations
                         principalColumn: "OrderId");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "ProductImages",
+                columns: table => new
+                {
+                    ProductImageId = table.Column<Guid>(type: "uuid", nullable: false),
+                    Image = table.Column<byte[]>(type: "bytea", nullable: false),
+                    Caption = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ProductImages", x => x.ProductImageId);
+                    table.ForeignKey(
+                        name: "FK_ProductImages_Products_ProductImageId",
+                        column: x => x.ProductImageId,
+                        principalTable: "Products",
+                        principalColumn: "ProductId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Orders_UserId",
                 table: "Orders",
@@ -106,6 +125,9 @@ namespace BusinessObjects.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "ProductImages");
+
             migrationBuilder.DropTable(
                 name: "Products");
 

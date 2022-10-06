@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace DataAccess.DTO
 {
     public class ProductDTO
     {
-        public int ProductId { get; set; }
-        public string? ProductName { get; set; }
+        public Guid? ProductId { get; set; }
+        public string ProductName { get; set; } = default!;
+        public string ProductDetail { get; set; } = default!;
         public int UnitsInStock { get; set; }
         public decimal Price { get; set; }
 
         public Guid CategoryId { get; set; }
+
+        public ProductImageDTO? ProductImage { get; set; }
     }
 }

@@ -20,18 +20,8 @@ namespace DataAccess.Util
             return new Category
             {
                 CategoryId = Guid.NewGuid(),
-                Name = categoryDTO.CategoryName
+                Name = categoryDTO.CategoryName!
             };
         }
-
-        // public static Category mapToEntity(CategoryDTO categoryDTO)
-        // {
-        //     Category category = new Category
-        //     {
-        //         CategoryId = categoryDTO.CategoryId,
-        //         Name = categoryDTO.CategoryName
-        //     };
-        //     return category;
-        // }
     }
 }
