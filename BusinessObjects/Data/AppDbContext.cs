@@ -24,9 +24,10 @@ namespace BusinessObjects.Data
             optionsBuilder.UseNpgsql(configuration.GetConnectionString("MyStoreDB"));
         }
 
+        public virtual DbSet<User>? Users { get; set; }
         public virtual DbSet<Category>? Categories { get; set; }
         public virtual DbSet<Product>? Products { get; set; }
+        public virtual DbSet<ProductImage>? ProductImages { get; set; }
         public virtual DbSet<Order>? Orders { get; set; }
-        public virtual DbSet<User>? Users { get; set; }
     }
 }
