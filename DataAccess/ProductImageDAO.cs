@@ -50,7 +50,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    productImage = context.ProductImages!.SingleOrDefault(pi => pi.ProductId == productId);
+                    productImage = context.ProductImages!.SingleOrDefault(pi => pi.ProductImageId == productId);
                 }
             }
             catch (Exception e)
