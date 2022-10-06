@@ -9,5 +9,7 @@
         public DateTime ShippedDate { get; set; }
 
         public Guid UserId { get; set; }
+
+        public OrderDetailDTO? OrderDetail { get; set; }
     }
 }
