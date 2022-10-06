@@ -120,6 +120,7 @@ namespace StoreAPI.Controllers
                 }
 
                 productRepository.UpdateProduct(product);
+                productImageRepository.UpdateProductImage(product.ProductImage!);
                 return Ok("Successfully updated");
             }
             catch (Exception e)
