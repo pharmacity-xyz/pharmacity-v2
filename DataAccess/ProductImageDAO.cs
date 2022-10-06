@@ -43,7 +43,7 @@ namespace DataAccess
             }
         }
 
-        public ProductImage GetProductImage(Guid productId)
+        public ProductImage GetProductImage(Guid? productId)
         {
             var productImage = new ProductImage();
             try

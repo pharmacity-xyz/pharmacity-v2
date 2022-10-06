@@ -18,19 +18,21 @@ namespace Repositories.Implements
             ProductImageDAO.Instance.AddNewProductImage(newProduct);
         }
 
-        public void DeleteProductImage(Guid id)
-        {
-            throw new NotImplementedException();
-        }
-
         public ProductImageDTO GetProductImage(Guid id)
         {
-            throw new NotImplementedException();
+            ProductImage productImage = ProductImageDAO.Instance.GetProductImage(id);
+            return ProductImageMapper.mapToDTO(productImage);
         }
 
         public void UpdateProductImage(ProductImageDTO p)
         {
-            throw new NotImplementedException();
+            ProductImage productImage = ProductImageDAO.Instance.GetProductImage(p.ProductImageId);
+            ProductImageDAO.Instance.UpdateProductImage(productImage);
+        }
+
+        public void DeleteProductImage(Guid id)
+        {
+            ProductImageDAO.Instance.DeleteProductImage(id);
         }
     }
 }
