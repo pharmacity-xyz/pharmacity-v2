@@ -43,6 +43,7 @@ namespace StoreAPI.Controllers
                 }
 
                 productRepository.AddNewProduct(product);
+                Console.Write("ProductImage" + product.ProductImageDTO);
                 productImageRepository.AddNewProductImage(product.ProductImageDTO!);
 
                 return Ok("Successfully added");

@@ -11,6 +11,7 @@ namespace DataAccess.Util
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName,
+                ProductDetail = product.ProductDetail,
                 Price = product.Price,
                 UnitsInStock = product.UnitInStock,
                 CategoryId = product.CategoryId,

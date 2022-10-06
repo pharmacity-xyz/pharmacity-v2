@@ -13,6 +13,7 @@ namespace Repositories.Implements
             {
                 ProductId = Guid.NewGuid(),
                 ProductName = productDTO.ProductName,
+                ProductDetail = productDTO.ProductDetail,
                 Price = productDTO.Price,
                 UnitInStock = productDTO.UnitsInStock,
                 CategoryId = productDTO.CategoryId
