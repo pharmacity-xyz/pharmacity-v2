@@ -4,7 +4,7 @@ namespace Repositories
 {
     public interface IProductRepository
     {
-        void AddNewProduct(ProductDTO p);
+        ProductDTO AddNewProduct(ProductDTO p);
         List<ProductDTO> GetProducts();
         List<ProductDTO> GetProductsByCategory(Guid id);
         ProductDTO GetProductById(Guid id);

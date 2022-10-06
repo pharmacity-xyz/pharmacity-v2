@@ -42,8 +42,9 @@ namespace StoreAPI.Controllers
                     throw new Exception("Please login with admin");
                 }
 
-                productRepository.AddNewProduct(product);
-                productImageRepository.AddNewProductImage(product.ProductImageDTO!);
+                ProductDTO newProductDTO = productRepository.AddNewProduct(product);
+                product.ProductImageDTO!.ProductImageId = newProductDTO.ProductId;
+                productImageRepository.AddNewProductImage(product.ProductImageDTO);
 
                 return Ok("Successfully added");
             }

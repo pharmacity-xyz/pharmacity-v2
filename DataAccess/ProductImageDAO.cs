@@ -55,7 +55,7 @@ namespace DataAccess
             }
             catch (Exception e)
             {
-                throw new Exception(e.Message);
+                throw new Exception(e.Message + " in ProductImageDAO");
             }
             return productImage!;
         }

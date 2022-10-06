@@ -7,7 +7,7 @@ namespace Repositories.Implements
 {
     public class ProductRepository : IProductRepository
     {
-        public void AddNewProduct(ProductDTO productDTO)
+        public ProductDTO AddNewProduct(ProductDTO productDTO)
         {
             Product new_product = new Product
             {
@@ -19,6 +19,7 @@ namespace Repositories.Implements
                 CategoryId = productDTO.CategoryId
             };
             ProductDAO.Instance.SaveProduct(new_product);
+            return ProductMapper.mapToDTO(new_product);
         }
 
         public ProductDTO GetProductById(Guid id)
