@@ -9,5 +9,7 @@
         public decimal Price { get; set; }
 
         public Guid CategoryId { get; set; }
+
+        public ProductImageDTO? ProductImageDTO { get; set; }
     }
 }
