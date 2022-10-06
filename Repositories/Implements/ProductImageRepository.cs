@@ -18,9 +18,9 @@ namespace Repositories.Implements
             ProductImageDAO.Instance.AddNewProductImage(newProduct);
         }
 
-        public ProductImageDTO GetProductImage(Guid id)
+        public ProductImageDTO GetProductImage(Guid? productId)
         {
-            ProductImage productImage = ProductImageDAO.Instance.GetProductImage(id);
+            ProductImage productImage = ProductImageDAO.Instance.GetProductImage(productId);
             return ProductImageMapper.mapToDTO(productImage);
         }
 
@@ -34,5 +34,6 @@ namespace Repositories.Implements
         {
             ProductImageDAO.Instance.DeleteProductImage(id);
         }
+
     }
 }

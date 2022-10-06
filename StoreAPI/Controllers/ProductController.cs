@@ -43,6 +43,7 @@ namespace StoreAPI.Controllers
                 }
 
                 productRepository.AddNewProduct(product);
+                productImageRepository.AddNewProductImage(product.ProductImageDTO!);
 
                 return Ok("Successfully added");
             }
@@ -58,6 +59,11 @@ namespace StoreAPI.Controllers
         {
             try
             {
+                IEnumerable<ProductDTO> productList = productRepository.GetProducts();
+                foreach (ProductDTO productDTO in productList)
+                {
+                    productDTO.ProductImageDTO = productImageRepository.GetProductImage(productDTO.ProductId);
+                }
                 return Ok(productRepository.GetProducts());
             }
             catch (Exception e)
