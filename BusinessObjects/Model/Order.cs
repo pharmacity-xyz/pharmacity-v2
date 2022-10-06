@@ -5,8 +5,12 @@ namespace BusinessObjects.Model
     public class Order
     {
         [Key]
-        public int OrderId { get; set; }
+        public Guid OrderId { get; set; }
+
+        [Required]
         public DateTime? OrderedDate { get; set; }
+
+        [Required]
         public DateTime? ShipDate { get; set; }
 
         public Guid UserId { get; set; }
