@@ -54,8 +54,8 @@ namespace StoreAPI.Controllers
                 }
 
                 PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-                userDTO.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
-                UserDTO user = userRepository.Login(userDTO.Email, userDTO.Password);
+                var hashedPassword = passwordHasher.HashPassword(userDTO, userDTO.Password);
+                UserDTO user = userRepository.Login(userDTO.Email, hashedPassword);
 
                 LoggedUser.Instance!.User = user;
 

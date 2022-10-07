@@ -32,6 +32,8 @@ namespace BusinessObjects.Data
                 .HasOne(p => p.ProductImage)
                 .WithOne(i => i.Product)
                 .HasForeignKey<ProductImage>(pi => pi.ProductImageId);
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
     }
 }
