@@ -27,7 +27,7 @@ namespace DataAccess
             }
         }
 
-        public IEnumerable<OrderDetail> GetList()
+        public IEnumerable<OrderDetail> GetAllOrderDetails()
         {
             List<OrderDetail> orderDetails;
             try
@@ -42,9 +42,9 @@ namespace DataAccess
             return orderDetails;
         }
 
-        public OrderDetail GetById(int? id)
+        public OrderDetail GetById(Guid? id)
         {
-            OrderDetail orderDetail = null;
+            OrderDetail? orderDetail = null;
             try
             {
                 var db = new AppDbContext();
@@ -54,7 +54,7 @@ namespace DataAccess
             {
                 throw new Exception(e.Message);
             }
-            return orderDetail;
+            return orderDetail!;
         }
 
         public void Add(OrderDetail orderDetail)
@@ -75,7 +75,7 @@ namespace DataAccess
         {
             try
             {
-                OrderDetail _orderDetail = GetById((int)orderDetail.OrderId);
+                OrderDetail _orderDetail = GetById(orderDetail.OrderId);
                 if (_orderDetail != null)
                 {
                     var db = new AppDbContext();
@@ -94,7 +94,7 @@ namespace DataAccess
             }
         }
 
-        public void Delete(int id)
+        public void Delete(Guid id)
         {
             try
             {
@@ -102,12 +102,12 @@ namespace DataAccess
                 if (_orderDetail != null)
                 {
                     var db = new AppDbContext();
-                    db.OrderDetails.Remove(_orderDetail);
+                    db.OrderDetails!.Remove(_orderDetail);
                     db.SaveChanges();
                 }
                 else
                 {
-                    throw new Exception("Order detail does not exist!!!");
+                    throw new Exception("Order detail does not exist");
                 }
             }
             catch (Exception e)
