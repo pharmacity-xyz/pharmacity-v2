@@ -30,7 +30,8 @@ namespace StoreAPI.Controllers
             try
             {
                 newOrder.ShippedDate = DateTime.UtcNow;
-                orderRepository.Add(newOrder);
+                Guid orderId = orderRepository.Add(newOrder);
+                orderDetailRepository.Add(newOrder.OrderDetail!, orderId);
 
                 return Ok("Successfully added");
             }
