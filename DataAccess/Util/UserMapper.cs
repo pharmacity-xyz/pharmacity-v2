@@ -32,7 +32,7 @@ namespace DataAccess.Util
             User user = new User
             {
                 UserId = Guid.NewGuid(),
-                Email = userDTO.Email,
+                Email = userDTO.Email!,
                 Country = userDTO.Country,
                 CompanyName = userDTO.CompanyName,
                 City = userDTO.City,

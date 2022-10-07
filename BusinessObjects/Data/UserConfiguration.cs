@@ -1,7 +1,6 @@
 using BusinessObjects.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.Extensions.Configuration;
 
 namespace BusinessObjects.Data
 {
