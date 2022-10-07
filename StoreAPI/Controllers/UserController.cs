@@ -1,6 +1,8 @@
-﻿using BusinessObjects.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
+
+using BusinessObjects.Models;
 using DataAccess.DTO;
-using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using StoreAPI.Storage;
 
@@ -16,6 +18,25 @@ namespace StoreAPI.Controllers
         public UserController(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
+        }
+
+        [HttpPost("register")]
+        public IActionResult register(UserDTO userDTO)
+        {
+            try
+            {
+                PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
+                userDTO.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
+                userDTO.Role = Role.USER.ToString();
+                userRepository.Add(userDTO);
+
+                return Ok(LoggedUser.Instance!.User);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpPost("login")]
@@ -103,22 +124,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("register")]
-        public IActionResult register(UserDTO userDTO)
-        {
-            try
-            {
-                userDTO.Role = Role.USER.ToString();
-                userRepository.Add(userDTO);
 
-                return Ok(LoggedUser.Instance!.User);
-
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
 
         [HttpPut("edit")]
         public IActionResult edit(
