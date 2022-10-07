@@ -10,11 +10,17 @@ namespace StoreAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository orderRepository;
+        private readonly IOrderDetailRepository orderDetailRepository;
         private readonly IProductRepository productRepository;
 
-        public OrderController(IOrderRepository orderRepository, IProductRepository productRepository)
+        public OrderController(
+            IOrderRepository orderRepository,
+            IOrderDetailRepository orderDetailRepository,
+            IProductRepository productRepository
+        )
         {
             this.orderRepository = orderRepository;
+            this.orderDetailRepository = orderDetailRepository;
             this.productRepository = productRepository;
         }
 
