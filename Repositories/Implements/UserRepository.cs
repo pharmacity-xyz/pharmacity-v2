@@ -7,9 +7,21 @@ namespace Repositories.Implements
 {
     public class UserRepository : IUserRepository
     {
-        public void Add(UserDTO user)
+        public void Add(UserDTO userDTO)
         {
-            UserDAO.Instance.SaveMember(UserMapper.mapToEntity(user));
+            User new_user = new User
+            {
+                UserId = Guid.NewGuid(),
+                Email = userDTO.Email,
+                Password = userDTO.Password,
+                FirstName = userDTO.FirstName,
+                LastName = userDTO.LastName,
+                City = userDTO.City,
+                Country = userDTO.Country,
+                CompanyName = userDTO.CompanyName,
+                Role = userDTO.Role?.ToString()
+            };
+            UserDAO.Instance.SaveMember(new_user);
         }
 
         public List<UserDTO> GetAll()
