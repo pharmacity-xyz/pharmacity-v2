@@ -31,7 +31,6 @@ namespace StoreAPI.Controllers
                 userRepository.Add(userDTO);
 
                 return Ok(LoggedUser.Instance!.User);
-
             }
             catch (Exception e)
             {
@@ -54,7 +53,8 @@ namespace StoreAPI.Controllers
                     if (userDTO.Password!.Equals("")) throw new Exception("Password cannot be empty");
                 }
 
-
+                PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
+                userDTO.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
                 UserDTO user = userRepository.Login(userDTO.Email, userDTO.Password);
 
                 LoggedUser.Instance!.User = user;
