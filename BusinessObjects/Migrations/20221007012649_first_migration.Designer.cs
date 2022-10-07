@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BusinessObjects.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20221006071027_first_migration")]
+    [Migration("20221007012649_first_migration")]
     partial class first_migration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -41,16 +41,21 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Model.Order", b =>
                 {
-                    b.Property<int>("OrderId")
+                    b.Property<Guid>("OrderId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
+                        .HasColumnType("uuid");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("OrderId"));
+                    b.Property<float>("Amount")
+                        .HasColumnType("real");
 
-                    b.Property<DateTime?>("OrderedDate")
+                    b.Property<DateTime>("OrderDate")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<DateTime?>("ShipDate")
+                    b.Property<string>("ShipAddress")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("ShippedDate")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<Guid>("UserId")
@@ -63,6 +68,34 @@ namespace BusinessObjects.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("BusinessObjects.Model.OrderDetail", b =>
+                {
+                    b.Property<Guid>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid");
+
+                    b.Property<float>("Price")
+                        .HasColumnType("real");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("integer");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.HasIndex("OrderId")
+                        .IsUnique();
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("OrderDetails");
+                });
+
             modelBuilder.Entity("BusinessObjects.Model.Product", b =>
                 {
                     b.Property<Guid>("ProductId")
@@ -72,13 +105,10 @@ namespace BusinessObjects.Migrations
                     b.Property<Guid>("CategoryId")
                         .HasColumnType("uuid");
 
-                    b.Property<int?>("OrderId")
-                        .HasColumnType("integer");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("numeric");
 
-                    b.Property<string>("ProductDetail")
+                    b.Property<string>("ProductDescription")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -86,14 +116,12 @@ namespace BusinessObjects.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("UnitInStock")
+                    b.Property<int>("Stock")
                         .HasColumnType("integer");
 
                     b.HasKey("ProductId");
 
                     b.HasIndex("CategoryId");
-
-                    b.HasIndex("OrderId");
 
                     b.ToTable("Products");
                 });
@@ -155,6 +183,25 @@ namespace BusinessObjects.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("BusinessObjects.Model.OrderDetail", b =>
+                {
+                    b.HasOne("BusinessObjects.Model.Order", "Order")
+                        .WithOne("OrderDetail")
+                        .HasForeignKey("BusinessObjects.Model.OrderDetail", "OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BusinessObjects.Model.Product", "Product")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Product");
+                });
+
             modelBuilder.Entity("BusinessObjects.Model.Product", b =>
                 {
                     b.HasOne("BusinessObjects.Model.Category", "Category")
@@ -163,13 +210,7 @@ namespace BusinessObjects.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("BusinessObjects.Model.Order", "Order")
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId");
-
                     b.Navigation("Category");
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("BusinessObjects.Model.ProductImage", b =>
@@ -190,11 +231,13 @@ namespace BusinessObjects.Migrations
 
             modelBuilder.Entity("BusinessObjects.Model.Order", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("OrderDetail");
                 });
 
             modelBuilder.Entity("BusinessObjects.Model.Product", b =>
                 {
+                    b.Navigation("OrderDetails");
+
                     b.Navigation("ProductImage");
                 });
 

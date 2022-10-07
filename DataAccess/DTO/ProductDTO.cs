@@ -4,8 +4,8 @@ namespace DataAccess.DTO
     {
         public Guid? ProductId { get; set; }
         public string ProductName { get; set; } = default!;
-        public string ProductDetail { get; set; } = default!;
-        public int UnitsInStock { get; set; }
+        public string ProductDescription { get; set; } = default!;
+        public int Stock { get; set; }
         public decimal Price { get; set; }
 
         public Guid CategoryId { get; set; }

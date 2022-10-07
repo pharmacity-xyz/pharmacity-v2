@@ -11,9 +11,9 @@ namespace DataAccess.Util
             {
                 ProductId = product.ProductId,
                 ProductName = product.ProductName!,
-                ProductDetail = product.ProductDetail!,
+                ProductDescription = product.ProductDescription!,
                 Price = product.Price,
-                UnitsInStock = product.UnitInStock,
+                Stock = product.Stock,
                 CategoryId = product.CategoryId,
             };
             return productDTO;

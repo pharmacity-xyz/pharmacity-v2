@@ -1,18 +1,18 @@
-﻿using BusinessObjects.Data;
+using BusinessObjects.Data;
 using BusinessObjects.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess
 {
-    public class OrderDAO
+    public class OrderDetailDAO
     {
-        private static OrderDAO? instance = null;
+        private static OrderDetailDAO? instance = null;
         private static readonly object iLock = new object();
-        public OrderDAO()
+        public OrderDetailDAO()
         {
-
         }
 
-        public static OrderDAO Instance
+        public static OrderDetailDAO Instance
         {
             get
             {
@@ -20,19 +20,19 @@ namespace DataAccess
                 {
                     if (instance == null)
                     {
-                        instance = new OrderDAO();
+                        instance = new OrderDetailDAO();
                     }
                     return instance;
                 }
             }
         }
 
-        public void Add(Order order)
+        public void Add(OrderDetail orderDetail)
         {
             try
             {
                 var db = new AppDbContext();
-                db.Orders!.Add(order);
+                db.OrderDetails!.Add(orderDetail);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -41,66 +41,51 @@ namespace DataAccess
             }
         }
 
-        public IEnumerable<Order> GetAllOrders()
+        public IEnumerable<OrderDetail> GetAllOrderDetails()
         {
-            List<Order> orders;
+            List<OrderDetail> orderDetails;
             try
             {
                 var db = new AppDbContext();
-                orders = db.Orders!.ToList();
+                orderDetails = db.OrderDetails!.ToList();
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return orders;
+            return orderDetails;
         }
 
-        public IEnumerable<Order> SearchByUserId(Guid id)
+        public OrderDetail GetById(Guid? orderId)
         {
-            List<Order> orders;
+            OrderDetail? orderDetail = null;
             try
             {
                 var db = new AppDbContext();
-                orders = db.Orders!.ToList().FindAll(order => order.UserId == id);
-
+                orderDetail = db.OrderDetails!.Include(c => c.Product).SingleOrDefault(c => c.OrderId == orderId);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return orders;
+            return orderDetail!;
         }
 
-        public Order GetById(Guid? id)
-        {
-            Order? order = null;
-            try
-            {
-                var db = new AppDbContext();
-                order = db.Orders!.SingleOrDefault(c => c.OrderId == id);
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return order!;
-        }
-
-        public void Update(Order order)
+        public void Update(OrderDetail orderDetail)
         {
             try
             {
-                Order _order = GetById(order.OrderId);
-                if (_order != null)
+                OrderDetail _orderDetail = GetById(orderDetail.OrderId);
+                if (_orderDetail != null)
                 {
                     var db = new AppDbContext();
-                    db.Orders!.Update(order);
+                    //db.Entry<OrderDetail>(orderDetail).State = EntityState.Modified;
+                    db.OrderDetails!.Update(orderDetail);
                     db.SaveChanges();
                 }
                 else
                 {
-                    throw new Exception("Cannot find Order");
+                    throw new Exception("Cannot find Order detail");
                 }
             }
             catch (Exception e)
@@ -113,16 +98,16 @@ namespace DataAccess
         {
             try
             {
-                Order _order = GetById(id);
-                if (_order != null)
+                OrderDetail _orderDetail = GetById(id);
+                if (_orderDetail != null)
                 {
                     var db = new AppDbContext();
-                    db.Orders!.Remove(_order);
+                    db.OrderDetails!.Remove(_orderDetail);
                     db.SaveChanges();
                 }
                 else
                 {
-                    throw new Exception("Order does not exist");
+                    throw new Exception("Order detail does not exist");
                 }
             }
             catch (Exception e)

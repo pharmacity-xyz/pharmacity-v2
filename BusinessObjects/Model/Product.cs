@@ -11,10 +11,10 @@ namespace BusinessObjects.Model
         public string? ProductName { get; set; }
 
         [Required]
-        public string? ProductDetail { get; set; }
+        public string? ProductDescription { get; set; }
 
         [Required]
-        public int UnitInStock { get; set; }
+        public int Stock { get; set; }
 
         [Required]
         public decimal Price { get; set; }
@@ -24,6 +24,6 @@ namespace BusinessObjects.Model
 
         public ProductImage? ProductImage { get; set; }
 
-        public Order? Order { get; set; }
+        public ICollection<OrderDetail>? OrderDetails { get; set; }
     }
 }

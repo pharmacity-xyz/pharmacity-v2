@@ -1,44 +1,60 @@
 ﻿using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using BusinessObjects.Model;
 
 namespace Repositories.Implements
 {
     public class OrderRepository : IOrderRepository
     {
-        public void Add(OrderDTO order)
+        public Guid Add(OrderDTO orderDTO)
         {
-            OrderDAO.Instance.Add(Mapper.mapToEntity(order));
-        }
-
-        public void Delete(int id)
-        {
-            OrderDAO.Instance.Delete(id);
+            Order newOrder = new Order
+            {
+                OrderId = Guid.NewGuid(),
+                Amount = orderDTO.Amount,
+                ShipAddress = orderDTO.ShipAddress,
+                OrderDate = DateTime.UtcNow,
+                ShippedDate = orderDTO.ShippedDate,
+                UserId = orderDTO.UserId,
+            };
+            OrderDAO.Instance.Add(newOrder);
+            return newOrder.OrderId;
         }
 
         public IEnumerable<OrderDTO> GetAllOrders()
         {
-            return OrderDAO.Instance.GetList().Select(p => Mapper.mapToDTO(p)).ToList();
+            return OrderDAO.Instance.GetAllOrders().Select(p => OrderMapper.mapToDTO(p)).ToList();
         }
 
         public IEnumerable<OrderDTO> GetAllOrdersByUserId(Guid id)
         {
-            return OrderDAO.Instance.SearchByUserId(id).Select(p => Mapper.mapToDTO(p)).ToList();
+            return OrderDAO.Instance.SearchByUserId(id).Select(p => OrderMapper.mapToDTO(p)).ToList();
         }
 
-        public OrderDTO GetOrderById(int id)
+        public OrderDTO GetOrderById(Guid id)
         {
-            return Mapper.mapToDTO(OrderDAO.Instance.GetById(id));
+            return OrderMapper.mapToDTO(OrderDAO.Instance.GetById(id));
         }
 
-        public void Update(OrderDTO order)
+        public void Update(OrderDTO orderDTO)
         {
-            OrderDAO.Instance.Update(Mapper.mapToEntity(order));
+            Order order = OrderDAO.Instance.GetById(orderDTO.OrderId);
+            Order tempOrder = new Order
+            {
+                OrderId = order.OrderId,
+                Amount = orderDTO.Amount,
+                ShipAddress = orderDTO.ShipAddress,
+                OrderDate = order.OrderDate,
+                ShippedDate = orderDTO.ShippedDate,
+                UserId = orderDTO.UserId,
+            };
+            OrderDAO.Instance.Update(tempOrder);
+        }
+
+        public void Delete(Guid id)
+        {
+            OrderDAO.Instance.Delete(id);
         }
     }
 }

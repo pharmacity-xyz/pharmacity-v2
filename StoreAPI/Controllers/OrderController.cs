@@ -10,12 +10,35 @@ namespace StoreAPI.Controllers
     public class OrderController : ControllerBase
     {
         private readonly IOrderRepository orderRepository;
+        private readonly IOrderDetailRepository orderDetailRepository;
         private readonly IProductRepository productRepository;
 
-        public OrderController(IOrderRepository orderRepository, IProductRepository productRepository)
+        public OrderController(
+            IOrderRepository orderRepository,
+            IOrderDetailRepository orderDetailRepository,
+            IProductRepository productRepository
+        )
         {
             this.orderRepository = orderRepository;
+            this.orderDetailRepository = orderDetailRepository;
             this.productRepository = productRepository;
+        }
+
+        [HttpPost("add")]
+        public IActionResult Add(OrderDTO newOrder)
+        {
+            try
+            {
+                newOrder.ShippedDate = DateTime.UtcNow;
+                Guid orderId = orderRepository.Add(newOrder);
+                orderDetailRepository.Add(newOrder.OrderDetail!, orderId);
+
+                return Ok("Successfully added");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
 
         [HttpGet("get_all")]
@@ -24,6 +47,10 @@ namespace StoreAPI.Controllers
             try
             {
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
+                foreach (OrderDTO orderDTO in orderList)
+                {
+                    orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+                }
                 return Ok(orderList);
             }
             catch (Exception e)
@@ -33,7 +60,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("get_by_id/{id}")]
-        public IActionResult GetId(int id)
+        public IActionResult GetId(Guid id)
         {
 
             try
@@ -45,8 +72,10 @@ namespace StoreAPI.Controllers
                     throw new Exception("Please login");
                 }
 
-                OrderDTO order = orderRepository.GetOrderById(id);
-                return Ok(order);
+                OrderDTO orderDTO = orderRepository.GetOrderById(id);
+                orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+
+                return Ok(orderDTO);
             }
             catch (Exception e)
             {
@@ -67,6 +96,10 @@ namespace StoreAPI.Controllers
                 }
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrdersByUserId(userid);
+                foreach (OrderDTO orderDTO in orderList)
+                {
+                    orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+                }
                 return Ok(orderList);
             }
             catch (Exception e)
@@ -75,28 +108,12 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(OrderDTO newOrder)
-        {
-            try
-            {
-                newOrder.OrderedDate = DateTime.UtcNow;
-                newOrder.ShipDate = DateTime.UtcNow;
-                orderRepository.Add(newOrder);
-
-                return Ok("Successfully added");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
         [HttpDelete("delete/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             try
             {
+                orderDetailRepository.Delete(id);
                 orderRepository.Delete(id);
                 return Ok("Successfully deleted");
             }
