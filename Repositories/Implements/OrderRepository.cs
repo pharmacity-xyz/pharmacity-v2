@@ -7,7 +7,7 @@ namespace Repositories.Implements
 {
     public class OrderRepository : IOrderRepository
     {
-        public void Add(OrderDTO orderDTO)
+        public Guid Add(OrderDTO orderDTO)
         {
             Order newOrder = new Order
             {
@@ -19,6 +19,7 @@ namespace Repositories.Implements
                 UserId = orderDTO.UserId,
             };
             OrderDAO.Instance.Add(newOrder);
+            return newOrder.OrderId;
         }
 
         public IEnumerable<OrderDTO> GetAllOrders()

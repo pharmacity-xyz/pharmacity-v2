@@ -29,7 +29,6 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                newOrder.OrderDate = DateTime.UtcNow;
                 newOrder.ShippedDate = DateTime.UtcNow;
                 orderRepository.Add(newOrder);
 

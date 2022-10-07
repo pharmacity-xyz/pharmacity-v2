@@ -7,7 +7,7 @@ namespace Repositories.Implements
 {
     public class OrderDetailRepository : IOrderDetailRepository
     {
-        public void Add(OrderDetailDTO orderDetailDTO, Guid orderId, Guid productId)
+        public void Add(OrderDetailDTO orderDetailDTO, Guid orderId)
         {
             OrderDetail newOrderDetail = new OrderDetail
             {
@@ -15,7 +15,7 @@ namespace Repositories.Implements
                 Price = orderDetailDTO.Price,
                 Quantity = orderDetailDTO.Quantity,
                 OrderId = orderId,
-                ProductId = productId,
+                ProductId = orderDetailDTO.ProductId,
             };
             OrderDetailDAO.Instance.Add(newOrderDetail);
         }

@@ -4,8 +4,8 @@ namespace Repositories
 {
     public interface IOrderDetailRepository
     {
+        void Add(OrderDetailDTO orderDetail, Guid orderId);
         OrderDetailDTO GetOrderDetailByOrderID(Guid orderID);
-        void Add(OrderDetailDTO orderDetail, Guid orderId, Guid productId);
         void Update(OrderDetailDTO orderDetail);
         void Delete(Guid id);
     }
