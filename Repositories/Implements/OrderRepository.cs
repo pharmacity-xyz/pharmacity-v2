@@ -23,7 +23,7 @@ namespace Repositories.Implements
 
         public IEnumerable<OrderDTO> GetAllOrders()
         {
-            return OrderDAO.Instance.GetList().Select(p => OrderMapper.mapToDTO(p)).ToList();
+            return OrderDAO.Instance.GetAllOrders().Select(p => OrderMapper.mapToDTO(p)).ToList();
         }
 
         public IEnumerable<OrderDTO> GetAllOrdersByUserId(Guid id)
