@@ -33,8 +33,8 @@ namespace Repositories.Implements
                 OrderDetailId = orderDetail.OrderDetailId,
                 Price = orderDetailDTO.Price,
                 Quantity = orderDetailDTO.Quantity,
-                OrderId = orderDetailDTO.OrderId,
-                ProductId = orderDetailDTO.ProductId,
+                OrderId = orderDetail.OrderId,
+                ProductId = orderDetail.ProductId,
             };
             OrderDetailDAO.Instance.Update(newOrderDetail);
         }
