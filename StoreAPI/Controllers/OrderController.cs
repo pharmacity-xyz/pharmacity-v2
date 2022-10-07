@@ -72,8 +72,10 @@ namespace StoreAPI.Controllers
                     throw new Exception("Please login");
                 }
 
-                OrderDTO order = orderRepository.GetOrderById(id);
-                return Ok(order);
+                OrderDTO orderDTO = orderRepository.GetOrderById(id);
+                orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+
+                return Ok(orderDTO);
             }
             catch (Exception e)
             {
@@ -94,6 +96,10 @@ namespace StoreAPI.Controllers
                 }
 
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrdersByUserId(userid);
+                foreach (OrderDTO orderDTO in orderList)
+                {
+                    orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+                }
                 return Ok(orderList);
             }
             catch (Exception e)
