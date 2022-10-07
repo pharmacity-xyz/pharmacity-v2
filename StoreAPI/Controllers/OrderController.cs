@@ -18,6 +18,23 @@ namespace StoreAPI.Controllers
             this.productRepository = productRepository;
         }
 
+        [HttpPost("add")]
+        public IActionResult Add(OrderDTO newOrder)
+        {
+            try
+            {
+                newOrder.OrderDate = DateTime.UtcNow;
+                newOrder.ShippedDate = DateTime.UtcNow;
+                orderRepository.Add(newOrder);
+
+                return Ok("Successfully added");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet("get_all")]
         public IActionResult GetAll()
         {
@@ -33,7 +50,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("get_by_id/{id}")]
-        public IActionResult GetId(int id)
+        public IActionResult GetId(Guid id)
         {
 
             try
@@ -75,25 +92,8 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(OrderDTO newOrder)
-        {
-            try
-            {
-                newOrder.OrderedDate = DateTime.UtcNow;
-                newOrder.ShipDate = DateTime.UtcNow;
-                orderRepository.Add(newOrder);
-
-                return Ok("Successfully added");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
         [HttpDelete("delete/{id}")]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Guid id)
         {
             try
             {
