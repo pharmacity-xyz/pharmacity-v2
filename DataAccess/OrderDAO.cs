@@ -27,7 +27,21 @@ namespace DataAccess
             }
         }
 
-        public IEnumerable<Order> GetList()
+        public void Add(Order order)
+        {
+            try
+            {
+                var db = new AppDbContext();
+                db.Orders!.Add(order);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public IEnumerable<Order> GetAllOrders()
         {
             List<Order> orders;
             try
@@ -71,20 +85,6 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return order!;
-        }
-
-        public void Add(Order order)
-        {
-            try
-            {
-                var db = new AppDbContext();
-                db.Orders!.Add(order);
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
         }
 
         public void Update(Order order)
