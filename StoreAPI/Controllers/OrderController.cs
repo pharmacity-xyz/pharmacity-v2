@@ -113,6 +113,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
+                orderDetailRepository.Delete(id);
                 orderRepository.Delete(id);
                 return Ok("Successfully deleted");
             }

@@ -27,6 +27,20 @@ namespace DataAccess
             }
         }
 
+        public void Add(OrderDetail orderDetail)
+        {
+            try
+            {
+                var db = new AppDbContext();
+                db.OrderDetails!.Add(orderDetail);
+                db.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public IEnumerable<OrderDetail> GetAllOrderDetails()
         {
             List<OrderDetail> orderDetails;
@@ -42,33 +56,19 @@ namespace DataAccess
             return orderDetails;
         }
 
-        public OrderDetail GetById(Guid? id)
+        public OrderDetail GetById(Guid? orderId)
         {
             OrderDetail? orderDetail = null;
             try
             {
                 var db = new AppDbContext();
-                orderDetail = db.OrderDetails!.Include(c => c.Product).SingleOrDefault(c => c.OrderId == id);
+                orderDetail = db.OrderDetails!.Include(c => c.Product).SingleOrDefault(c => c.OrderId == orderId);
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
             return orderDetail!;
-        }
-
-        public void Add(OrderDetail orderDetail)
-        {
-            try
-            {
-                var db = new AppDbContext();
-                db.OrderDetails!.Add(orderDetail);
-                db.SaveChanges();
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
         }
 
         public void Update(OrderDetail orderDetail)
