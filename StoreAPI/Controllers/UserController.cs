@@ -39,23 +39,23 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("login")]
-        public IActionResult Login(UserDTO userDTO)
+        public IActionResult Login(string email, string password)
         {
             try
             {
-                if (userDTO.Email!.Equals("") && userDTO.Password!.Equals(""))
+                if (email.Equals("") && password.Equals(""))
                 {
                     throw new Exception("Email and Password cannot be empty");
                 }
                 else
                 {
-                    if (userDTO.Email.Equals("")) throw new Exception("Email cannot be empty");
-                    if (userDTO.Password!.Equals("")) throw new Exception("Password cannot be empty");
+                    if (email.Equals("")) throw new Exception("Email cannot be empty");
+                    if (password!.Equals("")) throw new Exception("Password cannot be empty");
                 }
 
-                PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-                var hashedPassword = passwordHasher.HashPassword(userDTO, userDTO.Password);
-                UserDTO user = userRepository.Login(userDTO.Email, hashedPassword);
+                // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
+                // var hashedPassword = passwordHasher.HashPassword(userDTO, userDTO.Password);
+                UserDTO user = userRepository.Login(email, password);
 
                 LoggedUser.Instance!.User = user;
 
