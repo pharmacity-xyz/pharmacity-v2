@@ -14,7 +14,7 @@ namespace Repositories.Implements
                 OrderId = Guid.NewGuid(),
                 Amount = orderDTO.Amount,
                 ShipAddress = orderDTO.ShipAddress,
-                OrderDate = orderDTO.OrderDate,
+                OrderDate = DateTime.UtcNow,
                 ShippedDate = orderDTO.ShippedDate,
                 UserId = orderDTO.UserId,
             };
@@ -44,7 +44,7 @@ namespace Repositories.Implements
                 OrderId = order.OrderId,
                 Amount = orderDTO.Amount,
                 ShipAddress = orderDTO.ShipAddress,
-                OrderDate = orderDTO.OrderDate,
+                OrderDate = order.OrderDate,
                 ShippedDate = orderDTO.ShippedDate,
                 UserId = orderDTO.UserId,
             };
