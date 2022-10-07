@@ -13,10 +13,12 @@ namespace DataAccess.Util
                 {
                     UserId = user.UserId,
                     Email = user.Email,
+                    Password = user.Password,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    City = user.City,
                     Country = user.Country,
                     CompanyName = user.CompanyName,
-                    City = user.City,
-                    Password = user.Password,
                     Role = user.Role
                 };
             }
