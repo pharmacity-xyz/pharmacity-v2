@@ -41,7 +41,7 @@ namespace Repositories.Implements
 
         public void Delete(Guid id)
         {
-            throw new NotImplementedException();
+            OrderDetailDAO.Instance.Delete(id);
         }
     }
 }
