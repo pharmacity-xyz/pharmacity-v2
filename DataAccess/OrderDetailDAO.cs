@@ -33,7 +33,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                orderDetails = db.OrderDetails.ToList();
+                orderDetails = db.OrderDetails!.ToList();
             }
             catch (Exception e)
             {
@@ -48,7 +48,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                orderDetail = db.OrderDetails.Include(c => c.Product).SingleOrDefault(c => c.OrderId == id);
+                orderDetail = db.OrderDetails!.Include(c => c.Product).SingleOrDefault(c => c.OrderId == id);
             }
             catch (Exception e)
             {
@@ -62,7 +62,7 @@ namespace DataAccess
             try
             {
                 var db = new AppDbContext();
-                db.OrderDetails.Add(orderDetail);
+                db.OrderDetails!.Add(orderDetail);
                 db.SaveChanges();
             }
             catch (Exception e)
@@ -80,7 +80,7 @@ namespace DataAccess
                 {
                     var db = new AppDbContext();
                     //db.Entry<OrderDetail>(orderDetail).State = EntityState.Modified;
-                    db.OrderDetails.Update(orderDetail);
+                    db.OrderDetails!.Update(orderDetail);
                     db.SaveChanges();
                 }
                 else
