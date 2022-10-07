@@ -47,6 +47,10 @@ namespace StoreAPI.Controllers
             try
             {
                 IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
+                foreach (OrderDTO orderDTO in orderList)
+                {
+                    orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+                }
                 return Ok(orderList);
             }
             catch (Exception e)

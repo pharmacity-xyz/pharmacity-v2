@@ -20,7 +20,7 @@ namespace Repositories.Implements
             OrderDetailDAO.Instance.Add(newOrderDetail);
         }
 
-        public OrderDetailDTO GetOrderDetailByOrderID(Guid orderID)
+        public OrderDetailDTO GetOrderDetailByOrderID(Guid? orderID)
         {
             return OrderDetailMapper.mapToDTO(OrderDetailDAO.Instance.GetById(orderID));
         }
