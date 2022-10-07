@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-// using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BusinessObjects.Model
 {
@@ -12,7 +11,7 @@ namespace BusinessObjects.Model
         public string Email { get; set; } = default!;
 
         [Required]
-        public string? Password { get; set; }
+        public string Password { get; set; } = default!;
 
         [Required]
         public string FirstName { get; set; } = default!;
@@ -20,10 +19,17 @@ namespace BusinessObjects.Model
         [Required]
         public string LastName { get; set; } = default!;
 
-        public string? CompanyName { get; set; }
-        public string? City { get; set; }
-        public string? Country { get; set; }
+        [Required]
+        public string City { get; set; } = default!;
+
+        [Required]
+        public string Country { get; set; } = default!;
+
+        [Required]
+        public string CompanyName { get; set; } = default!;
+
         public string? Role { get; set; }
+
         public virtual ICollection<Order>? Orders { get; set; }
     }
 }
