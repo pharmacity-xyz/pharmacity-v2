@@ -40,7 +40,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    p = context.Users?.SingleOrDefault(x => x.Email == email && x.Password == password);
+                    p = context.Users?.SingleOrDefault(x => x.Email == email);
 
                     if (p == null)
                     {
