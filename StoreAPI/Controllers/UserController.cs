@@ -150,6 +150,19 @@ namespace StoreAPI.Controllers
             }
         }
 
+        [HttpPut("forgot_password")]
+        public IActionResult forgotPassword(string email, string newPassword)
+        {
+            try
+            {
+                return Ok("Update password successfully");
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost("change_password")]
         public IActionResult changePass(
                     string email,
@@ -176,5 +189,6 @@ namespace StoreAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
+
     }
 }
