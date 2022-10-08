@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-using DataAccess;
+﻿using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
 using BusinessObjects.Model;
