@@ -38,6 +38,24 @@ namespace StoreAPI.Controllers
             }
         }
 
+        [HttpPost("register/admin")]
+        public IActionResult registerAdmin(UserDTO userDTO)
+        {
+            try
+            {
+                PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
+                userDTO.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
+                userDTO.Role = Role.ADMIN.ToString();
+                userRepository.Add(userDTO);
+
+                return Ok(LoggedUser.Instance!.User);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpPost("login")]
         public IActionResult Login(string email, string password)
         {
@@ -56,12 +74,13 @@ namespace StoreAPI.Controllers
                 UserDTO user = userRepository.Login(email, password);
                 PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
 
-                if (passwordHasher.VerifyHashedPassword(user, user.Password, password) == PasswordVerificationResult.Failed)
+                if (passwordHasher.VerifyHashedPassword(user, user.Password, password) ==
+                        PasswordVerificationResult.Failed
+                    )
                 {
-                    throw new Exception("Wrong password");
+                    throw new Exception("You entered wrong password. Please type again.");
                 }
 
-                // PasswordVerificationResult.Failed
                 LoggedUser.Instance!.User = user;
 
                 return Ok(LoggedUser.Instance.User);
@@ -128,8 +147,6 @@ namespace StoreAPI.Controllers
                 return BadRequest(e.Message);
             }
         }
-
-
 
         [HttpPut("edit")]
         public IActionResult edit(
