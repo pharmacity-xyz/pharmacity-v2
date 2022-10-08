@@ -61,8 +61,9 @@ namespace Repositories.Implements
         public void ForgotPassword(string email, string newPassword)
         {
             User temp_user = UserDAO.Instance.FindUserByEmail(email);
-            temp_user.Password = newPassword;
-            UserDAO.Instance.AddNewUser(temp_user);
+            // temp_user.Password = newPassword;
+            // UserDAO.Instance.AddNewUser(temp_user);
+            UserDAO.Instance.ForgotPassword(temp_user, newPassword);
         }
     }
 }
