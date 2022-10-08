@@ -23,17 +23,17 @@ namespace Repositories.Implements
                 CompanyName = userDTO.CompanyName,
                 Role = userDTO.Role?.ToString()
             };
-            UserDAO.Instance.SaveMember(new_user);
+            UserDAO.Instance.AddNewUser(new_user);
         }
 
         public List<UserDTO> GetAll()
         {
-            return UserDAO.Instance.FindAll().Select(m => UserMapper.mapToDTO(m)).ToList()!;
+            return UserDAO.Instance.FetchAllUsers().Select(m => UserMapper.mapToDTO(m)).ToList()!;
         }
 
         public UserDTO Login(string email)
         {
-            return UserMapper.mapToDTO(UserDAO.Instance.FindMemberByEmail(email))!;
+            return UserMapper.mapToDTO(UserDAO.Instance.FindUserByEmail(email))!;
         }
 
         public UserDTO GetLoggedAccount()
@@ -43,20 +43,20 @@ namespace Repositories.Implements
 
         public void Update(UserDTO user, string newCity, string newCountry, string newCompany)
         {
-            User temp_user = UserDAO.Instance.FindMemberByEmail(user.Email);
+            User temp_user = UserDAO.Instance.FindUserByEmail(user.Email);
             temp_user.City = newCity;
             temp_user.Country = newCountry;
             temp_user.CompanyName = newCompany;
-            UserDAO.Instance.UpdateMember(temp_user);
+            UserDAO.Instance.UpdateUser(temp_user);
         }
 
         public UserDTO UpdatePassword(string email, string password, string newPassword)
         {
-            User temp_user = UserDAO.Instance.FindMemberByEmail(email);
+            User temp_user = UserDAO.Instance.FindUserByEmail(email);
             // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
             // temp_user.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
             temp_user.Password = newPassword;
-            UserDAO.Instance.UpdateMember(temp_user);
+            UserDAO.Instance.UpdateUser(temp_user);
             return UserMapper.mapToDTO(temp_user)!;
         }
     }

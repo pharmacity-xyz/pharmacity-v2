@@ -30,20 +30,46 @@ namespace DataAccess
             }
         }
 
-        private string createHashedPassword(User user)
+        public void AddNewUser(User user)
         {
-            // PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
-            return passwordHasher.HashPassword(user, user.Password);
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    user.Password = createHashedPassword(user);
+                    context.Users?.Add(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
-        private PasswordVerificationResult verifyPassword(User user, string password)
+        public List<User> FetchAllUsers()
         {
-            // PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+            var p = new List<User>();
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    p = context.Users?.ToList();
 
-            return passwordHasher.VerifyHashedPassword(user, user.Password, password);
+                    if (p == null)
+                    {
+                        throw new Exception("Can not fetch all users");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return p;
         }
 
-        public User FindMemberByEmail(string email)
+        public User FindUserByEmail(string email)
         {
             var p = new User();
             try
@@ -65,24 +91,7 @@ namespace DataAccess
             return p;
         }
 
-        public void SaveMember(User user)
-        {
-            try
-            {
-                using (var context = new AppDbContext())
-                {
-                    user.Password = createHashedPassword(user);
-                    context.Users?.Add(user);
-                    context.SaveChanges();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-
-        public void UpdateMember(User user)
+        public void UpdateUser(User user)
         {
             try
             {
@@ -98,26 +107,17 @@ namespace DataAccess
             }
         }
 
-        public List<User> FindAll()
+        private string createHashedPassword(User user)
         {
-            var p = new List<User>();
-            try
-            {
-                using (var context = new AppDbContext())
-                {
-                    p = context.Users?.ToList();
+            // PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+            return passwordHasher.HashPassword(user, user.Password);
+        }
 
-                    if (p == null)
-                    {
-                        throw new Exception("No Members!");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return p;
+        private PasswordVerificationResult verifyPassword(User user, string password)
+        {
+            // PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+
+            return passwordHasher.VerifyHashedPassword(user, user.Password, password);
         }
     }
 }
