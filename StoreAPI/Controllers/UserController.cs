@@ -80,26 +80,13 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("change_password")]
-        public IActionResult changePass(
-            string email,
-            string password,
-            string newPassword,
-            string confirmNewPassword
-        )
+        [HttpGet("get_all")]
+        public IActionResult GetAll()
         {
             try
             {
-                if (!confirmNewPassword.Equals(newPassword))
-                {
-                    throw new Exception("Confirm password does not match new password");
-                }
-
-                UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
-
-                LoggedUser.Instance!.User = user;
-
-                return Ok("Successfully changed");
+                List<UserDTO> userDTOs = userRepository.GetAll();
+                return Ok(userDTOs);
             }
             catch (Exception e)
             {
@@ -151,9 +138,9 @@ namespace StoreAPI.Controllers
                 {
                     throw new Exception("Can not find the user");
                 }
-                userRepository.Update(user, newCity, newCountry, newCompany);
+                UserDTO updated_user = userRepository.Update(user, newCity, newCountry, newCompany);
 
-                LoggedUser.Instance.User = user;
+                LoggedUser.Instance.User = updated_user;
 
                 return Ok(LoggedUser.Instance.User);
 
@@ -164,13 +151,26 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("get_all")]
-        public IActionResult GetAll()
+        [HttpPost("change_password")]
+        public IActionResult changePass(
+                    string email,
+                    string password,
+                    string newPassword,
+                    string confirmNewPassword
+                )
         {
             try
             {
-                List<UserDTO> userDTOs = userRepository.GetAll();
-                return Ok(userDTOs);
+                if (!confirmNewPassword.Equals(newPassword))
+                {
+                    throw new Exception("Confirm password does not match new password");
+                }
+
+                UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
+
+                LoggedUser.Instance!.User = user;
+
+                return Ok("Successfully changed");
             }
             catch (Exception e)
             {

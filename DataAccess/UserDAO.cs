@@ -127,7 +127,6 @@ namespace DataAccess
 
         private string CreateHashedPassword(User user, string password)
         {
-            // PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
             return passwordHasher.HashPassword(user, password);
         }
 
