@@ -25,8 +25,6 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-                // userDTO.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
                 userDTO.Role = Role.USER.ToString();
                 userRepository.Add(userDTO);
 
@@ -43,8 +41,6 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-                // userDTO.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
                 userDTO.Role = Role.ADMIN.ToString();
                 userRepository.Add(userDTO);
 
@@ -72,14 +68,6 @@ namespace StoreAPI.Controllers
                 }
 
                 UserDTO user = userRepository.Login(email, password);
-                // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-
-                // if (passwordHasher.VerifyHashedPassword(user, user.Password, password) ==
-                //         PasswordVerificationResult.Failed
-                //     )
-                // {
-                //     throw new Exception("You entered wrong password. Please type again.");
-                // }
 
                 LoggedUser.Instance!.User = user;
 
@@ -107,15 +95,6 @@ namespace StoreAPI.Controllers
                     throw new Exception("Confirm password does not match new password");
                 }
 
-                // UserDTO user = userRepository.Login(email);
-                // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-
-                // if (passwordHasher.VerifyHashedPassword(user, user.Password, password) ==
-                //         PasswordVerificationResult.Failed
-                //     )
-                // {
-                //     throw new Exception("You entered wrong password. Please type again.");
-                // }
                 UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
 
                 LoggedUser.Instance!.User = user;
