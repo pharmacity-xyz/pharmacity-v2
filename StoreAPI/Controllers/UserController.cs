@@ -107,16 +107,16 @@ namespace StoreAPI.Controllers
                     throw new Exception("Confirm password does not match new password");
                 }
 
-                UserDTO user = userRepository.Login(email);
-                PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
+                // UserDTO user = userRepository.Login(email);
+                // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
 
-                if (passwordHasher.VerifyHashedPassword(user, user.Password, password) ==
-                        PasswordVerificationResult.Failed
-                    )
-                {
-                    throw new Exception("You entered wrong password. Please type again.");
-                }
-                // UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
+                // if (passwordHasher.VerifyHashedPassword(user, user.Password, password) ==
+                //         PasswordVerificationResult.Failed
+                //     )
+                // {
+                //     throw new Exception("You entered wrong password. Please type again.");
+                // }
+                UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
 
                 LoggedUser.Instance!.User = user;
 

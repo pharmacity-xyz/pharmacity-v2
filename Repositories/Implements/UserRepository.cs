@@ -53,10 +53,7 @@ namespace Repositories.Implements
         public UserDTO UpdatePassword(string email, string password, string newPassword)
         {
             User temp_user = UserDAO.Instance.FindUserByEmail(email);
-            // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-            // temp_user.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
-            temp_user.Password = newPassword;
-            UserDAO.Instance.UpdateUser(temp_user);
+            UserDAO.Instance.UpdateUserPassword(temp_user, password, newPassword);
             return UserMapper.mapToDTO(temp_user)!;
         }
     }
