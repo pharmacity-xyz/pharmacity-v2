@@ -1,10 +1,7 @@
-﻿using BusinessObjects.Data;
+﻿using Microsoft.AspNetCore.Identity;
+
+using BusinessObjects.Data;
 using BusinessObjects.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -13,9 +10,9 @@ namespace DataAccess
 
         private static UserDAO? instance = null;
         private static readonly object iLock = new object();
+        private static PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
         public UserDAO()
         {
-
         }
 
         public static UserDAO Instance
@@ -33,34 +30,13 @@ namespace DataAccess
             }
         }
 
-        public User FindMemberByEmailPassword(string email, string password)
-        {
-            var p = new User();
-            try
-            {
-                using (var context = new AppDbContext())
-                {
-                    p = context.Users?.SingleOrDefault(x => x.Email == email && x.Password == password);
-
-                    if (p == null)
-                    {
-                        throw new Exception("Wrong password or username");
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return p;
-        }
-
-        public void SaveMember(User user)
+        public void AddNewUser(User user)
         {
             try
             {
                 using (var context = new AppDbContext())
                 {
+                    user.Password = CreateHashedPassword(user, user.Password);
                     context.Users?.Add(user);
                     context.SaveChanges();
                 }
@@ -71,7 +47,51 @@ namespace DataAccess
             }
         }
 
-        public void UpdateMember(User user)
+        public List<User> FetchAllUsers()
+        {
+            var p = new List<User>();
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    p = context.Users?.ToList();
+
+                    if (p == null)
+                    {
+                        throw new Exception("Can not fetch all users");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return p;
+        }
+
+        public User FindUserByEmail(string email)
+        {
+            var p = new User();
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    p = context.Users?.SingleOrDefault(x => x.Email == email);
+
+                    if (p == null)
+                    {
+                        throw new Exception("Can not find with provided email");
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return p;
+        }
+
+        public void UpdateUser(User user)
         {
             try
             {
@@ -87,26 +107,44 @@ namespace DataAccess
             }
         }
 
-        public List<User> FindAll()
+        public void UpdateUserPassword(User user, string provided_password, string new_password)
         {
-            var p = new List<User>();
             try
             {
                 using (var context = new AppDbContext())
                 {
-                    p = context.Users?.ToList();
-
-                    if (p == null)
-                    {
-                        throw new Exception("No Members!");
-                    }
+                    VerifyPassword(user, provided_password);
+                    user.Password = CreateHashedPassword(user, new_password);
+                    context.Entry<User>(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.SaveChanges();
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return p;
+        }
+
+        private string CreateHashedPassword(User user, string password)
+        {
+            return passwordHasher.HashPassword(user, password);
+        }
+
+        public void VerifyPassword(User user, string provided_password)
+        {
+            PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+            try
+            {
+                if (passwordHasher.VerifyHashedPassword(user, user.Password, provided_password) == PasswordVerificationResult.Failed)
+                {
+                    throw new Exception("You entered wrong password. Please type again.");
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
         }
     }
 }

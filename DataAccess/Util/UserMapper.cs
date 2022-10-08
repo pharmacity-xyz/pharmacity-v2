@@ -13,10 +13,12 @@ namespace DataAccess.Util
                 {
                     UserId = user.UserId,
                     Email = user.Email,
+                    Password = user.Password,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    City = user.City,
                     Country = user.Country,
                     CompanyName = user.CompanyName,
-                    City = user.City,
-                    Password = user.Password,
                     Role = user.Role
                 };
             }
@@ -32,7 +34,7 @@ namespace DataAccess.Util
             User user = new User
             {
                 UserId = Guid.NewGuid(),
-                Email = userDTO.Email,
+                Email = userDTO.Email!,
                 Country = userDTO.Country,
                 CompanyName = userDTO.CompanyName,
                 City = userDTO.City,

@@ -6,12 +6,30 @@ namespace BusinessObjects.Model
     {
         [Key]
         public Guid UserId { get; set; }
-        public string? Email { get; set; }
-        public string? CompanyName { get; set; }
-        public string? City { get; set; }
-        public string? Country { get; set; }
-        public string? Password { get; set; }
+
+        [Required]
+        public string Email { get; set; } = default!;
+
+        [Required]
+        public string Password { get; set; } = default!;
+
+        [Required]
+        public string FirstName { get; set; } = default!;
+
+        [Required]
+        public string LastName { get; set; } = default!;
+
+        [Required]
+        public string City { get; set; } = default!;
+
+        [Required]
+        public string Country { get; set; } = default!;
+
+        [Required]
+        public string CompanyName { get; set; } = default!;
+
         public string? Role { get; set; }
+
         public virtual ICollection<Order>? Orders { get; set; }
     }
 }

@@ -1,5 +1,6 @@
-﻿using DataAccess.DTO;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+
+using DataAccess.DTO;
 using Repositories;
 using StoreAPI.Storage;
 

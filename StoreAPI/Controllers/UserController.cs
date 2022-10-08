@@ -1,6 +1,7 @@
-﻿using BusinessObjects.Models;
+﻿using Microsoft.AspNetCore.Mvc;
+
+using BusinessObjects.Models;
 using DataAccess.DTO;
-using Microsoft.AspNetCore.Mvc;
 using Repositories;
 using StoreAPI.Storage;
 
@@ -18,23 +19,54 @@ namespace StoreAPI.Controllers
             this.userRepository = userRepository;
         }
 
-        [HttpPost("login")]
-        public IActionResult Login(UserDTO userDTO)
+        [HttpPost("register")]
+        public IActionResult register(UserDTO userDTO)
         {
             try
             {
-                if (userDTO.Email!.Equals("") && userDTO.Password!.Equals(""))
+                userDTO.Role = Role.USER.ToString();
+                userRepository.Add(userDTO);
+
+                return Ok(LoggedUser.Instance!.User);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("register/admin")]
+        public IActionResult registerAdmin(UserDTO userDTO)
+        {
+            try
+            {
+                userDTO.Role = Role.ADMIN.ToString();
+                userRepository.Add(userDTO);
+
+                return Ok(LoggedUser.Instance!.User);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpPost("login")]
+        public IActionResult Login(string email, string password)
+        {
+            try
+            {
+                if (email.Equals("") && password.Equals(""))
                 {
                     throw new Exception("Email and Password cannot be empty");
                 }
                 else
                 {
-                    if (userDTO.Email.Equals("")) throw new Exception("Email cannot be empty");
-                    if (userDTO.Password!.Equals("")) throw new Exception("Password cannot be empty");
+                    if (email.Equals("")) throw new Exception("Email cannot be empty");
+                    if (password!.Equals("")) throw new Exception("Password cannot be empty");
                 }
 
-
-                UserDTO user = userRepository.Login(userDTO.Email, userDTO.Password);
+                UserDTO user = userRepository.Login(email, password);
 
                 LoggedUser.Instance!.User = user;
 
@@ -47,26 +79,13 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("change_password")]
-        public IActionResult changePass(
-            string email,
-            string password,
-            string newPassword,
-            string confirmNewPassword
-        )
+        [HttpGet("get_all")]
+        public IActionResult GetAll()
         {
             try
             {
-                if (!confirmNewPassword.Equals(newPassword))
-                {
-                    throw new Exception("Confirm password does not match new password");
-                }
-                UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
-
-                LoggedUser.Instance!.User = user;
-
-                return Ok("Successfully changed");
-
+                List<UserDTO> userDTOs = userRepository.GetAll();
+                return Ok(userDTOs);
             }
             catch (Exception e)
             {
@@ -103,23 +122,6 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("register")]
-        public IActionResult register(UserDTO userDTO)
-        {
-            try
-            {
-                userDTO.Role = Role.USER.ToString();
-                userRepository.Add(userDTO);
-
-                return Ok(LoggedUser.Instance!.User);
-
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
         [HttpPut("edit")]
         public IActionResult edit(
             string newCompany,
@@ -135,9 +137,9 @@ namespace StoreAPI.Controllers
                 {
                     throw new Exception("Can not find the user");
                 }
-                userRepository.Update(user, newCity, newCountry, newCompany);
+                UserDTO updated_user = userRepository.Update(user, newCity, newCountry, newCompany);
 
-                LoggedUser.Instance.User = user;
+                LoggedUser.Instance.User = updated_user;
 
                 return Ok(LoggedUser.Instance.User);
 
@@ -148,13 +150,26 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("get_all")]
-        public IActionResult GetAll()
+        [HttpPost("change_password")]
+        public IActionResult changePass(
+                    string email,
+                    string password,
+                    string newPassword,
+                    string confirmNewPassword
+                )
         {
             try
             {
-                List<UserDTO> userDTOs = userRepository.GetAll();
-                return Ok(userDTOs);
+                if (!confirmNewPassword.Equals(newPassword))
+                {
+                    throw new Exception("Confirm password does not match new password");
+                }
+
+                UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
+
+                LoggedUser.Instance!.User = user;
+
+                return Ok("Successfully changed");
             }
             catch (Exception e)
             {

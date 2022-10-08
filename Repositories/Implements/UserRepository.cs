@@ -7,19 +7,33 @@ namespace Repositories.Implements
 {
     public class UserRepository : IUserRepository
     {
-        public void Add(UserDTO user)
+        public void Add(UserDTO userDTO)
         {
-            UserDAO.Instance.SaveMember(UserMapper.mapToEntity(user));
+            User new_user = new User
+            {
+                UserId = Guid.NewGuid(),
+                Email = userDTO.Email,
+                Password = userDTO.Password,
+                FirstName = userDTO.FirstName,
+                LastName = userDTO.LastName,
+                City = userDTO.City,
+                Country = userDTO.Country,
+                CompanyName = userDTO.CompanyName,
+                Role = userDTO.Role?.ToString()
+            };
+            UserDAO.Instance.AddNewUser(new_user);
         }
 
         public List<UserDTO> GetAll()
         {
-            return UserDAO.Instance.FindAll().Select(m => UserMapper.mapToDTO(m)).ToList()!;
+            return UserDAO.Instance.FetchAllUsers().Select(m => UserMapper.mapToDTO(m)).ToList()!;
         }
 
-        public UserDTO Login(string email, string password)
+        public UserDTO Login(string email, string provided_password)
         {
-            return UserMapper.mapToDTO(UserDAO.Instance.FindMemberByEmailPassword(email, password))!;
+            User user = UserDAO.Instance.FindUserByEmail(email);
+            UserDAO.Instance.VerifyPassword(user, provided_password);
+            return UserMapper.mapToDTO(user)!;
         }
 
         public UserDTO GetLoggedAccount()
@@ -27,20 +41,20 @@ namespace Repositories.Implements
             throw new NotImplementedException();
         }
 
-        public void Update(UserDTO user, string newCity, string newCountry, string newCompany)
+        public UserDTO Update(UserDTO user, string newCity, string newCountry, string newCompany)
         {
-            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(user.Email!, user.Password!);
+            User temp_user = UserDAO.Instance.FindUserByEmail(user.Email);
             temp_user.City = newCity;
             temp_user.Country = newCountry;
             temp_user.CompanyName = newCompany;
-            UserDAO.Instance.UpdateMember(temp_user);
+            UserDAO.Instance.UpdateUser(temp_user);
+            return UserMapper.mapToDTO(temp_user)!;
         }
 
         public UserDTO UpdatePassword(string email, string password, string newPassword)
         {
-            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(email!, password!);
-            temp_user.Password = newPassword;
-            UserDAO.Instance.UpdateMember(temp_user);
+            User temp_user = UserDAO.Instance.FindUserByEmail(email);
+            UserDAO.Instance.UpdateUserPassword(temp_user, password, newPassword);
             return UserMapper.mapToDTO(temp_user)!;
         }
     }
