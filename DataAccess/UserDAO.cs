@@ -125,7 +125,7 @@ namespace DataAccess
             }
         }
 
-        public void ForgotPassword(User user, string newPassword)
+        public User ForgotPassword(User user, string newPassword)
         {
             try
             {
@@ -142,6 +142,8 @@ namespace DataAccess
 
                 throw new Exception(e.Message);
             }
+
+            return user;
         }
 
         private string CreateHashedPassword(User user, string password)

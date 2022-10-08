@@ -10,6 +10,6 @@ namespace Repositories
         UserDTO GetLoggedAccount();
         UserDTO Update(UserDTO user, string newCity, string newCountry, string newCompany);
         UserDTO UpdatePassword(string email, string password, string newPassword);
-        void ForgotPassword(string email, string newPassword);
+        UserDTO ForgotPassword(string email, string newPassword);
     }
 }

@@ -155,6 +155,8 @@ namespace StoreAPI.Controllers
         {
             try
             {
+                var updated_user = userRepository.ForgotPassword(email, newPassword);
+                LoggedUser.Instance!.User = updated_user;
                 return Ok("Update password successfully");
             }
             catch (Exception e)
