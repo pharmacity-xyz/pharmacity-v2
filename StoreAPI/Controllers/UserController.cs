@@ -71,15 +71,15 @@ namespace StoreAPI.Controllers
                     if (password!.Equals("")) throw new Exception("Password cannot be empty");
                 }
 
-                UserDTO user = userRepository.Login(email);
-                PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
+                UserDTO user = userRepository.Login(email, password);
+                // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
 
-                if (passwordHasher.VerifyHashedPassword(user, user.Password, password) ==
-                        PasswordVerificationResult.Failed
-                    )
-                {
-                    throw new Exception("You entered wrong password. Please type again.");
-                }
+                // if (passwordHasher.VerifyHashedPassword(user, user.Password, password) ==
+                //         PasswordVerificationResult.Failed
+                //     )
+                // {
+                //     throw new Exception("You entered wrong password. Please type again.");
+                // }
 
                 LoggedUser.Instance!.User = user;
 

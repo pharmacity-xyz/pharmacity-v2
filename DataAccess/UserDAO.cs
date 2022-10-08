@@ -113,10 +113,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
-                    if (VerifyPassword(user, provided_password) == PasswordVerificationResult.Failed)
-                    {
-                        throw new Exception("You entered wrong password. Please type again.");
-                    }
+                    VerifyPassword(user, provided_password);
                     user.Password = CreateHashedPassword(user, new_password);
                     context.Entry<User>(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
                     context.SaveChanges();
@@ -134,11 +131,21 @@ namespace DataAccess
             return passwordHasher.HashPassword(user, user.Password);
         }
 
-        private PasswordVerificationResult VerifyPassword(User user, string password)
+        public void VerifyPassword(User user, string provided_password)
         {
-            // PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+            PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+            try
+            {
+                if (passwordHasher.VerifyHashedPassword(user, user.Password, provided_password) == PasswordVerificationResult.Failed)
+                {
+                    throw new Exception("You entered wrong password. Please type again.");
+                }
+            }
+            catch (Exception e)
+            {
 
-            return passwordHasher.VerifyHashedPassword(user, user.Password, password);
+                throw new Exception(e.Message);
+            }
         }
     }
 }

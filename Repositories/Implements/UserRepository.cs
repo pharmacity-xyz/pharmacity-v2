@@ -31,9 +31,11 @@ namespace Repositories.Implements
             return UserDAO.Instance.FetchAllUsers().Select(m => UserMapper.mapToDTO(m)).ToList()!;
         }
 
-        public UserDTO Login(string email)
+        public UserDTO Login(string email, string provided_password)
         {
-            return UserMapper.mapToDTO(UserDAO.Instance.FindUserByEmail(email))!;
+            User user = UserDAO.Instance.FindUserByEmail(email);
+            UserDAO.Instance.VerifyPassword(user, provided_password);
+            return UserMapper.mapToDTO(user)!;
         }
 
         public UserDTO GetLoggedAccount()
