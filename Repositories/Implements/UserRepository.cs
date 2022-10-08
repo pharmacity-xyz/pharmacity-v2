@@ -1,4 +1,6 @@
-﻿using DataAccess;
+﻿using Microsoft.AspNetCore.Identity;
+
+using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
 using BusinessObjects.Model;
@@ -29,9 +31,9 @@ namespace Repositories.Implements
             return UserDAO.Instance.FindAll().Select(m => UserMapper.mapToDTO(m)).ToList()!;
         }
 
-        public UserDTO Login(string email, string password)
+        public UserDTO Login(string email)
         {
-            return UserMapper.mapToDTO(UserDAO.Instance.FindMemberByEmailPassword(email, password))!;
+            return UserMapper.mapToDTO(UserDAO.Instance.FindMemberByEmail(email))!;
         }
 
         public UserDTO GetLoggedAccount()
@@ -41,7 +43,7 @@ namespace Repositories.Implements
 
         public void Update(UserDTO user, string newCity, string newCountry, string newCompany)
         {
-            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(user.Email!, user.Password!);
+            User temp_user = UserDAO.Instance.FindMemberByEmail(user.Email);
             temp_user.City = newCity;
             temp_user.Country = newCountry;
             temp_user.CompanyName = newCompany;
@@ -50,7 +52,9 @@ namespace Repositories.Implements
 
         public UserDTO UpdatePassword(string email, string password, string newPassword)
         {
-            User temp_user = UserDAO.Instance.FindMemberByEmailPassword(email!, password!);
+            User temp_user = UserDAO.Instance.FindMemberByEmail(email);
+            // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
+            // temp_user.Password = passwordHasher.HashPassword(userDTO, userDTO.Password);
             temp_user.Password = newPassword;
             UserDAO.Instance.UpdateMember(temp_user);
             return UserMapper.mapToDTO(temp_user)!;

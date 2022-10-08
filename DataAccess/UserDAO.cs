@@ -1,10 +1,7 @@
-﻿using BusinessObjects.Data;
+﻿using Microsoft.AspNetCore.Identity;
+
+using BusinessObjects.Data;
 using BusinessObjects.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataAccess
 {
@@ -13,9 +10,9 @@ namespace DataAccess
 
         private static UserDAO? instance = null;
         private static readonly object iLock = new object();
+        private static PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
         public UserDAO()
         {
-
         }
 
         public static UserDAO Instance
@@ -33,7 +30,20 @@ namespace DataAccess
             }
         }
 
-        public User FindMemberByEmailPassword(string email, string password)
+        private string createHashedPassword(User user)
+        {
+            // PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+            return passwordHasher.HashPassword(user, user.Password);
+        }
+
+        private PasswordVerificationResult verifyPassword(User user, string password)
+        {
+            // PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
+
+            return passwordHasher.VerifyHashedPassword(user, user.Password, password);
+        }
+
+        public User FindMemberByEmail(string email)
         {
             var p = new User();
             try
@@ -44,7 +54,7 @@ namespace DataAccess
 
                     if (p == null)
                     {
-                        throw new Exception("Can not find the user with provided email");
+                        throw new Exception("Can not find with provided email");
                     }
                 }
             }
@@ -61,6 +71,7 @@ namespace DataAccess
             {
                 using (var context = new AppDbContext())
                 {
+                    user.Password = createHashedPassword(user);
                     context.Users?.Add(user);
                     context.SaveChanges();
                 }
