@@ -44,7 +44,7 @@ namespace DataAccess
 
                     if (p == null)
                     {
-                        throw new Exception("Wrong password or username");
+                        throw new Exception("Can not find the user with provided email");
                     }
                 }
             }

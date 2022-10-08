@@ -53,10 +53,15 @@ namespace StoreAPI.Controllers
                     if (password!.Equals("")) throw new Exception("Password cannot be empty");
                 }
 
-                // PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
-                // var hashedPassword = passwordHasher.HashPassword(userDTO, userDTO.Password);
                 UserDTO user = userRepository.Login(email, password);
+                PasswordHasher<UserDTO> passwordHasher = new PasswordHasher<UserDTO>();
 
+                if (passwordHasher.VerifyHashedPassword(user, user.Password, password) == PasswordVerificationResult.Failed)
+                {
+                    throw new Exception("Wrong password");
+                }
+
+                // PasswordVerificationResult.Failed
                 LoggedUser.Instance!.User = user;
 
                 return Ok(LoggedUser.Instance.User);
