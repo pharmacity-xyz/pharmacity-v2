@@ -125,6 +125,27 @@ namespace DataAccess
             }
         }
 
+        public User ForgotPassword(User user, string newPassword)
+        {
+            try
+            {
+                using (var context = new AppDbContext())
+                {
+                    user.Password = CreateHashedPassword(user, newPassword);
+                    context.Entry<User>(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+                    context.SaveChanges();
+                }
+
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception(e.Message);
+            }
+
+            return user;
+        }
+
         private string CreateHashedPassword(User user, string password)
         {
             return passwordHasher.HashPassword(user, password);

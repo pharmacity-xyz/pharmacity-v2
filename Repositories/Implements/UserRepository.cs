@@ -57,5 +57,12 @@ namespace Repositories.Implements
             UserDAO.Instance.UpdateUserPassword(temp_user, password, newPassword);
             return UserMapper.mapToDTO(temp_user)!;
         }
+
+        public UserDTO ForgotPassword(string email, string newPassword)
+        {
+            User temp_user = UserDAO.Instance.FindUserByEmail(email);
+            User updated_user = UserDAO.Instance.ForgotPassword(temp_user, newPassword);
+            return UserMapper.mapToDTO(updated_user)!;
+        }
     }
 }
