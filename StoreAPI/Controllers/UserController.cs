@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.IdentityModel.Tokens.Jwt;
 
 using BusinessObjects.Models;
 using DataAccess.DTO;
@@ -219,7 +220,16 @@ namespace StoreAPI.Controllers
             );
 
             var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-            return string.Empty;
+
+            var token = new JwtSecurityToken(
+                claims: claims,
+                expires: DateTime.Now.AddDays(1),
+                signingCredentials: cred
+            );
+
+            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return jwt;
         }
 
     }
