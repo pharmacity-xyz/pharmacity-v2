@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using BusinessObjects.Models;
 using DataAccess.DTO;
@@ -17,6 +18,12 @@ namespace StoreAPI.Controllers
         public UserController(IUserRepository userRepository)
         {
             this.userRepository = userRepository;
+        }
+
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(UserDTO userDTO)
+        {
+            return Ok();
         }
 
         [HttpPost("register")]
