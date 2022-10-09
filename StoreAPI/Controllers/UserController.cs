@@ -48,7 +48,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("register/admin"), Authorize]
+        [HttpPost("register/admin"), Authorize(Roles = "Admin")]
         public IActionResult RegisterAdmin(UserDTO userDTO)
         {
             try
