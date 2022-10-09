@@ -231,6 +231,5 @@ namespace StoreAPI.Controllers
 
             return jwt;
         }
-
     }
 }
