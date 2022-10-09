@@ -33,7 +33,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register(UserDTO userDTO)
+        public ActionResult<UserDTO> Register(UserDTO userDTO)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("register/admin")]
+        [HttpPost("register/admin"), Authorize(Roles = "Admin")]
         public IActionResult RegisterAdmin(UserDTO userDTO)
         {
             try
@@ -69,16 +69,6 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                if (email.Equals("") && password.Equals(""))
-                {
-                    throw new Exception("Email and Password cannot be empty");
-                }
-                else
-                {
-                    if (email.Equals("")) throw new Exception("Email cannot be empty");
-                    if (password!.Equals("")) throw new Exception("Password cannot be empty");
-                }
-
                 UserDTO user = userRepository.Login(email, password);
 
                 LoggedUser.Instance!.User = user;
@@ -231,6 +221,5 @@ namespace StoreAPI.Controllers
 
             return jwt;
         }
-
     }
 }
