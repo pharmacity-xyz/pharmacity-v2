@@ -1,4 +1,4 @@
-﻿using BusinessObjects.Model;
+﻿using StoreAPI.Model;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
