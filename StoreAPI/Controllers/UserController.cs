@@ -26,6 +26,8 @@ namespace StoreAPI.Controllers
             this.userRepository = userRepository;
         }
 
+        // public ActionResult<>
+
         [HttpPost("authenticate")]
         public IActionResult Authenticate(UserDTO userDTO)
         {
@@ -119,6 +121,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
+
                 return Ok(LoggedUser.Instance!.User);
             }
             catch (Exception e)
