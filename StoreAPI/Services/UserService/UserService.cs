@@ -3,9 +3,9 @@ using DataAccess.DTO;
 using DataAccess.Util;
 using BusinessObjects.Model;
 
-namespace Repositories.Implements
+namespace StoreAPI.Services
 {
-    public class UserRepository : IUserRepository
+    public class UserService : IUserService
     {
         public void Add(UserDTO userDTO)
         {

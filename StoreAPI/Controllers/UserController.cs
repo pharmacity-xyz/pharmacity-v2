@@ -7,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 
 using BusinessObjects.Models;
 using DataAccess.DTO;
-using Repositories;
+using StoreAPI.Services;
 using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers
@@ -17,13 +17,13 @@ namespace StoreAPI.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly IUserRepository userRepository;
+        private readonly IUserService userService;
         private readonly IConfiguration _configuration;
 
-        public UserController(IConfiguration configuration, IUserRepository userRepository)
+        public UserController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
-            this.userRepository = userRepository;
+            this.userService = userService;
         }
 
         [HttpPost("authenticate")]
@@ -38,7 +38,7 @@ namespace StoreAPI.Controllers
             try
             {
                 userDTO.Role = Role.USER.ToString();
-                userRepository.Add(userDTO);
+                userService.Add(userDTO);
 
                 return Ok(LoggedUser.Instance!.User);
             }
@@ -54,7 +54,7 @@ namespace StoreAPI.Controllers
             try
             {
                 userDTO.Role = Role.ADMIN.ToString();
-                userRepository.Add(userDTO);
+                userService.Add(userDTO);
 
                 return Ok(LoggedUser.Instance!.User);
             }
@@ -69,7 +69,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = userRepository.Login(email, password);
+                UserDTO user = userService.Login(email, password);
 
                 LoggedUser.Instance!.User = user;
 
@@ -89,7 +89,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                List<UserDTO> userDTOs = userRepository.GetAll();
+                List<UserDTO> userDTOs = userService.GetAll();
                 return Ok(userDTOs);
             }
             catch (Exception e)
@@ -142,7 +142,7 @@ namespace StoreAPI.Controllers
                 {
                     throw new Exception("Can not find the user");
                 }
-                UserDTO updated_user = userRepository.Update(user, newCity, newCountry, newCompany);
+                UserDTO updated_user = userService.Update(user, newCity, newCountry, newCompany);
 
                 LoggedUser.Instance.User = updated_user;
 
@@ -160,7 +160,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                var updated_user = userRepository.ForgotPassword(email, newPassword);
+                var updated_user = userService.ForgotPassword(email, newPassword);
                 LoggedUser.Instance!.User = updated_user;
                 return Ok("Update password successfully");
             }
@@ -185,7 +185,7 @@ namespace StoreAPI.Controllers
                     throw new Exception("Confirm password does not match new password");
                 }
 
-                UserDTO user = userRepository.UpdatePassword(email, password, newPassword);
+                UserDTO user = userService.UpdatePassword(email, password, newPassword);
 
                 LoggedUser.Instance!.User = user;
 

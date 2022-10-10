@@ -1,8 +1,8 @@
 ﻿using DataAccess.DTO;
 
-namespace Repositories
+namespace StoreAPI.Services
 {
-    public interface IUserRepository
+    public interface IUserService
     {
         void Add(UserDTO member);
         List<UserDTO> GetAll();
