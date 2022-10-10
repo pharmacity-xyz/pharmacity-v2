@@ -7,7 +7,7 @@ namespace StoreAPI.Model
         [Key]
         public Guid UserId { get; set; }
 
-        [Required]
+        [Required, EmailAddress]
         public string Email { get; set; } = default!;
 
         [Required]

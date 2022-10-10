@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using DataAccess.DTO;
 using Repositories;
-using StoreAPI.Storage;
+// using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers
 {
@@ -60,18 +61,18 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("get_by_id/{id}")]
+        [HttpGet("get_by_id/{id}"), Authorize(Roles = "User")]
         public IActionResult GetId(Guid id)
         {
 
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Please login");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Please login");
+                // }
 
                 OrderDTO orderDTO = orderRepository.GetOrderById(id);
                 orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
