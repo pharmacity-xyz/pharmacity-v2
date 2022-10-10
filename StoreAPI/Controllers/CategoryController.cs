@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using BusinessObjects.Models;
 using DataAccess.DTO;
 using Repositories;
-using StoreAPI.Storage;
+// using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers
 {
@@ -23,21 +24,21 @@ namespace StoreAPI.Controllers
             this.orderRepository = orderRepository;
         }
 
-        [HttpPost("add")]
+        [HttpPost("add"), Authorize(Roles = "Admin")]
         public IActionResult Add(CategoryDTO category)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
                 categoryRepository.Add(category);
 
@@ -55,21 +56,21 @@ namespace StoreAPI.Controllers
             return Ok(categoryRepository.GetCategory());
         }
 
-        [HttpPut("update")]
+        [HttpPut("update"), Authorize(Roles = "Admin")]
         public IActionResult Update(CategoryDTO category)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
                 categoryRepository.Update(category);
 
@@ -81,7 +82,7 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("delete/{id}"), Authorize(Roles = "Admin")]
         public IActionResult Delete(Guid id)
         {
             try
