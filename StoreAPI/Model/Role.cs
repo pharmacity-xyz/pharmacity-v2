@@ -1,4 +1,4 @@
-﻿namespace BusinessObjects.Models
+﻿namespace StoreAPI.Models
 {
     public enum Role
     {
