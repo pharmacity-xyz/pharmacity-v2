@@ -17,13 +17,13 @@ namespace StoreAPI.Controllers
     public class UserController : ControllerBase
     {
 
-        private readonly IUserService userService;
+        private readonly IUserService _userService;
         private readonly IConfiguration _configuration;
 
         public UserController(IConfiguration configuration, IUserService userService)
         {
             _configuration = configuration;
-            this.userService = userService;
+            _userService = userService;
         }
 
         [HttpPost("authenticate")]
@@ -38,9 +38,9 @@ namespace StoreAPI.Controllers
             try
             {
                 userDTO.Role = Role.USER.ToString();
-                userService.Add(userDTO);
+                _userService.Add(userDTO);
 
-                return Ok(LoggedUser.Instance!.User);
+                return Ok(userDTO);
             }
             catch (Exception e)
             {
@@ -54,9 +54,9 @@ namespace StoreAPI.Controllers
             try
             {
                 userDTO.Role = Role.ADMIN.ToString();
-                userService.Add(userDTO);
+                _userService.Add(userDTO);
 
-                return Ok(LoggedUser.Instance!.User);
+                return Ok(userDTO);
             }
             catch (Exception e)
             {
@@ -69,9 +69,9 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = userService.Login(email, password);
+                UserDTO user = _userService.Login(email, password);
 
-                LoggedUser.Instance!.User = user;
+                // LoggedUser.Instance!.User = user;
 
                 string token = CreateToken(user);
 
@@ -89,7 +89,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                List<UserDTO> userDTOs = userService.GetAll();
+                List<UserDTO> userDTOs = _userService.GetAll();
                 return Ok(userDTOs);
             }
             catch (Exception e)
@@ -103,9 +103,10 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                LoggedUser.Instance!.User = null;
+                // LoggedUser.Instance!.User = null;
 
-                return Ok(LoggedUser.Instance.User);
+                // return Ok(LoggedUser.Instance.User);
+                return Ok();
 
             }
             catch (Exception e)
@@ -119,7 +120,8 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                return Ok(LoggedUser.Instance!.User);
+                // return Ok(LoggedUser.Instance!.User);
+                return Ok();
             }
             catch (Exception e)
             {
@@ -142,9 +144,9 @@ namespace StoreAPI.Controllers
                 {
                     throw new Exception("Can not find the user");
                 }
-                UserDTO updated_user = userService.Update(user, newCity, newCountry, newCompany);
+                UserDTO updated_user = _userService.Update(user, newCity, newCountry, newCompany);
 
-                LoggedUser.Instance.User = updated_user;
+                // LoggedUser.Instance.User = updated_user;
 
                 return Ok(LoggedUser.Instance.User);
 
@@ -160,8 +162,8 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                var updated_user = userService.ForgotPassword(email, newPassword);
-                LoggedUser.Instance!.User = updated_user;
+                var updated_user = _userService.ForgotPassword(email, newPassword);
+                // LoggedUser.Instance!.User = updated_user;
                 return Ok("Update password successfully");
             }
             catch (Exception e)
@@ -185,7 +187,7 @@ namespace StoreAPI.Controllers
                     throw new Exception("Confirm password does not match new password");
                 }
 
-                UserDTO user = userService.UpdatePassword(email, password, newPassword);
+                UserDTO user = _userService.UpdatePassword(email, password, newPassword);
 
                 LoggedUser.Instance!.User = user;
 
