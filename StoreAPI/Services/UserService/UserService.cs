@@ -2,11 +2,27 @@
 using DataAccess.DTO;
 using DataAccess.Util;
 using BusinessObjects.Model;
+using StoreAPI.Data;
 
 namespace StoreAPI.Services
 {
     public class UserService : IUserService
     {
+
+        private readonly AppDbContext _context;
+        private readonly IConfiguration _configuration;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public UserService(
+            AppDbContext context, 
+            IConfiguration configuration, 
+            IHttpContextAccessor httpContextAccessor)
+        {
+            _context = context;
+            _configuration = configuration;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
         public void Add(UserDTO userDTO)
         {
             User new_user = new User
