@@ -91,7 +91,7 @@ namespace StoreAPI.Services
             return UserMapper.mapToDTO(temp_user)!;
         }
 
-        public UserDTO UpdatePassword(string email, string password, string newPassword)
+        public async Task<ServiceResponse<bool>> ChangePassword(string newPassword)
         {
             User temp_user = UserDAO.Instance.FindUserByEmail(email);
             UserDAO.Instance.UpdateUserPassword(temp_user, password, newPassword);

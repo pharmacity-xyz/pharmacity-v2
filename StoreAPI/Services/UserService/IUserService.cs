@@ -11,7 +11,6 @@ namespace StoreAPI.Services
         List<UserDTO> GetAll();
         UserDTO GetLoggedAccount();
         UserDTO Update(UserDTO user, string newCity, string newCountry, string newCompany);
-        UserDTO UpdatePassword(string email, string password, string newPassword);
-        UserDTO ForgotPassword(string email, string newPassword);
+        Task<ServiceResponse<bool>> ChangePassword(string newPassword);
     }
 }
