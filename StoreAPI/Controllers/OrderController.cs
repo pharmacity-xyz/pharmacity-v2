@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 
 using DataAccess.DTO;
 using Repositories;
+using StoreAPI.Services;
 
 namespace StoreAPI.Controllers
 {
@@ -10,19 +11,17 @@ namespace StoreAPI.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly IOrderRepository orderRepository;
-        private readonly IOrderDetailRepository orderDetailRepository;
-        private readonly IProductRepository productRepository;
+        private readonly IOrderService _orderService;
+        // private readonly IOrderDetailRepository orderDetailRepository;
+        // private readonly IProductRepository productRepository;
 
         public OrderController(
-            IOrderRepository orderRepository,
-            IOrderDetailRepository orderDetailRepository,
-            IProductRepository productRepository
+            IOrderService orderService
         )
         {
-            this.orderRepository = orderRepository;
-            this.orderDetailRepository = orderDetailRepository;
-            this.productRepository = productRepository;
+            _orderService = orderService;
+            // this.orderDetailRepository = orderDetailRepository;
+            // this.productRepository = productRepository;
         }
 
         [HttpPost("add")]
@@ -31,8 +30,8 @@ namespace StoreAPI.Controllers
             try
             {
                 newOrder.ShippedDate = DateTime.UtcNow;
-                Guid orderId = orderRepository.Add(newOrder);
-                orderDetailRepository.Add(newOrder.OrderDetail!, orderId);
+                Guid orderId = _orderService.Add(newOrder);
+                // orderDetailRepository.Add(newOrder.OrderDetail!, orderId);
 
                 return Ok("Successfully added");
             }
@@ -47,10 +46,10 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
+                IEnumerable<OrderDTO> orderList = _orderService.GetAllOrders();
                 foreach (OrderDTO orderDTO in orderList)
                 {
-                    orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+                    // orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
                 }
                 return Ok(orderList);
             }
@@ -73,8 +72,8 @@ namespace StoreAPI.Controllers
                 //     throw new Exception("Please login");
                 // }
 
-                OrderDTO orderDTO = orderRepository.GetOrderById(id);
-                orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+                OrderDTO orderDTO = _orderService.GetOrderById(id);
+                // orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
 
                 return Ok(orderDTO);
             }
@@ -115,8 +114,8 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                orderDetailRepository.Delete(id);
-                orderRepository.Delete(id);
+                // orderDetailRepo.Delete(id);
+                _orderService.Delete(id);
                 return Ok("Successfully deleted");
             }
             catch (Exception e)
