@@ -4,11 +4,12 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
 
-using DataAccess;
-using DataAccess.DTO;
-using DataAccess.Util;
+// using DataAccess;
+// using Store.DTO;
+// using DataAccess.Util;
 using StoreAPI.Models;
 using StoreAPI.Data;
+using StoreAPI.DTO;
 using StoreAPI.Utils;
 
 namespace StoreAPI.Services
@@ -51,7 +52,8 @@ namespace StoreAPI.Services
 
         public List<UserDTO> GetAll()
         {
-            return UserDAO.Instance.FetchAllUsers().Select(m => UserMapper.mapToDTO(m)).ToList()!;
+            // return UserDAO.Instance.FetchAllUsers().Select(m => UserMapper.mapToDTO(m)).ToList()!;
+            throw new NotImplementedException();
         }
 
         public async Task<ServiceResponse<string>> Login(string email, string password)
@@ -83,12 +85,13 @@ namespace StoreAPI.Services
 
         public UserDTO Update(UserDTO user, string newCity, string newCountry, string newCompany)
         {
-            User temp_user = UserDAO.Instance.FindUserByEmail(user.Email);
-            temp_user.City = newCity;
-            temp_user.Country = newCountry;
-            temp_user.CompanyName = newCompany;
-            UserDAO.Instance.UpdateUser(temp_user);
-            return UserMapper.mapToDTO(temp_user)!;
+            // User temp_user = UserDAO.Instance.FindUserByEmail(user.Email);
+            // temp_user.City = newCity;
+            // temp_user.Country = newCountry;
+            // temp_user.CompanyName = newCompany;
+            // UserDAO.Instance.UpdateUser(temp_user);
+            // return new UserDTO();
+            throw new NotImplementedException();
         }
 
         public async Task<ServiceResponse<bool>> ChangePassword(Guid userId, string newPassword)
@@ -117,7 +120,7 @@ namespace StoreAPI.Services
         {
             List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.NameIdentifier, user.UserId.ToString()),
-                new Claim(ClaimTypes.Email, user.Email)
+                new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.Role!),
             };
 
