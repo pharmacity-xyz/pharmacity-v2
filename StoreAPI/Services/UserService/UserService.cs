@@ -36,11 +36,14 @@ namespace StoreAPI.Services
 
         public string GetUserEmail() => _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Email);
 
-        public async Task<ServiceResponse<Guid>> Register(User user)
+        public async Task<ServiceResponse<Guid>> Register(User user, string password)
         {
-            UserDAO.Instance.AddNewUser(user);
-            user.Password = CreateHashedPassword(user, user.Password);
-            _context.Users?.Add(user);
+            CreatePasswordHash(password, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            _context.Users!.Add(user);
             await _context.SaveChangesAsync();
 
             return new ServiceResponse<Guid> { Data = user.UserId, Message = "Registration successful" };
@@ -51,7 +54,7 @@ namespace StoreAPI.Services
             return UserDAO.Instance.FetchAllUsers().Select(m => UserMapper.mapToDTO(m)).ToList()!;
         }
 
-        public async Task<ServiceResponse<string>> Login(string email, string provided_password)
+        public async Task<ServiceResponse<string>> Login(string email, string password)
         {
             var response = new ServiceResponse<string>();
             var user = _context.Users!.FirstOrDefault(x => x.Email.ToLower().Equals(email.ToLower()));
@@ -60,11 +63,17 @@ namespace StoreAPI.Services
                 response.Success = false;
                 response.Message = "User not found.";
             }
-            else if ()
-                User user = UserDAO.Instance.FindUserByEmail(email);
-            UserDAO.Instance.VerifyPassword(user, provided_password);
-            return response;
+            else if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+            {
+                response.Success = false;
+                response.Message = "Wrong password.";
+            }
+            else
+            {
+                response.Data = CreateToken(user);
+            }
 
+            return response;
         }
 
         public UserDTO GetLoggedAccount()
@@ -142,10 +151,5 @@ namespace StoreAPI.Services
                 return computedHash.SequenceEqual(passwordHash);
             }
         }
-
-        // private string CreateHashedPassword(User user, string password)
-        // {
-        //     return passwordHasher.HashPassword(user, password);
-        // }
     }
 }
