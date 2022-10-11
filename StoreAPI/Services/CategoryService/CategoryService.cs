@@ -5,7 +5,7 @@ using DataAccess.Util;
 
 namespace StoreAPI.Services
 {
-    public class CategoryRepository : ICategoryService
+    public class CategoryService : ICategoryService
     {
         public void Add(CategoryDTO categoryDTO)
         {
