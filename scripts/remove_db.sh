@@ -11,6 +11,6 @@ docker stop ${container_id}
 docker container rm ${container_id}
 
 >&2 echo "Remove Migrations folder"
-rm -rf BusinessObjects/Migrations/
+rm -rf StoreAPI/Migrations/
 
 >&2 echo "Successfully removed the db"
