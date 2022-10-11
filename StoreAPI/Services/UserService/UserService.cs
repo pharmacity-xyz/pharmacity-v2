@@ -33,7 +33,7 @@ namespace StoreAPI.Services
 
         public string GetUserEmail() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
 
-        public void Add(UserDTO userDTO)
+        public async void Register(UserDTO userDTO)
         {
             User new_user = new User
             {
