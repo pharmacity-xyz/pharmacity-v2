@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
@@ -6,7 +7,7 @@ using System.IdentityModel.Tokens.Jwt;
 using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
-using BusinessObjects.Model;
+using StoreAPI.Models;
 using StoreAPI.Data;
 using StoreAPI.Utils;
 
@@ -18,6 +19,7 @@ namespace StoreAPI.Services
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
+        private static PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
 
         public UserService(
             AppDbContext context,
@@ -34,9 +36,14 @@ namespace StoreAPI.Services
 
         public string GetUserEmail() => _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Email);
 
-        public async Task<ServiceResponse<int>> Register(User user)
+        public async Task<ServiceResponse<Guid>> Register(User user)
         {
             UserDAO.Instance.AddNewUser(user);
+            user.Password = CreateHashedPassword(user, user.Password);
+            _context.Users?.Add(user);
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<Guid> { Data = user.UserId, Message = "Registration successful" };
         }
 
         public List<UserDTO> GetAll()
@@ -105,6 +112,11 @@ namespace StoreAPI.Services
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwt;
+        }
+
+        private string CreateHashedPassword(User user, string password)
+        {
+            return passwordHasher.HashPassword(user, password);
         }
     }
 }

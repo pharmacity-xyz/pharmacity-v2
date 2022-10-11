@@ -31,7 +31,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("register")]
-        public async Task<ActionResult<ServiceResponse<int>>> Register(UserRegister request)
+        public async Task<ActionResult<ServiceResponse<Guid>>> Register(UserRegister request)
         {
             var response = await _userService.Register(
                 new User

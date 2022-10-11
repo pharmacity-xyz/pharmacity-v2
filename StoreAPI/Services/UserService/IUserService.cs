@@ -6,7 +6,7 @@ namespace StoreAPI.Services
 {
     public interface IUserService
     {
-        Task<ServiceResponse<int>> Register(User user);
+        Task<ServiceResponse<Guid>> Register(User user);
         List<UserDTO> GetAll();
         UserDTO Login(string email, string provided_password);
         UserDTO GetLoggedAccount();
