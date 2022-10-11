@@ -3,9 +3,9 @@ using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
 
-namespace Repositories.Implements
+namespace StoreAPI.Services
 {
-    public class ProductRepository : IProductRepository
+    public class ProductService : IProductService
     {
         public ProductDTO AddNewProduct(ProductDTO productDTO)
         {
