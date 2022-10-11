@@ -1,4 +1,4 @@
-﻿using StoreAPI.Model;
+﻿using StoreAPI.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
