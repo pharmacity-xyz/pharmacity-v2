@@ -98,13 +98,6 @@ namespace StoreAPI.Services
             return UserMapper.mapToDTO(temp_user)!;
         }
 
-        public UserDTO ForgotPassword(string email, string newPassword)
-        {
-            User temp_user = UserDAO.Instance.FindUserByEmail(email);
-            User updated_user = UserDAO.Instance.ForgotPassword(temp_user, newPassword);
-            return UserMapper.mapToDTO(updated_user)!;
-        }
-
         private string CreateToken(User user)
         {
             List<Claim> claims = new List<Claim> {

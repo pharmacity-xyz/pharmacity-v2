@@ -141,28 +141,8 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPut("forgot_password")]
-        public IActionResult forgotPassword(string email, string newPassword)
-        {
-            try
-            {
-                var updated_user = _userService.ForgotPassword(email, newPassword);
-                // LoggedUser.Instance!.User = updated_user;
-                return Ok("Update password successfully");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
         [HttpPost("change_password")]
-        public IActionResult changePass(
-                    string email,
-                    string password,
-                    string newPassword,
-                    string confirmNewPassword
-                )
+        public IActionResult ChangePassword(string newPassword)
         {
             try
             {
