@@ -97,36 +97,25 @@ namespace StoreAPI.Services
         public async Task<ServiceResponse<User>> AddOrUpdate(User user)
         {
             var response = new ServiceResponse<User>();
-            var dbAddress = (await GetAddress()).Data;
-            if (dbAddress == null)
+            var dbUser = (await GetUser()).Data;
+            if (dbUser == null)
             {
-                address.UserId = _authService.GetUserId();
-                _context.Addresses.Add(address);
-                response.Data = address;
+                user.UserId = _authService.GetUserId();
+                _context.Users!.Add(user);
+                response.Data = user;
             }
             else
             {
-                dbAddress.FirstName = address.FirstName;
-                dbAddress.LastName = address.LastName;
-                dbAddress.State = address.State;
-                dbAddress.Country = address.Country;
-                dbAddress.City = address.City;
-                dbAddress.Zip = address.Zip;
-                dbAddress.Street = address.Street;
-                response.Data = dbAddress;
+                dbUser.FirstName = user.FirstName;
+                dbUser.LastName = user.LastName;
+                dbUser.Country = user.Country;
+                dbUser.City = user.City;
+                response.Data = dbUser;
             }
 
             await _context.SaveChangesAsync();
 
             return response;
-        }
-
-        public async Task<ServiceResponse<Address>> GetAddress()
-        {
-            int userId = _authService.GetUserId();
-            var address = await _context.Addresses
-                .FirstOrDefaultAsync(a => a.UserId == userId);
-            return new ServiceResponse<Address> { Data = address };
         }
     }
 }
