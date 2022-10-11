@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 
 using DataAccess.DTO;
 using Repositories;
-// using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers
 {
@@ -90,19 +89,20 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Please login");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Please login");
+                // }
 
-                IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrdersByUserId(userid);
-                foreach (OrderDTO orderDTO in orderList)
-                {
-                    orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
-                }
-                return Ok(orderList);
+                // IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrdersByUserId(userid);
+                // foreach (OrderDTO orderDTO in orderList)
+                // {
+                //     orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
+                // }
+                // return Ok(orderList);
+                return Ok();
             }
             catch (Exception e)
             {
