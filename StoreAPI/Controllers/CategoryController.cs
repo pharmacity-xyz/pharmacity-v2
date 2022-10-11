@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
-using BusinessObjects.Models;
+using StoreAPI.Models;
 using DataAccess.DTO;
 using StoreAPI.Services;
 

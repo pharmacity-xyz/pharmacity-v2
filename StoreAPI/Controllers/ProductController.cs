@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using BusinessObjects.Models;
+using StoreAPI.Models;
 using DataAccess.DTO;
 // using Repositories;
 using StoreAPI.Services;
