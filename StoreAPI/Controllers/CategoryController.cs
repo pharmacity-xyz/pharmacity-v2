@@ -24,7 +24,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("add"), Authorize(Roles = "Admin")]
-        public IActionResult Add(Category category)
+        public IActionResult Add(CategoryDTO category)
         {
             try
             {

@@ -1,4 +1,5 @@
-﻿using StoreAPI.Models;
+﻿using StoreAPI.DTO;
+using StoreAPI.Models;
 // using DataAccess;
 // using DataAccess.DTO;
 // using DataAccess.Util;
@@ -36,6 +37,16 @@ namespace StoreAPI.Services
         {
             throw new NotImplementedException();
             // CategoryDAO.Instance.DeleteCategory(id);
+        }
+
+        public void Add(CategoryDTO categoryDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(CategoryDTO categoryDTO)
+        {
+            throw new NotImplementedException();
         }
     }
 }
