@@ -1,11 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.IdentityModel.Tokens.Jwt;
-
-using StoreAPI.Models;
+﻿using StoreAPI.Models;
 using StoreAPI.Data;
-using StoreAPI.DTO;
 using StoreAPI.Utils;
 
 namespace StoreAPI.Services
@@ -21,9 +15,10 @@ namespace StoreAPI.Services
             _authService = authService;
         }
 
-        public Task<ServiceResponse<List<User>>> GetAll()
+        public async Task<ServiceResponse<List<User>>> GetAll()
         {
-            throw new NotImplementedException();
+            var allUsers = _context.Users!.ToList();
+            return new ServiceResponse<List<User>> { Data = allUsers };
         }
 
         public async Task<ServiceResponse<User>> GetUser()
