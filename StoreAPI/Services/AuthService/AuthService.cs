@@ -5,7 +5,6 @@ using System.IdentityModel.Tokens.Jwt;
 
 using StoreAPI.Models;
 using StoreAPI.Data;
-using StoreAPI.DTO;
 using StoreAPI.Utils;
 
 namespace StoreAPI.Services
