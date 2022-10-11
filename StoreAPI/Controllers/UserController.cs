@@ -23,95 +23,11 @@ namespace StoreAPI.Controllers
             _userService = userService;
         }
 
-        [HttpPost("authenticate")]
-        public IActionResult Authenticate(UserDTO userDTO)
-        {
-            return Ok();
-        }
-
-        [HttpPost("register")]
-        public async Task<ActionResult<ServiceResponse<Guid>>> Register(UserRegister request)
-        {
-            var response = await _userService.Register(
-                new User
-                {
-                    UserId = Guid.NewGuid(),
-                    Email = request.Email,
-                    FirstName = request.FirstName,
-                    LastName = request.LastName,
-                    City = request.City,
-                    Country = request.Country,
-                    CompanyName = request.CompanyName,
-                },
-                request.Password
-            );
-
-            if (!response.Success)
-            {
-                return BadRequest(response);
-            }
-
-            return Ok(response);
-        }
-
-        [HttpPost("login")]
-        public async Task<ActionResult<ServiceResponse<string>>> Login(UserLogin request)
-        {
-            var response = await _userService.Login(request.Email, request.Password);
-            if (!response.Success)
-            {
-
-                return BadRequest(response);
-            }
-
-            return Ok(response);
-
-        }
-
         [HttpGet("get_all")]
-        public IActionResult GetAll()
+        public async Task<ActionResult<List<User>>> GetAll()
         {
-            // try
-            // {
-            //     List<UserDTO> userDTOs = _userService.GetAll();
-            //     return Ok(userDTOs);
-            // }
-            // catch (Exception e)
-            // {
-            //     return BadRequest(e.Message);
-            // }
-            return Ok();
-        }
-
-        [HttpGet("logout")]
-        public IActionResult logout()
-        {
-            try
-            {
-                // LoggedUser.Instance!.User = null;
-
-                // return Ok(LoggedUser.Instance.User);
-                return Ok();
-
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
-        [HttpGet("logged_member")]
-        public IActionResult loggedUser()
-        {
-            try
-            {
-                // return Ok(LoggedUser.Instance!.User);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var response = await _userService.GetAll();
+            return Ok(response);
         }
 
         [HttpPut("edit")]
@@ -140,20 +56,6 @@ namespace StoreAPI.Controllers
             {
                 return BadRequest(e.Message);
             }
-        }
-
-        [HttpPost("change_password"), Authorize]
-        public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword(string newPassword)
-        {
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var response = await _userService.ChangePassword(Guid.Parse(userId), newPassword);
-
-            if (!response.Success)
-            {
-
-                return BadRequest(response);
-            }
-            return Ok(response);
         }
     }
 }
