@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
@@ -13,11 +12,9 @@ namespace StoreAPI.Services
 {
     public class AuthService : IAuthService
     {
-
         private readonly AppDbContext _context;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private static PasswordHasher<User> passwordHasher = new PasswordHasher<User>();
 
         public AuthService(
             AppDbContext context,
