@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Http;
 
 using BusinessObjects.Models;
-using DataAccess.DTO;
+using StoreAPI.DTO;
 using StoreAPI.Services;
 // using StoreAPI.Storage;
 
@@ -30,11 +30,10 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("register")]
-        public ActionResult<UserDTO> Register(UserDTO userDTO)
+        public async Task<ActionResult<ServiceResponse<int>>> Register(UserRegister request)
         {
             try
             {
-                userDTO.Role = Role.USER.ToString();
                 _userService.Add(userDTO);
 
                 return Ok(userDTO);
