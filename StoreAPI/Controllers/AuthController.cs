@@ -14,19 +14,19 @@ namespace StoreAPI.Controllers
     public class AuthController : ControllerBase
     {
 
-        private readonly IUserService _userService;
+        private readonly IAuthService _authService;
         private readonly IConfiguration _configuration;
 
-        public AuthController(IConfiguration configuration, IUserService userService)
+        public AuthController(IConfiguration configuration, IAuthService authService)
         {
             _configuration = configuration;
-            _userService = userService;
+            _authService = authService;
         }
 
         [HttpPost("register")]
         public async Task<ActionResult<ServiceResponse<Guid>>> Register(UserRegister request)
         {
-            var response = await _userService.Register(
+            var response = await _authService.Register(
                 new User
                 {
                     UserId = Guid.NewGuid(),
@@ -51,7 +51,7 @@ namespace StoreAPI.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<ServiceResponse<string>>> Login(UserLogin request)
         {
-            var response = await _userService.Login(request.Email, request.Password);
+            var response = await _authService.Login(request.Email, request.Password);
             if (!response.Success)
             {
 
@@ -66,7 +66,7 @@ namespace StoreAPI.Controllers
         public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword(string newPassword)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var response = await _userService.ChangePassword(Guid.Parse(userId), newPassword);
+            var response = await _authService.ChangePassword(Guid.Parse(userId), newPassword);
 
             if (!response.Success)
             {
