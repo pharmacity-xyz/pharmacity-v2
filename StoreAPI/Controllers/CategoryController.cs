@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 
 using StoreAPI.Models;
+using StoreAPI.DTO;
 using StoreAPI.Services;
 
 namespace StoreAPI.Controllers
@@ -23,7 +24,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("add"), Authorize(Roles = "Admin")]
-        public IActionResult Add(CategoryDTO category)
+        public IActionResult Add(Category category)
         {
             try
             {

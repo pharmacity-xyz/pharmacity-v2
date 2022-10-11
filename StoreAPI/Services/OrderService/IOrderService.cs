@@ -1,5 +1,5 @@
-﻿using DataAccess.DTO;
-
+﻿using StoreAPI.DTO;
+using StoreAPI.Models;
 namespace StoreAPI.Services
 {
     public interface IOrderService
