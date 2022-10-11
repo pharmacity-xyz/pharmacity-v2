@@ -8,7 +8,7 @@ namespace StoreAPI.Services
     {
         Task<ServiceResponse<Guid>> Register(User user);
         List<UserDTO> GetAll();
-        UserDTO Login(string email, string provided_password);
+        Task<ServiceResponse<string>> Login(string email, string provided_password);
         UserDTO GetLoggedAccount();
         UserDTO Update(UserDTO user, string newCity, string newCountry, string newCompany);
         UserDTO UpdatePassword(string email, string password, string newPassword);

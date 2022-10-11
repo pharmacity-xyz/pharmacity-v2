@@ -51,11 +51,20 @@ namespace StoreAPI.Services
             return UserDAO.Instance.FetchAllUsers().Select(m => UserMapper.mapToDTO(m)).ToList()!;
         }
 
-        public UserDTO Login(string email, string provided_password)
+        public async Task<ServiceResponse<string>> Login(string email, string provided_password)
         {
-            User user = UserDAO.Instance.FindUserByEmail(email);
+            var response = new ServiceResponse<string>();
+            var user = _context.Users!.FirstOrDefault(x => x.Email.ToLower().Equals(email.ToLower()));
+            if (user == null)
+            {
+                response.Success = false;
+                response.Message = "User not found.";
+            }
+            else if ()
+                User user = UserDAO.Instance.FindUserByEmail(email);
             UserDAO.Instance.VerifyPassword(user, provided_password);
-            return UserMapper.mapToDTO(user)!;
+            return response;
+
         }
 
         public UserDTO GetLoggedAccount()
@@ -114,9 +123,29 @@ namespace StoreAPI.Services
             return jwt;
         }
 
-        private string CreateHashedPassword(User user, string password)
+        private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
         {
-            return passwordHasher.HashPassword(user, password);
+            using (var hmac = new HMACSHA512())
+            {
+                passwordSalt = hmac.Key;
+                passwordHash = hmac
+                    .ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+            }
         }
+
+        private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
+        {
+            using (var hmac = new HMACSHA512(passwordSalt))
+            {
+                var computedHash =
+                    hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
+                return computedHash.SequenceEqual(passwordHash);
+            }
+        }
+
+        // private string CreateHashedPassword(User user, string password)
+        // {
+        //     return passwordHasher.HashPassword(user, password);
+        // }
     }
 }
