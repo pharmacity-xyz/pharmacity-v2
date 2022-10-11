@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Authorization;
 
 using StoreAPI.Models;
-using DataAccess.DTO;
 using StoreAPI.Services;
 
 namespace StoreAPI.Controllers

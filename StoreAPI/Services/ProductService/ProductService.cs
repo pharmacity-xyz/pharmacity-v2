@@ -1,7 +1,5 @@
 ﻿using StoreAPI.Models;
-using DataAccess;
-using DataAccess.DTO;
-using DataAccess.Util;
+using StoreAPI.DTO;
 
 namespace StoreAPI.Services
 {

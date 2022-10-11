@@ -1,37 +1,41 @@
-﻿using BusinessObjects.Model;
-using DataAccess;
-using DataAccess.DTO;
-using DataAccess.Util;
+﻿using StoreAPI.Models;
+// using DataAccess;
+// using DataAccess.DTO;
+// using DataAccess.Util;
 
 namespace StoreAPI.Services
 {
     public class CategoryService : ICategoryService
     {
-        public void Add(CategoryDTO categoryDTO)
+        public void Add(Category category)
         {
-            Category newCategory = new Category
-            {
-                CategoryId = Guid.NewGuid(),
-                Name = categoryDTO.CategoryName!,
-            };
+            // Category newCategory = new Category
+            // {
+            //     CategoryId = Guid.NewGuid(),
+            //     Name = categoryDTO.CategoryName!,
+            // };
 
-            CategoryDAO.Instance.Add(newCategory);
+            // CategoryDAO.Instance.Add(newCategory);
+            throw new NotImplementedException();
         }
 
-        public List<CategoryDTO> GetCategory()
+        public List<Category> GetCategory()
         {
-            return CategoryDAO.Instance.GetCategories().Select(m => CategoryMapper.mapToDTO(m)).ToList();
+            throw new NotImplementedException();
+            // return CategoryDAO.Instance.GetCategories().Select(m => CategoryMapper.mapToDTO(m)).ToList();
         }
 
-        public void Update(CategoryDTO categoryDTO)
+        public void Update(Category categoryDTO)
         {
-            Category category = CategoryDAO.Instance.GetCategoryById(categoryDTO.CategoryId);
-            CategoryDAO.Instance.Update(category);
+            throw new NotImplementedException();
+            // Category category = CategoryDAO.Instance.GetCategoryById(categoryDTO.CategoryId);
+            // CategoryDAO.Instance.Update(category);
         }
 
         public void Delete(Guid id)
         {
-            CategoryDAO.Instance.DeleteCategory(id);
+            throw new NotImplementedException();
+            // CategoryDAO.Instance.DeleteCategory(id);
         }
     }
 }
