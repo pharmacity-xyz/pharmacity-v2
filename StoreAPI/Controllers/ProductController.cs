@@ -2,7 +2,8 @@
 
 using BusinessObjects.Models;
 using DataAccess.DTO;
-using Repositories;
+// using Repositories;
+using StoreAPI.Services;
 
 namespace StoreAPI.Controllers
 {
@@ -10,19 +11,11 @@ namespace StoreAPI.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository productRepository;
-        private readonly IProductImageRepository productImageRepository;
-        private readonly IOrderRepository orderRepository;
+        private readonly IProductService _productService;
 
-        public ProductController(
-            IProductRepository productRepository,
-            IProductImageRepository productImageRepository,
-            IOrderRepository orderRepository
-        )
+        public ProductController(IProductService productService)
         {
-            this.productRepository = productRepository;
-            this.productImageRepository = productImageRepository;
-            this.orderRepository = orderRepository;
+            _productService = productService;
         }
 
         [HttpPost("add")]
@@ -58,11 +51,11 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                IEnumerable<ProductDTO> productList = productRepository.GetProducts();
-                foreach (ProductDTO productDTO in productList)
-                {
-                    productDTO.ProductImage = productImageRepository.GetProductImage(productDTO.ProductId);
-                }
+                IEnumerable<ProductDTO> productList = _productService.GetProducts();
+                // foreach (ProductDTO productDTO in productList)
+                // {
+                //     productDTO.ProductImage = productImage.GetProductImage(productDTO.ProductId);
+                // }
                 return Ok(productList);
             }
             catch (Exception e)
@@ -77,7 +70,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                return Ok(productRepository.GetProductById(id));
+                return Ok(_productService.GetProductById(id));
             }
             catch (Exception e)
             {
@@ -91,7 +84,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                return Ok(productRepository.GetProductsByCategory(id));
+                return Ok(_productService.GetProductsByCategory(id));
             }
             catch (Exception e)
             {
