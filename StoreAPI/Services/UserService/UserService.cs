@@ -24,7 +24,8 @@ namespace StoreAPI.Services
         public async Task<ServiceResponse<User>> GetUser()
         {
             Guid userId = _authService.GetUserId();
-            var user = _context.Users!.FirstOrDefault(a => a.UserId == userId);
+            // var user = _context.Users!.FirstOrDefault(a => a.UserId == userId);
+            var user = await _context.Users!.FindAsync(userId);
             return new ServiceResponse<User> { Data = user };
         }
 
