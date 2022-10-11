@@ -1,10 +1,12 @@
-﻿using DataAccess.DTO;
+﻿using StoreAPI.DTO;
+using StoreAPI.Models;
+using StoreAPI.Utils;
 
 namespace StoreAPI.Services
 {
     public interface IUserService
     {
-        void Add(UserDTO member);
+        Task<ServiceResponse<int>> Register(User user);
         List<UserDTO> GetAll();
         UserDTO Login(string email, string provided_password);
         UserDTO GetLoggedAccount();

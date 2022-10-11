@@ -2,9 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 
-using BusinessObjects.Models;
+using StoreAPI.Models;
 using StoreAPI.DTO;
 using StoreAPI.Services;
+using StoreAPI.Utils;
 // using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers
@@ -32,16 +33,26 @@ namespace StoreAPI.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<ServiceResponse<int>>> Register(UserRegister request)
         {
-            try
-            {
-                _userService.Add(userDTO);
+            var response = await _userService.Register(
+                new User
+                {
+                    UserId = Guid.NewGuid(),
+                    Email = request.Email,
+                    Password = request.Password,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    City = request.City,
+                    Country = request.Country,
+                    CompanyName = request.CompanyName,
+                }
+            );
 
-                return Ok(userDTO);
-            }
-            catch (Exception e)
+            if (!response.Success)
             {
-                return BadRequest(e.Message);
+                return BadRequest(response);
             }
+
+            return Ok(response);
         }
 
         [HttpPost("register/admin"), Authorize(Roles = "Admin")]
@@ -195,6 +206,6 @@ namespace StoreAPI.Controllers
             }
         }
 
-        
+
     }
 }

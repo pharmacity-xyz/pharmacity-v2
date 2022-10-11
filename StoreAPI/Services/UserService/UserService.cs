@@ -8,6 +8,7 @@ using DataAccess.DTO;
 using DataAccess.Util;
 using BusinessObjects.Model;
 using StoreAPI.Data;
+using StoreAPI.Utils;
 
 namespace StoreAPI.Services
 {
@@ -31,23 +32,11 @@ namespace StoreAPI.Services
         public Guid GetUserId() => Guid.Parse(
             _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.NameIdentifier));
 
-        public string GetUserEmail() => _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Email);
+        public string GetUserEmail() => _httpContextAccessor.HttpContext!.User.FindFirstValue(ClaimTypes.Email);
 
-        public async void Register(UserDTO userDTO)
+        public async Task<ServiceResponse<int>> Register(User user)
         {
-            User new_user = new User
-            {
-                UserId = Guid.NewGuid(),
-                Email = userDTO.Email,
-                Password = userDTO.Password,
-                FirstName = userDTO.FirstName,
-                LastName = userDTO.LastName,
-                City = userDTO.City,
-                Country = userDTO.Country,
-                CompanyName = userDTO.CompanyName,
-                Role = userDTO.Role?.ToString()
-            };
-            UserDAO.Instance.AddNewUser(new_user);
+            UserDAO.Instance.AddNewUser(user);
         }
 
         public List<UserDTO> GetAll()
