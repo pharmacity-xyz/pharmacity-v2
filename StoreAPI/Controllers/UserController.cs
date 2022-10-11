@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using System.Security.Claims;
 
 using StoreAPI.Models;
 using StoreAPI.DTO;
@@ -141,28 +141,21 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpPost("change_password")]
-        public IActionResult ChangePassword(string newPassword)
+        [HttpPost("change_password"), Authorize]
+        public async Task<ActionResult<ServiceResponse<bool>>> ChangePassword(string newPassword)
         {
-            try
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var response = await _userService.ChangePassword(Guid.Parse(userId), newPassword);
+
+            if (!response.Success)
             {
-                if (!confirmNewPassword.Equals(newPassword))
-                {
-                    throw new Exception("Confirm password does not match new password");
-                }
 
-                UserDTO user = _userService.UpdatePassword(email, password, newPassword);
-
-                LoggedUser.Instance!.User = user;
-
-                return Ok("Successfully changed");
+                return BadRequest(response);
             }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            return Ok(response);
         }
-
-
     }
+
+
+}
 }
