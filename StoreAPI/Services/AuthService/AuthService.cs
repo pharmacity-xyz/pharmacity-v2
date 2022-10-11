@@ -4,9 +4,6 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
 
-// using DataAccess;
-// using Store.DTO;
-// using DataAccess.Util;
 using StoreAPI.Models;
 using StoreAPI.Data;
 using StoreAPI.DTO;
