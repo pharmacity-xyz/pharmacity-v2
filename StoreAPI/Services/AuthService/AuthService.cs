@@ -4,19 +4,18 @@ using System.Security.Cryptography;
 using System.IdentityModel.Tokens.Jwt;
 
 using StoreAPI.Models;
-using StoreAPI.Data;
 using StoreAPI.Utils;
 
 namespace StoreAPI.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly AppDbContext _context;
+        private readonly DataContext _context;
         private readonly IConfiguration _configuration;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         public AuthService(
-            AppDbContext context,
+            DataContext context,
             IConfiguration configuration,
             IHttpContextAccessor httpContextAccessor)
         {

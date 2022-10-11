@@ -12,11 +12,9 @@ namespace StoreAPI.Controllers
     {
 
         private readonly IUserService _userService;
-        private readonly IConfiguration _configuration;
 
-        public UserController(IConfiguration configuration, IUserService userService)
+        public UserController(IUserService userService)
         {
-            _configuration = configuration;
             _userService = userService;
         }
 

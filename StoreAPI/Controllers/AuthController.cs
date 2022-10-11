@@ -15,11 +15,9 @@ namespace StoreAPI.Controllers
     {
 
         private readonly IAuthService _authService;
-        private readonly IConfiguration _configuration;
 
-        public AuthController(IConfiguration configuration, IAuthService authService)
+        public AuthController(IAuthService authService)
         {
-            _configuration = configuration;
             _authService = authService;
         }
 

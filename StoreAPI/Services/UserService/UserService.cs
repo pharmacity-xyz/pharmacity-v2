@@ -1,15 +1,14 @@
 ﻿using StoreAPI.Models;
-using StoreAPI.Data;
 using StoreAPI.Utils;
 
 namespace StoreAPI.Services
 {
     public class UserService : IUserService
     {
-        private readonly AppDbContext _context;
+        private readonly DataContext _context;
         private readonly IAuthService _authService;
 
-        public UserService(AppDbContext context, IAuthService authService)
+        public UserService(DataContext context, IAuthService authService)
         {
             _context = context;
             _authService = authService;

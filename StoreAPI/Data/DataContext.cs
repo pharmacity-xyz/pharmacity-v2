@@ -1,13 +1,22 @@
 ﻿using StoreAPI.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace StoreAPI.Data
 {
-    public class AppDbContext : DbContext
+    public class DataContext : DbContext
     {
-        public AppDbContext()
+        public DataContext()
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // modelBuilder.Entity<Product>()
+            //     .HasOne(p => p.ProductImage)
+            //     .WithOne(i => i.Product)
+            //     .HasForeignKey<ProductImage>(pi => pi.ProductImageId);
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -26,14 +35,5 @@ namespace StoreAPI.Data
         public virtual DbSet<Order>? Orders { get; set; }
         public virtual DbSet<OrderDetail>? OrderDetails { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Product>()
-                .HasOne(p => p.ProductImage)
-                .WithOne(i => i.Product)
-                .HasForeignKey<ProductImage>(pi => pi.ProductImageId);
-            modelBuilder.ApplyConfiguration(new UserConfiguration());
-            base.OnModelCreating(modelBuilder);
-        }
     }
 }
