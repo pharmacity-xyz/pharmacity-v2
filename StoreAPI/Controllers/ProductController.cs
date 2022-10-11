@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-using BusinessObjects.Models;
-using DataAccess.DTO;
-using Repositories;
-using StoreAPI.Storage;
+using StoreAPI.Models;
+using StoreAPI.DTO;
+using StoreAPI.Services;
+// using Repositories;
+using StoreAPI.Services;
 
 namespace StoreAPI.Controllers
 {
@@ -11,19 +12,11 @@ namespace StoreAPI.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly IProductRepository productRepository;
-        private readonly IProductImageRepository productImageRepository;
-        private readonly IOrderRepository orderRepository;
+        private readonly IProductService _productService;
 
-        public ProductController(
-            IProductRepository productRepository,
-            IProductImageRepository productImageRepository,
-            IOrderRepository orderRepository
-        )
+        public ProductController(IProductService productService)
         {
-            this.productRepository = productRepository;
-            this.productImageRepository = productImageRepository;
-            this.orderRepository = orderRepository;
+            _productService = productService;
         }
 
         [HttpPost("add")]
@@ -31,19 +24,19 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
-                ProductDTO newProductDTO = productRepository.AddNewProduct(product);
-                productImageRepository.AddNewProductImage(product.ProductImage!, newProductDTO.ProductId);
+                // ProductDTO newProductDTO = productRepository.AddNewProduct(product);
+                // productImageRepository.AddNewProductImage(product.ProductImage!, newProductDTO.ProductId);
 
                 return Ok("Successfully added");
             }
@@ -59,11 +52,11 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                IEnumerable<ProductDTO> productList = productRepository.GetProducts();
-                foreach (ProductDTO productDTO in productList)
-                {
-                    productDTO.ProductImage = productImageRepository.GetProductImage(productDTO.ProductId);
-                }
+                IEnumerable<ProductDTO> productList = _productService.GetProducts();
+                // foreach (ProductDTO productDTO in productList)
+                // {
+                //     productDTO.ProductImage = productImage.GetProductImage(productDTO.ProductId);
+                // }
                 return Ok(productList);
             }
             catch (Exception e)
@@ -78,7 +71,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                return Ok(productRepository.GetProductById(id));
+                return Ok(_productService.GetProductById(id));
             }
             catch (Exception e)
             {
@@ -92,7 +85,7 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                return Ok(productRepository.GetProductsByCategory(id));
+                return Ok(_productService.GetProductsByCategory(id));
             }
             catch (Exception e)
             {
@@ -108,19 +101,19 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
-                productRepository.UpdateProduct(product);
-                productImageRepository.UpdateProductImage(product.ProductImage!);
+                // productRepository.UpdateProduct(product);
+                // productImageRepository.UpdateProductImage(product.ProductImage!);
                 return Ok("Successfully updated");
             }
             catch (Exception e)
@@ -134,20 +127,20 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
-                productRepository.DeleteProduct(id);
+                // productRepository.DeleteProduct(id);
 
-                IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
+                // IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
 
                 return Ok("Successfully deleted");
             }

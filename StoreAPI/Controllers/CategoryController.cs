@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
-using BusinessObjects.Models;
-using DataAccess.DTO;
-using Repositories;
-using StoreAPI.Storage;
+using StoreAPI.Models;
+using StoreAPI.DTO;
+using StoreAPI.Services;
 
 namespace StoreAPI.Controllers
 {
@@ -11,35 +11,35 @@ namespace StoreAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryRepository categoryRepository;
-        private readonly IOrderRepository orderRepository;
+        private readonly ICategoryService _categoryService;
+        private readonly IOrderService _orderService;
 
         public CategoryController(
-            ICategoryRepository categoryRepository,
-            IOrderRepository orderRepository
+            ICategoryService categoryService,
+            IOrderService orderService
         )
         {
-            this.categoryRepository = categoryRepository;
-            this.orderRepository = orderRepository;
+            _categoryService = categoryService;
+            _orderService = orderService;
         }
 
-        [HttpPost("add")]
+        [HttpPost("add"), Authorize(Roles = "Admin")]
         public IActionResult Add(CategoryDTO category)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
-                categoryRepository.Add(category);
+                _categoryService.Add(category);
 
                 return Ok("Successfully added");
             }
@@ -52,26 +52,27 @@ namespace StoreAPI.Controllers
         [HttpGet("get_all")]
         public IActionResult GetAll()
         {
-            return Ok(categoryRepository.GetCategory());
+            return Ok(_categoryService.GetCategory());
         }
 
-        [HttpPut("update")]
+        [HttpPut("update"), Authorize(Roles = "Admin")]
         public IActionResult Update(CategoryDTO category)
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
-                categoryRepository.Update(category);
+                _categoryService.Update(category);
+
 
                 return Ok("Successfully updated");
             }
@@ -81,13 +82,13 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("delete/{id}"), Authorize(Roles = "Admin")]
         public IActionResult Delete(Guid id)
         {
             try
             {
-                categoryRepository.Delete(id);
-                IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
+                _categoryService.Delete(id);
+                IEnumerable<OrderDTO> orderList = _orderService.GetAllOrders();
                 return Ok("Successfully deleted");
             }
             catch (Exception e)
