@@ -1,9 +1,9 @@
 global using StoreAPI.Data;
+global using Microsoft.EntityFrameworkCore;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Text;
 using Swashbuckle.AspNetCore.Filters;
 using StoreAPI.Services;

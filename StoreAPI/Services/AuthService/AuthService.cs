@@ -45,7 +45,7 @@ namespace StoreAPI.Services
         public async Task<ServiceResponse<string>> Login(string email, string password)
         {
             var response = new ServiceResponse<string>();
-            var user = _context.Users!.FirstOrDefault(x => x.Email.ToLower().Equals(email.ToLower()));
+            var user = await _context.Users!.FirstOrDefaultAsync(x => x.Email.ToLower().Equals(email.ToLower()));
             if (user == null)
             {
                 response.Success = false;
