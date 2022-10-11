@@ -43,7 +43,8 @@ namespace StoreAPI.Controllers
                     City = request.City,
                     Country = request.Country,
                     CompanyName = request.CompanyName,
-                }
+                },
+                request.Password
             );
 
             if (!response.Success)
@@ -71,15 +72,16 @@ namespace StoreAPI.Controllers
         [HttpGet("get_all")]
         public IActionResult GetAll()
         {
-            try
-            {
-                List<UserDTO> userDTOs = _userService.GetAll();
-                return Ok(userDTOs);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            // try
+            // {
+            //     List<UserDTO> userDTOs = _userService.GetAll();
+            //     return Ok(userDTOs);
+            // }
+            // catch (Exception e)
+            // {
+            //     return BadRequest(e.Message);
+            // }
+            return Ok();
         }
 
         [HttpGet("logout")]
@@ -122,17 +124,17 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                UserDTO updated_user = _userService.Update(user, newCity, newCountry, newCompany);
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // UserDTO updated_user = _userService.Update(user, newCity, newCountry, newCompany);
 
-                // LoggedUser.Instance.User = updated_user;
+                // // LoggedUser.Instance.User = updated_user;
 
-                return Ok(LoggedUser.Instance.User);
+                return Ok();
 
             }
             catch (Exception e)
