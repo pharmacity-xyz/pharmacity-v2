@@ -3,7 +3,6 @@
 using BusinessObjects.Models;
 using DataAccess.DTO;
 using Repositories;
-using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers
 {
@@ -31,19 +30,19 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
-                ProductDTO newProductDTO = productRepository.AddNewProduct(product);
-                productImageRepository.AddNewProductImage(product.ProductImage!, newProductDTO.ProductId);
+                // ProductDTO newProductDTO = productRepository.AddNewProduct(product);
+                // productImageRepository.AddNewProductImage(product.ProductImage!, newProductDTO.ProductId);
 
                 return Ok("Successfully added");
             }
@@ -108,19 +107,19 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
-                productRepository.UpdateProduct(product);
-                productImageRepository.UpdateProductImage(product.ProductImage!);
+                // productRepository.UpdateProduct(product);
+                // productImageRepository.UpdateProductImage(product.ProductImage!);
                 return Ok("Successfully updated");
             }
             catch (Exception e)
@@ -134,20 +133,20 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                UserDTO user = LoggedUser.Instance!.User!;
+                // UserDTO user = LoggedUser.Instance!.User!;
 
-                if (user == null)
-                {
-                    throw new Exception("Can not find the user");
-                }
-                else if (user.Role != Role.ADMIN.ToString())
-                {
-                    throw new Exception("Please login with admin");
-                }
+                // if (user == null)
+                // {
+                //     throw new Exception("Can not find the user");
+                // }
+                // else if (user.Role != Role.ADMIN.ToString())
+                // {
+                //     throw new Exception("Please login with admin");
+                // }
 
-                productRepository.DeleteProduct(id);
+                // productRepository.DeleteProduct(id);
 
-                IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
+                // IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
 
                 return Ok("Successfully deleted");
             }
