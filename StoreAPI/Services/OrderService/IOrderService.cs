@@ -1,8 +1,8 @@
 ﻿using DataAccess.DTO;
 
-namespace Repositories
+namespace StoreAPI.Services
 {
-    public interface IOrderRepository
+    public interface IOrderService
     {
         Guid Add(OrderDTO order);
         IEnumerable<OrderDTO> GetAllOrders();

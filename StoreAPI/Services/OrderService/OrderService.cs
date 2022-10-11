@@ -3,9 +3,9 @@ using DataAccess.DTO;
 using DataAccess.Util;
 using BusinessObjects.Model;
 
-namespace Repositories.Implements
+namespace StoreAPI.Services
 {
-    public class OrderRepository : IOrderRepository
+    public class OrderService : IOrderService
     {
         public Guid Add(OrderDTO orderDTO)
         {

@@ -3,9 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 
 using BusinessObjects.Models;
 using DataAccess.DTO;
-// using Repositories;
 using StoreAPI.Services;
-// using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers
 {
@@ -13,16 +11,16 @@ namespace StoreAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryService categoryRepository;
-        private readonly IOrderRepository orderRepository;
+        private readonly ICategoryService _categoryService;
+        private readonly IOrderService _orderService;
 
         public CategoryController(
-            ICategoryRepository categoryRepository,
-            IOrderRepository orderRepository
+            ICategoryService categoryService,
+            IOrderService orderService
         )
         {
-            this.categoryRepository = categoryRepository;
-            this.orderRepository = orderRepository;
+            _categoryService = categoryService;
+            _orderService = orderService;
         }
 
         [HttpPost("add"), Authorize(Roles = "Admin")]
@@ -41,7 +39,7 @@ namespace StoreAPI.Controllers
                 //     throw new Exception("Please login with admin");
                 // }
 
-                categoryRepository.Add(category);
+                _categoryService.Add(category);
 
                 return Ok("Successfully added");
             }
@@ -54,7 +52,7 @@ namespace StoreAPI.Controllers
         [HttpGet("get_all")]
         public IActionResult GetAll()
         {
-            return Ok(categoryRepository.GetCategory());
+            return Ok(_categoryService.GetCategory());
         }
 
         [HttpPut("update"), Authorize(Roles = "Admin")]
@@ -73,7 +71,8 @@ namespace StoreAPI.Controllers
                 //     throw new Exception("Please login with admin");
                 // }
 
-                categoryRepository.Update(category);
+                _categoryService.Update(category);
+
 
                 return Ok("Successfully updated");
             }
@@ -88,8 +87,8 @@ namespace StoreAPI.Controllers
         {
             try
             {
-                categoryRepository.Delete(id);
-                IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
+                _categoryService.Delete(id);
+                IEnumerable<OrderDTO> orderList = _orderService.GetAllOrders();
                 return Ok("Successfully deleted");
             }
             catch (Exception e)
