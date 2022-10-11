@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 
 using StoreAPI.Models;
-using StoreAPI.DTO;
 using StoreAPI.Services;
 using StoreAPI.Utils;
 
@@ -24,38 +21,17 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("get_all")]
-        public async Task<ActionResult<List<User>>> GetAll()
+        public async Task<ActionResult<ServiceResponse<List<User>>>> GetAll()
         {
             var response = await _userService.GetAll();
             return Ok(response);
         }
 
-        [HttpPut("edit")]
-        public IActionResult edit(
-            string newCompany,
-            string newCity,
-            string newCountry
-        )
+        [HttpPut("add_or_update")]
+        public async Task<ActionResult<ServiceResponse<User>>> AddOrUpdate(User user)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // UserDTO updated_user = _userService.Update(user, newCity, newCountry, newCompany);
-
-                // // LoggedUser.Instance.User = updated_user;
-
-                return Ok();
-
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var response = await _userService.AddOrUpdate(user);
+            return Ok(response);
         }
     }
 }
