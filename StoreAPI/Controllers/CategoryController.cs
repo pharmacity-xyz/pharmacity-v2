@@ -3,7 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 
 using BusinessObjects.Models;
 using DataAccess.DTO;
-using Repositories;
+// using Repositories;
+using StoreAPI.Services;
 // using StoreAPI.Storage;
 
 namespace StoreAPI.Controllers
@@ -12,7 +13,7 @@ namespace StoreAPI.Controllers
     [ApiController]
     public class CategoryController : ControllerBase
     {
-        private readonly ICategoryRepository categoryRepository;
+        private readonly ICategoryService categoryRepository;
         private readonly IOrderRepository orderRepository;
 
         public CategoryController(

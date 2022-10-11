@@ -4,8 +4,8 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using Swashbuckle.AspNetCore.Filters;
 
-using Repositories;
-using Repositories.Implements;
+// using Repositories;
+// using Repositories.Implements;
 using StoreAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);

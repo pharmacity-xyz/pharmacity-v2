@@ -1,8 +1,8 @@
 ﻿using DataAccess.DTO;
 
-namespace Repositories
+namespace StoreAPI.Services
 {
-    public interface ICategoryRepository
+    public interface ICategoryService
     {
         List<CategoryDTO> GetCategory();
         void Add(CategoryDTO categoryDTO);

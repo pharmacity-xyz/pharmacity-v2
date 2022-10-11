@@ -3,9 +3,9 @@ using DataAccess;
 using DataAccess.DTO;
 using DataAccess.Util;
 
-namespace Repositories.Implements
+namespace StoreAPI.Services
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : ICategoryService
     {
         public void Add(CategoryDTO categoryDTO)
         {
