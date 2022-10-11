@@ -27,7 +27,7 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPut("update")]
+        [HttpPut("update"), Authorize]
         public async Task<ActionResult<ServiceResponse<User>>> AddOrUpdate(UserUpdate request)
         {
             var response = await _userService.Update(request);
