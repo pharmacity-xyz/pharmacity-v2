@@ -28,7 +28,7 @@ namespace StoreAPI.Models
         [Required]
         public string CompanyName { get; set; } = default!;
 
-        public string? Role { get; set; }
+        public string Role { get; set; } = "User";
 
         public virtual ICollection<Order>? Orders { get; set; }
     }

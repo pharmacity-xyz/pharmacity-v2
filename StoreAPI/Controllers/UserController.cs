@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.IdentityModel.Tokens;
-using System.Security.Claims;
-using System.Security.Cryptography;
-using System.IdentityModel.Tokens.Jwt;
+
 
 using BusinessObjects.Models;
 using DataAccess.DTO;
@@ -199,29 +196,6 @@ namespace StoreAPI.Controllers
             }
         }
 
-        private string CreateToken(UserDTO userDTO)
-        {
-            List<Claim> claims = new List<Claim> {
-                new Claim(ClaimTypes.Email, userDTO.Email)
-            };
-
-            var key = new SymmetricSecurityKey(
-                System.Text.Encoding.UTF8.GetBytes(
-                    _configuration.GetSection("AppSettings:Token").Value
-                )
-            );
-
-            var cred = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
-
-            var token = new JwtSecurityToken(
-                claims: claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: cred
-            );
-
-            var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-
-            return jwt;
-        }
+        
     }
 }
