@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using StoreAPI.Models;
 using StoreAPI.Services;
@@ -18,14 +19,14 @@ namespace StoreAPI.Controllers
             _userService = userService;
         }
 
-        [HttpGet("get_all")]
+        [HttpGet("get_all"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResponse<List<User>>>> GetAll()
         {
             var response = await _userService.GetAll();
             return Ok(response);
         }
 
-        [HttpPut("add_or_update")]
+        [HttpPost("add_or_update")]
         public async Task<ActionResult<ServiceResponse<User>>> AddOrUpdate(User user)
         {
             var response = await _userService.AddOrUpdate(user);
