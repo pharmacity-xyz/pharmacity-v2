@@ -93,9 +93,24 @@ namespace StoreAPI.Services
 
         public async Task<ServiceResponse<bool>> ChangePassword(Guid userId, string newPassword)
         {
-            User temp_user = UserDAO.Instance.FindUserByEmail(email);
-            UserDAO.Instance.UpdateUserPassword(temp_user, password, newPassword);
-            return UserMapper.mapToDTO(temp_user)!;
+            var user = await _context.Users!.FindAsync(userId);
+            if (user == null)
+            {
+                return new ServiceResponse<bool>
+                {
+                    Success = false,
+                    Message = "User not found."
+                };
+            }
+
+            CreatePasswordHash(newPassword, out byte[] passwordHash, out byte[] passwordSalt);
+
+            user.PasswordHash = passwordHash;
+            user.PasswordSalt = passwordSalt;
+
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<bool> { Data = true, Message = "Password has been changed." };
         }
 
         private string CreateToken(User user)
