@@ -55,22 +55,6 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPost("register/admin"), Authorize(Roles = "Admin")]
-        public IActionResult RegisterAdmin(UserDTO userDTO)
-        {
-            try
-            {
-                userDTO.Role = Role.ADMIN.ToString();
-                _userService.Add(userDTO);
-
-                return Ok(userDTO);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-
         [HttpPost("login")]
         public IActionResult Login(string email, string password)
         {
