@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
 using StoreAPI.Models;
-using DataAccess.DTO;
+using StoreAPI.DTO;
+using StoreAPI.Services;
 // using Repositories;
 using StoreAPI.Services;
 
