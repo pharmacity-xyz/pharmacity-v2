@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using StoreAPI.Models;
 using StoreAPI.Services;
 using StoreAPI.Utils;
+using StoreAPI.DTO;
 
 namespace StoreAPI.Controllers
 {
@@ -26,10 +27,16 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPost("add_or_update")]
-        public async Task<ActionResult<ServiceResponse<User>>> AddOrUpdate(User user)
+        [HttpPut("update")]
+        public async Task<ActionResult<ServiceResponse<User>>> AddOrUpdate(UserUpdate request)
         {
-            var response = await _userService.AddOrUpdate(user);
+            var response = await _userService.Update(request);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
             return Ok(response);
         }
     }

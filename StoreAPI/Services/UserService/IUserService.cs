@@ -8,6 +8,6 @@ namespace StoreAPI.Services
     {
         Task<ServiceResponse<List<User>>> GetAll();
         Task<ServiceResponse<User>> GetUser();
-        Task<ServiceResponse<User>> AddOrUpdate(User user);
+        Task<ServiceResponse<User>> Update(UserUpdate request);
     }
 }
