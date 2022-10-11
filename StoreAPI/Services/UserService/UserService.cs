@@ -16,7 +16,7 @@ namespace StoreAPI.Services
 
         public async Task<ServiceResponse<List<User>>> GetAll()
         {
-            var allUsers = _context.Users!.ToList();
+            var allUsers = await _context.Users!.ToListAsync();
             return new ServiceResponse<List<User>> { Data = allUsers };
         }
 
