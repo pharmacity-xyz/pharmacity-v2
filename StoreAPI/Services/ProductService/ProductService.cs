@@ -18,7 +18,9 @@ namespace StoreAPI.Services
 
         public async Task<ServiceResponse<Product>> CreateProduct(Product product)
         {
-            throw new NotImplementedException();
+            _context.Products!.Add(product);
+            await _context.SaveChangesAsync();
+            return new ServiceResponse<Product> { Data = product };
         }
 
         public ProductDTO AddNewProduct(ProductDTO productDTO)
