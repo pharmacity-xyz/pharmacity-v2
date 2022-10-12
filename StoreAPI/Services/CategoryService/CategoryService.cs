@@ -67,7 +67,8 @@ namespace StoreAPI.Services
 
         private async Task<Category?> GetCategoryById(Guid id)
         {
-            return await _context.Categories!.FirstOrDefaultAsync(c => c.CategoryId == id);
+            // return await _context.Categories!.FirstOrDefaultAsync(c => c.CategoryId == id);
+            return await _context.Categories!.FindAsync(id);
         }
     }
 }
