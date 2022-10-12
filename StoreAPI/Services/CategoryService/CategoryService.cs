@@ -48,23 +48,26 @@ namespace StoreAPI.Services
             return await GetCategories();
         }
 
-        public Task<ServiceResponse<List<Category>>> DeleteCategory(Guid id)
+        public async Task<ServiceResponse<List<Category>>> DeleteCategory(Guid id)
         {
-            throw new NotImplementedException();
+            Category? category = await GetCategoryById(id);
+            if (category == null)
+            {
+                return new ServiceResponse<List<Category>>
+                {
+                    Success = false,
+                    Message = "Category not found."
+                };
+            }
+
+            _context.Categories!.Remove(category);
+            await _context.SaveChangesAsync();
+            return await GetCategories();
         }
 
         private async Task<Category?> GetCategoryById(Guid id)
         {
             return await _context.Categories!.FirstOrDefaultAsync(c => c.CategoryId == id);
-        }
-
-
-        
-
-        public void Delete(Guid id)
-        {
-            throw new NotImplementedException();
-            // CategoryDAO.Instance.DeleteCategory(id);
         }
     }
 }
