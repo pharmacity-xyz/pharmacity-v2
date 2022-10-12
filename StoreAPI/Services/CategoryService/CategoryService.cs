@@ -13,6 +13,13 @@ namespace StoreAPI.Services
             _context = context;
         }
 
+        public async Task<ServiceResponse<List<Category>>> AddCategory(Category category)
+        {
+            _context.Categories!.Add(category);
+            await _context.SaveChangesAsync();
+            return await GetCategories();
+        }
+
         public async Task<ServiceResponse<List<Category>>> GetCategories()
         {
             var categories = await _context.Categories!.ToListAsync();
@@ -22,10 +29,7 @@ namespace StoreAPI.Services
             };
         }
 
-        public Task<ServiceResponse<List<Category>>> AddCategory(Category category)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Task<ServiceResponse<List<Category>>> UpdateCategory(Category category)
         {
