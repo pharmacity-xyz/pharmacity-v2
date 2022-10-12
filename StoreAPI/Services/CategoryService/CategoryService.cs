@@ -1,52 +1,72 @@
-﻿using StoreAPI.DTO;
-using StoreAPI.Models;
-// using DataAccess;
-// using DataAccess.DTO;
-// using DataAccess.Util;
+﻿using StoreAPI.Models;
+using StoreAPI.Utils;
 
 namespace StoreAPI.Services
 {
     public class CategoryService : ICategoryService
     {
-        public void Add(Category category)
-        {
-            // Category newCategory = new Category
-            // {
-            //     CategoryId = Guid.NewGuid(),
-            //     Name = categoryDTO.CategoryName!,
-            // };
+        private readonly DataContext _context;
 
-            // CategoryDAO.Instance.Add(newCategory);
-            throw new NotImplementedException();
+        public CategoryService(DataContext context)
+        {
+            _context = context;
         }
 
-        public List<Category> GetCategory()
+        public async Task<ServiceResponse<List<Category>>> AddCategory(Category category)
         {
-            throw new NotImplementedException();
-            // return CategoryDAO.Instance.GetCategories().Select(m => CategoryMapper.mapToDTO(m)).ToList();
+            _context.Categories!.Add(category);
+            await _context.SaveChangesAsync();
+            return await GetCategories();
         }
 
-        public void Update(Category categoryDTO)
+        public async Task<ServiceResponse<List<Category>>> GetCategories()
         {
-            throw new NotImplementedException();
-            // Category category = CategoryDAO.Instance.GetCategoryById(categoryDTO.CategoryId);
-            // CategoryDAO.Instance.Update(category);
+            var categories = await _context.Categories!.ToListAsync();
+            return new ServiceResponse<List<Category>>
+            {
+                Data = categories
+            };
         }
 
-        public void Delete(Guid id)
+        public async Task<ServiceResponse<List<Category>>> UpdateCategory(Category category)
         {
-            throw new NotImplementedException();
-            // CategoryDAO.Instance.DeleteCategory(id);
+            var dbCategory = await GetCategoryById(category.CategoryId);
+            if (dbCategory == null)
+            {
+                return new ServiceResponse<List<Category>>
+                {
+                    Success = false,
+                    Message = "Category not found."
+                };
+            }
+
+            dbCategory.Name = category.Name;
+
+            await _context.SaveChangesAsync();
+
+            return await GetCategories();
         }
 
-        public void Add(CategoryDTO categoryDTO)
+        public async Task<ServiceResponse<List<Category>>> DeleteCategory(Guid id)
         {
-            throw new NotImplementedException();
+            var category = await GetCategoryById(id);
+            if (category == null)
+            {
+                return new ServiceResponse<List<Category>>
+                {
+                    Success = false,
+                    Message = "Category not found."
+                };
+            }
+
+            _context.Categories!.Remove(category);
+            await _context.SaveChangesAsync();
+            return await GetCategories();
         }
 
-        public void Update(CategoryDTO categoryDTO)
+        private async Task<Category?> GetCategoryById(Guid id)
         {
-            throw new NotImplementedException();
+            return await _context.Categories!.FindAsync(id);
         }
     }
 }

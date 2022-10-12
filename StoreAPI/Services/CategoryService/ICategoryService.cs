@@ -1,13 +1,13 @@
-﻿using StoreAPI.DTO;
+﻿using StoreAPI.Utils;
 using StoreAPI.Models;
 
 namespace StoreAPI.Services
 {
     public interface ICategoryService
     {
-        List<Category> GetCategory();
-        void Add(CategoryDTO categoryDTO);
-        void Delete(Guid id);
-        void Update(CategoryDTO categoryDTO);
+        Task<ServiceResponse<List<Category>>> GetCategories();
+        Task<ServiceResponse<List<Category>>> AddCategory(Category category);
+        Task<ServiceResponse<List<Category>>> UpdateCategory(Category category);
+        Task<ServiceResponse<List<Category>>> DeleteCategory(Guid id);
     }
 }

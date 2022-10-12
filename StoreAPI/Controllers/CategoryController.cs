@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using StoreAPI.Models;
 using StoreAPI.DTO;
 using StoreAPI.Services;
+using StoreAPI.Utils;
 
 namespace StoreAPI.Controllers
 {
@@ -23,79 +24,38 @@ namespace StoreAPI.Controllers
             _orderService = orderService;
         }
 
-        [HttpPost("add"), Authorize(Roles = "Admin")]
-        public IActionResult Add(CategoryDTO category)
+        [HttpPost, Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> AddCategory(CategoryDTO category)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                _categoryService.Add(category);
-
-                return Ok("Successfully added");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var result = await _categoryService.AddCategory(
+                new Category
+                {
+                    CategoryId = Guid.NewGuid(),
+                    Name = category.CategoryName
+                }
+            );
+            return Ok(result);
         }
 
-        [HttpGet("get_all")]
-        public IActionResult GetAll()
+        [HttpGet]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategories()
         {
-            return Ok(_categoryService.GetCategory());
+            var result = await _categoryService.GetCategories();
+            return Ok(result);
         }
 
-        [HttpPut("update"), Authorize(Roles = "Admin")]
-        public IActionResult Update(CategoryDTO category)
+        [HttpPut, Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> UpdateCategory(Category category)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                _categoryService.Update(category);
-
-
-                return Ok("Successfully updated");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var result = await _categoryService.UpdateCategory(category);
+            return Ok(result);
         }
 
-        [HttpDelete("delete/{id}"), Authorize(Roles = "Admin")]
-        public IActionResult Delete(Guid id)
+        [HttpDelete("admin/{id}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> DeleteCategory(Guid id)
         {
-            try
-            {
-                _categoryService.Delete(id);
-                IEnumerable<OrderDTO> orderList = _orderService.GetAllOrders();
-                return Ok("Successfully deleted");
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var result = await _categoryService.DeleteCategory(id);
+            return Ok(result);
         }
     }
 }
