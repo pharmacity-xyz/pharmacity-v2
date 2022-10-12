@@ -45,33 +45,13 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPut, Authorize(Roles = "Admin")]
-        public IActionResult Update(CategoryDTO category)
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> UpdateCategory(Category category)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                _categoryService.Update(category);
-
-
-                return Ok("Successfully updated");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var result = await _categoryService.UpdateCategory(category);
+            return Ok(result);
         }
 
-        [HttpDelete("delete/{id}"), Authorize(Roles = "Admin")]
+        [HttpDelete("/{id}"), Authorize(Roles = "Admin")]
         public IActionResult Delete(Guid id)
         {
             try
