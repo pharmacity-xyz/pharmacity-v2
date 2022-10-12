@@ -6,6 +6,16 @@ namespace StoreAPI.Services
 {
     public class ProductService : IProductService
     {
+
+        private readonly DataContext _context;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+
+        public ProductService(DataContext context, IHttpContextAccessor httpContextAccessor)
+        {
+            _context = context;
+            _httpContextAccessor = httpContextAccessor;
+        }
+
         public async Task<ServiceResponse<Product>> CreateProduct(Product product)
         {
             throw new NotImplementedException();
@@ -103,7 +113,7 @@ namespace StoreAPI.Services
             throw new NotImplementedException();
         }
 
-        
+
 
         public Task<ServiceResponse<Product>> UpdateProduct(Product product)
         {
