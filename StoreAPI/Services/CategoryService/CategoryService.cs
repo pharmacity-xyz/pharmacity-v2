@@ -50,7 +50,7 @@ namespace StoreAPI.Services
 
         public async Task<ServiceResponse<List<Category>>> DeleteCategory(Guid id)
         {
-            Category? category = await GetCategoryById(id);
+            var category = await GetCategoryById(id);
             if (category == null)
             {
                 return new ServiceResponse<List<Category>>
