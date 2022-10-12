@@ -48,16 +48,17 @@ namespace StoreAPI.Services
             return await GetCategories();
         }
 
+        public Task<ServiceResponse<List<Category>>> DeleteCategory(Guid id)
+        {
+            throw new NotImplementedException();
+        }
 
         private async Task<Category?> GetCategoryById(Guid id)
         {
             return await _context.Categories!.FirstOrDefaultAsync(c => c.CategoryId == id);
         }
 
-        public Task<ServiceResponse<List<Category>>> DeleteCategory(Guid id)
-        {
-            throw new NotImplementedException();
-        }
+
         public void Add(Category category)
         {
             // Category newCategory = new Category
