@@ -6,6 +6,11 @@ namespace StoreAPI.Services
 {
     public class ProductService : IProductService
     {
+        public async Task<ServiceResponse<Product>> CreateProduct(Product product)
+        {
+            throw new NotImplementedException();
+        }
+
         public ProductDTO AddNewProduct(ProductDTO productDTO)
         {
             // Product new_product = new Product
@@ -98,10 +103,7 @@ namespace StoreAPI.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResponse<Product>> CreateProduct(Product product)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public Task<ServiceResponse<Product>> UpdateProduct(Product product)
         {

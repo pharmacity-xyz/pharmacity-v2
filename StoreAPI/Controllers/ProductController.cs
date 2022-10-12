@@ -3,6 +3,7 @@
 using StoreAPI.Models;
 using StoreAPI.DTO;
 using StoreAPI.Services;
+using StoreAPI.Utils;
 
 namespace StoreAPI.Controllers
 {
@@ -18,31 +19,9 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add(ProductDTO product)
+        public async Task<ActionResult<ServiceResponse<Product>>> CreateProduct(ProductDTO product)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                // ProductDTO newProductDTO = productRepository.AddNewProduct(product);
-                // productImageRepository.AddNewProductImage(product.ProductImage!, newProductDTO.ProductId);
-
-                return Ok("Successfully added");
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            return Ok("Successfully added");
         }
 
         [HttpGet("get_all")]
