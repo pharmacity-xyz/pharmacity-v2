@@ -1,6 +1,6 @@
 using StoreAPI.Models;
 
-namespace BlazorEcommerce.Shared
+namespace StoreAPI.Utils
 {
     public class ProductSearchResult
     {
