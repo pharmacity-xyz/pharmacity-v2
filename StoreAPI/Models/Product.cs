@@ -12,7 +12,7 @@ namespace StoreAPI.Models
         public List<ProductImage> Images { get; set; } = new List<ProductImage>();
         public int Stock { get; set; }
         public decimal Price { get; set; }
-        public bool Featured { get; set; } = false;
+        public bool Featured { get; set; }
 
         public virtual Category? Category { get; set; }
         public Guid CategoryId { get; set; }

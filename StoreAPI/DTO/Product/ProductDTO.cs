@@ -13,11 +13,14 @@ namespace StoreAPI.DTO
         public string ProductDescription { get; set; } = string.Empty;
 
         public string ImageUrl { get; set; } = string.Empty;
+
         [Required]
         public int Stock { get; set; }
 
         [Required]
         public decimal Price { get; set; }
+
+        public bool Featured { get; set; } = false;
 
         public Guid CategoryId { get; set; }
 
