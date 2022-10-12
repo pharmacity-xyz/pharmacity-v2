@@ -34,9 +34,6 @@ namespace StoreAPI.Services
             var dbUser = (await GetUser()).Data;
             if (dbUser == null)
             {
-                // user.UserId = _authService.GetUserId();
-                // _context.Users!.Add(user);
-                // response.Data = user;
                 response.Success = false;
                 response.Message = "User not found.";
             }
