@@ -48,12 +48,6 @@ namespace StoreAPI.Services
             throw new NotImplementedException();
         }
 
-        public List<Category> GetCategory()
-        {
-            throw new NotImplementedException();
-            // return CategoryDAO.Instance.GetCategories().Select(m => CategoryMapper.mapToDTO(m)).ToList();
-        }
-
         public void Update(Category categoryDTO)
         {
             throw new NotImplementedException();

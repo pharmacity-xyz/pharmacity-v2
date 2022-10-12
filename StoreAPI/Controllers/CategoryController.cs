@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using StoreAPI.Models;
 using StoreAPI.DTO;
 using StoreAPI.Services;
+using StoreAPI.Utils;
 
 namespace StoreAPI.Controllers
 {
@@ -49,10 +50,11 @@ namespace StoreAPI.Controllers
             }
         }
 
-        [HttpGet("get_all")]
-        public IActionResult GetAll()
+        [HttpGet]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> GetCategories()
         {
-            return Ok(_categoryService.GetCategory());
+            var result = await _categoryService.GetCategories();
+            return Ok(result);
         }
 
         [HttpPut("update"), Authorize(Roles = "Admin")]
