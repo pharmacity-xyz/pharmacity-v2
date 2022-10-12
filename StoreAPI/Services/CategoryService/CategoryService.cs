@@ -29,11 +29,29 @@ namespace StoreAPI.Services
             };
         }
 
-
-
-        public Task<ServiceResponse<List<Category>>> UpdateCategory(Category category)
+        public async Task<ServiceResponse<List<Category>>> UpdateCategory(Category category)
         {
-            throw new NotImplementedException();
+            var dbCategory = await GetCategoryById(category.CategoryId);
+            if (dbCategory == null)
+            {
+                return new ServiceResponse<List<Category>>
+                {
+                    Success = false,
+                    Message = "Category not found."
+                };
+            }
+
+            dbCategory.Name = category.Name;
+
+            await _context.SaveChangesAsync();
+
+            return await GetCategories();
+        }
+
+
+        private async Task<Category?> GetCategoryById(Guid id)
+        {
+            return await _context.Categories!.FirstOrDefaultAsync(c => c.CategoryId == id);
         }
 
         public Task<ServiceResponse<List<Category>>> DeleteCategory(Guid id)

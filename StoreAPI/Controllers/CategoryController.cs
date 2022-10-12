@@ -25,7 +25,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost, Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ServiceResponse<List<Category>>>> Add(CategoryDTO category)
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> AddCategory(CategoryDTO category)
         {
             var result = await _categoryService.AddCategory(
                 new Category
@@ -44,7 +44,7 @@ namespace StoreAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPut("update"), Authorize(Roles = "Admin")]
+        [HttpPut, Authorize(Roles = "Admin")]
         public IActionResult Update(CategoryDTO category)
         {
             try
