@@ -88,7 +88,7 @@ namespace StoreAPI.Controllers
             try
             {
                 _categoryService.Delete(id);
-                IEnumerable<OrderDTO> orderList = _orderService.GetAllOrders();
+                // IEnumerable<OrderDTO> orderList = _orderService.GetAllOrders();
                 return Ok("Successfully deleted");
             }
             catch (Exception e)
