@@ -1,5 +1,6 @@
 ﻿using StoreAPI.DTO;
 using StoreAPI.Models;
+using StoreAPI.Utils;
 // using DataAccess;
 // using DataAccess.DTO;
 // using DataAccess.Util;
@@ -45,6 +46,31 @@ namespace StoreAPI.Services
         }
 
         public void Update(CategoryDTO categoryDTO)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ServiceResponse<List<Category>>> GetCategories()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ServiceResponse<List<Category>>> GetAdminCategories()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ServiceResponse<List<Category>>> AddCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ServiceResponse<List<Category>>> UpdateCategory(Category category)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ServiceResponse<List<Category>>> DeleteCategory(int id)
         {
             throw new NotImplementedException();
         }
