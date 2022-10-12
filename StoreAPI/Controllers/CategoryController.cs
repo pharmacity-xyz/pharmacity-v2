@@ -24,30 +24,17 @@ namespace StoreAPI.Controllers
             _orderService = orderService;
         }
 
-        [HttpPost("add"), Authorize(Roles = "Admin")]
-        public IActionResult Add(CategoryDTO category)
+        [HttpPost, Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> Add(CategoryDTO category)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                _categoryService.Add(category);
-
-                return Ok("Successfully added");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var result = await _categoryService.AddCategory(
+                new Category
+                {
+                    CategoryId = Guid.NewGuid(),
+                    Name = category.CategoryName
+                }
+            );
+            return Ok(result);
         }
 
         [HttpGet]
