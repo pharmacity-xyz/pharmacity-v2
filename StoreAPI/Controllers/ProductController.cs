@@ -73,30 +73,11 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpPut("update")]
-        public IActionResult Update(ProductDTO product)
+        [HttpPut, Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<Product>>> UpdateProduct(Product product)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                // productRepository.UpdateProduct(product);
-                // productImageRepository.UpdateProductImage(product.ProductImage!);
-                return Ok("Successfully updated");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.UpdateProduct(product);
+            return Ok(response);
         }
 
         [HttpDelete("delete/{id}")]

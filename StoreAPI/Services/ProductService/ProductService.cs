@@ -102,6 +102,36 @@ namespace StoreAPI.Services
             return response;
         }
 
+        public async Task<ServiceResponse<Product>> UpdateProduct(Product product)
+        {
+            var dbProduct = await _context.Products!
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.ProductId == product.ProductId);
+
+            if (dbProduct == null)
+            {
+                return new ServiceResponse<Product>
+                {
+                    Success = false,
+                    Message = "Product not found."
+                };
+            }
+
+            dbProduct.ProductName = product.ProductName;
+            dbProduct.ProductDescription = product.ProductDescription;
+            dbProduct.ImageUrl = product.ImageUrl;
+            dbProduct.CategoryId = product.CategoryId;
+            dbProduct.Featured = product.Featured;
+
+            var productImages = dbProduct.Images;
+            _context.ProductImages!.RemoveRange(productImages);
+
+            dbProduct.Images = product.Images;
+
+            await _context.SaveChangesAsync();
+            return new ServiceResponse<Product> { Data = product };
+        }
+
         public void UpdateProduct(ProductDTO productDTO)
         {
             // Product product = ProductDAO.Instance.FindProductById(productDTO.ProductId);
@@ -139,10 +169,7 @@ namespace StoreAPI.Services
 
 
 
-        public Task<ServiceResponse<Product>> UpdateProduct(Product product)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Task<ServiceResponse<bool>> DeleteProduct(int productId)
         {
