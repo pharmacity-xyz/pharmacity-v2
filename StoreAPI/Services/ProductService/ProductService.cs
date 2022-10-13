@@ -157,9 +157,9 @@ namespace StoreAPI.Services
         private async Task<List<Product>> FindProductsBySearchText(string searchText)
         {
             return await _context.Products!
-                                .Where(p => p.ProductName.ToLower().Contains(searchText.ToLower()) ||
-                                    p.ProductDescription.ToLower().Contains(searchText.ToLower()))
-                                .ToListAsync();
+                .Where(p => p.ProductName.ToLower().Contains(searchText.ToLower()) ||
+                        p.ProductDescription.ToLower().Contains(searchText.ToLower()))
+                .ToListAsync();
         }
     }
 }
