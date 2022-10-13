@@ -20,9 +20,21 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost, Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ServiceResponse<Product>>> CreateProduct(ProductDTO product)
+        public async Task<ActionResult<ServiceResponse<Product>>> CreateProduct(ProductDTO request)
         {
-            var response = await _productService.CreateProduct(new Product { });
+            var response = await _productService.CreateProduct(
+                new Product
+                {
+                    ProductId = Guid.NewGuid(),
+                    ProductName = request.ProductName,
+                    ProductDescription = request.ProductDescription,
+                    ImageUrl = request.ImageUrl,
+                    Stock = request.Stock,
+                    Price = request.Price,
+                    Featured = request.Featured,
+                    CategoryId = request.CategoryId,
+                }
+            );
             return Ok(response);
         }
 
