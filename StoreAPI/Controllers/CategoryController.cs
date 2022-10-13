@@ -51,10 +51,10 @@ namespace StoreAPI.Controllers
             return Ok(result);
         }
 
-        [HttpDelete("admin/{id}"), Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ServiceResponse<List<Category>>>> DeleteCategory(Guid id)
+        [HttpDelete("{categoryId}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<List<Category>>>> DeleteCategory(Guid categoryId)
         {
-            var result = await _categoryService.DeleteCategory(id);
+            var result = await _categoryService.DeleteCategory(categoryId);
             return Ok(result);
         }
     }
