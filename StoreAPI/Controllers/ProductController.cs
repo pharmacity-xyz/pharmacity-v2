@@ -59,6 +59,13 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
+        [HttpGet("search/{searchText}/{page}")]
+        public async Task<ActionResult<ServiceResponse<ProductSearchResult>>> SearchProducts(string searchText, int page = 1)
+        {
+            var response = await _productService.SearchProducts(searchText, page);
+            return Ok(response);
+        }
+
         [HttpPut("update")]
         public IActionResult Update(ProductDTO product)
         {
