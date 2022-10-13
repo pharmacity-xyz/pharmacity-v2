@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 
 using StoreAPI.Models;
 using StoreAPI.DTO;
-using StoreAPI.Services;
 using StoreAPI.Utils;
 
 namespace StoreAPI.Services
