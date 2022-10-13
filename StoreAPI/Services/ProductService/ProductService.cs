@@ -89,6 +89,19 @@ namespace StoreAPI.Services
             return response;
         }
 
+        public async Task<ServiceResponse<List<Product>>> GetFeaturedProducts()
+        {
+            var response = new ServiceResponse<List<Product>>
+            {
+                Data = await _context.Products!
+                        .Where(p => p.Featured)
+                        .Include(p => p.Images)
+                        .ToListAsync()
+            };
+
+            return response;
+        }
+
         public void UpdateProduct(ProductDTO productDTO)
         {
             // Product product = ProductDAO.Instance.FindProductById(productDTO.ProductId);
@@ -124,10 +137,7 @@ namespace StoreAPI.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResponse<List<Product>>> GetFeaturedProducts()
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Task<ServiceResponse<Product>> UpdateProduct(Product product)
         {
