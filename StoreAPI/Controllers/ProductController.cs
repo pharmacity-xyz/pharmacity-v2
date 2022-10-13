@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using StoreAPI.Models;
 using StoreAPI.DTO;
@@ -18,10 +19,11 @@ namespace StoreAPI.Controllers
             _productService = productService;
         }
 
-        [HttpPost("add")]
+        [HttpPost, Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResponse<Product>>> CreateProduct(ProductDTO product)
         {
-            return Ok("Successfully added");
+            var response = await _productService.CreateProduct(new Product { });
+            return Ok(response);
         }
 
         [HttpGet("get_all")]
