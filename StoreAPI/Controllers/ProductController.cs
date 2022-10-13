@@ -52,21 +52,12 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("get_by_category/{id}")]
-        public IActionResult GetCategoryId(Guid id)
+        [HttpGet("category/{categoryId}")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductsByCategory(Guid categoryId)
         {
-            try
-            {
-                return Ok(_productService.GetProductsByCategory(id));
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.GetProductsByCategory(categoryId);
+            return Ok(response);
         }
-
-
 
         [HttpPut("update")]
         public IActionResult Update(ProductDTO product)

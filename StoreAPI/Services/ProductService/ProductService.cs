@@ -54,23 +54,14 @@ namespace StoreAPI.Services
             return response;
         }
 
-        public ProductDTO GetProductById(Guid id)
+        public async Task<ServiceResponse<List<Product>>> GetProductsByCategory(Guid categoryId)
         {
-            // return ProductMapper.mapToDTO(ProductDAO.Instance.FindProductById(id));
-            throw new NotImplementedException();
-        }
+            var response = new ServiceResponse<List<Product>>
+            {
+                Data = await _context.Products!.Where(p => p.CategoryId == categoryId).ToListAsync(),
+            };
 
-        public List<ProductDTO> GetProducts()
-        {
-            // return ProductDAO.Instance.GetProducts().Select(p => ProductMapper.mapToDTO(p)).ToList();
-            throw new NotImplementedException();
-        }
-
-        public List<ProductDTO> GetProductsByCategory(Guid id)
-        {
-            // return ProductDAO.Instance.FindProductByCategoryId(id).Select(p => ProductMapper.mapToDTO(p)).ToList();
-
-            throw new NotImplementedException();
+            return response;
         }
 
         public void UpdateProduct(ProductDTO productDTO)
@@ -99,10 +90,7 @@ namespace StoreAPI.Services
 
 
 
-        public Task<ServiceResponse<List<Product>>> GetProductsByCategory(string categoryUrl)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Task<ServiceResponse<ProductSearchResult>> SearchProducts(string searchText, int page)
         {

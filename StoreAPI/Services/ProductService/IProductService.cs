@@ -7,7 +7,7 @@ namespace StoreAPI.Services
     {
         Task<ServiceResponse<List<Product>>> GetProductsAsync();
         Task<ServiceResponse<Product>> GetProductAsync(Guid productId);
-        Task<ServiceResponse<List<Product>>> GetProductsByCategory(string categoryUrl);
+        Task<ServiceResponse<List<Product>>> GetProductsByCategory(Guid categoryId);
         Task<ServiceResponse<ProductSearchResult>> SearchProducts(string searchText, int page);
         Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText);
         Task<ServiceResponse<List<Product>>> GetFeaturedProducts();
