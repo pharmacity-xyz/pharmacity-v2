@@ -39,14 +39,14 @@ namespace StoreAPI.Controllers
             return Ok(result);
         }
 
-        [HttpPut("update-quantity")]
+        [HttpPut("update_quantity")]
         public async Task<ActionResult<ServiceResponse<bool>>> UpdateQuantity(CartItem cartItem)
         {
             var result = await _cartService.UpdateQuantity(cartItem);
             return Ok(result);
         }
 
-        [HttpDelete("{productId}/{productTypeId}")]
+        [HttpDelete("{productId}")]
         public async Task<ActionResult<ServiceResponse<bool>>> RemoveItemFromCart(Guid productId)
         {
             var result = await _cartService.RemoveItemFromCart(productId);
