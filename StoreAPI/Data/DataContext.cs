@@ -13,6 +13,8 @@ namespace StoreAPI.Data
         {
             modelBuilder.Entity<CartItem>().HasKey(ci => new { ci.UserId, ci.ProductId });
 
+            modelBuilder.Entity<OrderItem>().HasKey(oi => new { oi.OrderId, oi.ProductId });
+
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             base.OnModelCreating(modelBuilder);
         }
