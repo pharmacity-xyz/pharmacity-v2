@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using StoreAPI.Models;
 
 namespace StoreAPI.DTO
 {
@@ -13,6 +14,8 @@ namespace StoreAPI.DTO
         public string ProductDescription { get; set; } = string.Empty;
 
         public string ImageUrl { get; set; } = string.Empty;
+
+        public List<ProductImage> Images { get; set; } = new List<ProductImage>();
 
         [Required]
         public int Stock { get; set; }

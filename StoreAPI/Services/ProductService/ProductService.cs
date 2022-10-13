@@ -58,7 +58,10 @@ namespace StoreAPI.Services
         {
             var response = new ServiceResponse<List<Product>>
             {
-                Data = await _context.Products!.Where(p => p.CategoryId == categoryId).ToListAsync(),
+                Data = await _context.Products!
+                    .Where(p => p.CategoryId == categoryId)
+                    .Include(p => p.Images)
+                    .ToListAsync(),
             };
 
             return response;
@@ -132,48 +135,23 @@ namespace StoreAPI.Services
             return new ServiceResponse<Product> { Data = product };
         }
 
-        public void UpdateProduct(ProductDTO productDTO)
+        public async Task<ServiceResponse<bool>> DeleteProduct(Guid productId)
         {
-            // Product product = ProductDAO.Instance.FindProductById(productDTO.ProductId);
-            // Product updatedProduct = new Product
-            // {
-            //     ProductId = product.ProductId,
-            //     ProductName = productDTO.ProductName,
-            //     ProductDescription = productDTO.ProductDescription,
-            //     Price = productDTO.Price,
-            //     Stock = productDTO.Stock,
-            //     CategoryId = productDTO.CategoryId
-            // };
-            // ProductDAO.Instance.UpdateProduct(updatedProduct);
-            throw new NotImplementedException();
-        }
+            var dbProduct = await _context.Products!.FindAsync(productId);
+            if (dbProduct == null)
+            {
+                return new ServiceResponse<bool>
+                {
+                    Success = false,
+                    Data = false,
+                    Message = "Product not found."
+                };
+            }
 
-        public void DeleteProduct(Guid id)
-        {
-            // ProductDAO.Instance.DeleteProduct(id);
-            throw new NotImplementedException();
-        }
+            _context.Products.Remove(dbProduct);
+            await _context.SaveChangesAsync();
+            return new ServiceResponse<bool> { Data = true };
 
-
-
-
-
-
-
-
-
-        public Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
-        {
-            throw new NotImplementedException();
-        }
-
-
-
-
-
-        public Task<ServiceResponse<bool>> DeleteProduct(int productId)
-        {
-            throw new NotImplementedException();
         }
 
         private async Task<List<Product>> FindProductsBySearchText(string searchText)

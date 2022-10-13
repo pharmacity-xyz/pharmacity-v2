@@ -9,10 +9,9 @@ namespace StoreAPI.Services
         Task<ServiceResponse<Product>> GetProductAsync(Guid productId);
         Task<ServiceResponse<List<Product>>> GetProductsByCategory(Guid categoryId);
         Task<ServiceResponse<ProductSearchResult>> SearchProducts(string searchText, int page);
-        Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText);
         Task<ServiceResponse<List<Product>>> GetFeaturedProducts();
         Task<ServiceResponse<Product>> CreateProduct(Product product);
         Task<ServiceResponse<Product>> UpdateProduct(Product product);
-        Task<ServiceResponse<bool>> DeleteProduct(int productId);
+        Task<ServiceResponse<bool>> DeleteProduct(Guid productId);
     }
 }

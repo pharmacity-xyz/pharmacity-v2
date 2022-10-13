@@ -80,32 +80,11 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpDelete("delete/{id}")]
-        public IActionResult Delete(Guid id)
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<bool>>> DeleteProduct(Guid id)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                // productRepository.DeleteProduct(id);
-
-                // IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
-
-                return Ok("Successfully deleted");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.DeleteProduct(id);
+            return Ok(response);
         }
     }
 }
