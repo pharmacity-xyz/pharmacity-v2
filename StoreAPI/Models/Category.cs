@@ -9,7 +9,5 @@ namespace StoreAPI.Models
 
         [Required]
         public string Name { get; set; } = default!;
-
-        public virtual ICollection<Product>? Products { get; set; }
     }
 }
