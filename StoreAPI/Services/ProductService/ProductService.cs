@@ -23,6 +23,20 @@ namespace StoreAPI.Services
             return new ServiceResponse<Product> { Data = product };
         }
 
+        public async Task<ServiceResponse<List<Product>>> GetProductsAsync()
+        {
+            var response = new ServiceResponse<List<Product>>
+            {
+                Data = await _context.Products!.Include(p => p.Images).ToListAsync()
+            };
+            return response;
+        }
+
+        public Task<ServiceResponse<Product>> GetProductAsync(int productId)
+        {
+            throw new NotImplementedException();
+        }
+
         public ProductDTO GetProductById(Guid id)
         {
             // return ProductMapper.mapToDTO(ProductDAO.Instance.FindProductById(id));
@@ -64,15 +78,9 @@ namespace StoreAPI.Services
             throw new NotImplementedException();
         }
 
-        public Task<ServiceResponse<List<Product>>> GetProductsAsync()
-        {
-            throw new NotImplementedException();
-        }
 
-        public Task<ServiceResponse<Product>> GetProductAsync(int productId)
-        {
-            throw new NotImplementedException();
-        }
+
+
 
         public Task<ServiceResponse<List<Product>>> GetProductsByCategory(string categoryUrl)
         {
@@ -93,13 +101,6 @@ namespace StoreAPI.Services
         {
             throw new NotImplementedException();
         }
-
-        public Task<ServiceResponse<List<Product>>> GetAdminProducts()
-        {
-            throw new NotImplementedException();
-        }
-
-
 
         public Task<ServiceResponse<Product>> UpdateProduct(Product product)
         {
