@@ -1,20 +1,32 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
+using StoreAPI.Models;
 
-namespace StoreAPI.Models
+namespace StoreAPI.DTO
 {
-    public class Product
+    public class ProductDTO
     {
-        [Key]
-        public Guid ProductId { get; set; }
-        public string ProductName { get; set; } = string.Empty;
-        public string ProductDescription { get; set; } = string.Empty;
-        public string ImageUrl { get; set; } = string.Empty;
-        public List<ProductImage> Images { get; set; } = new List<ProductImage>();
-        public int Stock { get; set; }
-        public decimal Price { get; set; }
-        public bool Featured { get; set; }
+        public Guid? ProductId { get; set; }
 
-        public virtual Category? Category { get; set; }
+        [Required]
+        public string ProductName { get; set; } = string.Empty;
+
+        [Required]
+        public string ProductDescription { get; set; } = string.Empty;
+
+        public string ImageUrl { get; set; } = string.Empty;
+
+        public List<ProductImage> Images { get; set; } = new List<ProductImage>();
+
+        [Required]
+        public int Stock { get; set; }
+
+        [Required]
+        public decimal Price { get; set; }
+
+        public bool Featured { get; set; } = false;
+
         public Guid CategoryId { get; set; }
+
+        public ProductImageDTO? ProductImage { get; set; }
     }
 }

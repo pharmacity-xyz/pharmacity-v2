@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 using StoreAPI.Models;
 using StoreAPI.DTO;
 using StoreAPI.Services;
+using StoreAPI.Utils;
 
 namespace StoreAPI.Controllers
 {
@@ -17,135 +19,72 @@ namespace StoreAPI.Controllers
             _productService = productService;
         }
 
-        [HttpPost("add")]
-        public IActionResult Add(ProductDTO product)
+        [HttpPost, Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<Product>>> CreateProduct(ProductDTO request)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                // ProductDTO newProductDTO = productRepository.AddNewProduct(product);
-                // productImageRepository.AddNewProductImage(product.ProductImage!, newProductDTO.ProductId);
-
-                return Ok("Successfully added");
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.CreateProduct(
+                new Product
+                {
+                    ProductId = Guid.NewGuid(),
+                    ProductName = request.ProductName,
+                    ProductDescription = request.ProductDescription,
+                    ImageUrl = request.ImageUrl,
+                    Stock = request.Stock,
+                    Price = request.Price,
+                    Featured = request.Featured,
+                    CategoryId = request.CategoryId,
+                }
+            );
+            return Ok(response);
         }
 
-        [HttpGet("get_all")]
-        public IActionResult GetAll()
+        [HttpGet]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProducts()
         {
-            try
-            {
-                IEnumerable<ProductDTO> productList = _productService.GetProducts();
-                // foreach (ProductDTO productDTO in productList)
-                // {
-                //     productDTO.ProductImage = productImage.GetProductImage(productDTO.ProductId);
-                // }
-                return Ok(productList);
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.GetProductsAsync();
+            return Ok(response);
         }
 
-        [HttpGet("get_by_id/{id}")]
-        public IActionResult GetId(Guid id)
+        [HttpGet("{productId}")]
+        public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(Guid productId)
         {
-            try
-            {
-                return Ok(_productService.GetProductById(id));
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.GetProductAsync(productId);
+            return Ok(response);
         }
 
-        [HttpGet("get_by_category/{id}")]
-        public IActionResult GetCategoryId(Guid id)
+        [HttpGet("category/{categoryId}")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProductsByCategory(Guid categoryId)
         {
-            try
-            {
-                return Ok(_productService.GetProductsByCategory(id));
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.GetProductsByCategory(categoryId);
+            return Ok(response);
         }
 
-
-
-        [HttpPut("update")]
-        public IActionResult Update(ProductDTO product)
+        [HttpGet("search/{searchText}/{page}")]
+        public async Task<ActionResult<ServiceResponse<ProductSearchResult>>> SearchProducts(string searchText, int page = 1)
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
-
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
-
-                // productRepository.UpdateProduct(product);
-                // productImageRepository.UpdateProductImage(product.ProductImage!);
-                return Ok("Successfully updated");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.SearchProducts(searchText, page);
+            return Ok(response);
         }
 
-        [HttpDelete("delete/{id}")]
-        public IActionResult Delete(Guid id)
+        [HttpGet("featured")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetFeaturedProducts()
         {
-            try
-            {
-                // UserDTO user = LoggedUser.Instance!.User!;
+            var response = await _productService.GetFeaturedProducts();
+            return Ok(response);
+        }
 
-                // if (user == null)
-                // {
-                //     throw new Exception("Can not find the user");
-                // }
-                // else if (user.Role != Role.ADMIN.ToString())
-                // {
-                //     throw new Exception("Please login with admin");
-                // }
+        [HttpPut, Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<Product>>> UpdateProduct(Product product)
+        {
+            var response = await _productService.UpdateProduct(product);
+            return Ok(response);
+        }
 
-                // productRepository.DeleteProduct(id);
-
-                // IEnumerable<OrderDTO> orderList = orderRepository.GetAllOrders();
-
-                return Ok("Successfully deleted");
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
+        [HttpDelete("{id}"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<bool>>> DeleteProduct(Guid id)
+        {
+            var response = await _productService.DeleteProduct(id);
+            return Ok(response);
         }
     }
 }
