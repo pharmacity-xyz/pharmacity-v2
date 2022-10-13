@@ -46,9 +46,9 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("{productId}")]
-        public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(Guid id)
+        public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(Guid productId)
         {
-            var response = await _productService.GetProductAsync(id);
+            var response = await _productService.GetProductAsync(productId);
             return Ok(response);
         }
 
