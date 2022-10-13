@@ -39,22 +39,10 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetProducts()
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetProducts()
         {
-            try
-            {
-                IEnumerable<ProductDTO> productList = _productService.GetProducts();
-                // foreach (ProductDTO productDTO in productList)
-                // {
-                //     productDTO.ProductImage = productImage.GetProductImage(productDTO.ProductId);
-                // }
-                return Ok(productList);
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.GetProductsAsync();
+            return Ok(response);
         }
 
         [HttpGet("get_by_id/{id}")]
