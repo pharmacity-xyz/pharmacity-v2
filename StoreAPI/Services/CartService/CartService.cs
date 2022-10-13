@@ -6,7 +6,7 @@ using StoreAPI.DTO;
 using StoreAPI.Services;
 using StoreAPI.Utils;
 
-namespace BlazorEcommerce.Server.Services.CartService
+namespace StoreAPI.Services
 {
     public class CartService : ICartService
     {
