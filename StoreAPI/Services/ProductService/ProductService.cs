@@ -32,9 +32,26 @@ namespace StoreAPI.Services
             return response;
         }
 
-        public Task<ServiceResponse<Product>> GetProductAsync(int productId)
+        public async Task<ServiceResponse<Product>> GetProductAsync(Guid productId)
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<Product>();
+            Product? product = null;
+
+            product = await _context.Products!
+                .Include(p => p.Images)
+                .FirstOrDefaultAsync(p => p.ProductId == productId);
+
+            if (product == null)
+            {
+                response.Success = false;
+                response.Message = "Sorry, but this product does not exist.";
+            }
+            else
+            {
+                response.Data = product;
+            }
+
+            return response;
         }
 
         public ProductDTO GetProductById(Guid id)

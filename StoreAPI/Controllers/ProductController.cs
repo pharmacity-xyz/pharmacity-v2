@@ -46,17 +46,10 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("{productId}")]
-        public IActionResult GetProduct(Guid id)
+        public async Task<ActionResult<ServiceResponse<Product>>> GetProduct(Guid id)
         {
-            try
-            {
-                return Ok(_productService.GetProductById(id));
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
+            var response = await _productService.GetProductAsync(id);
+            return Ok(response);
         }
 
         [HttpGet("get_by_category/{id}")]
