@@ -66,6 +66,13 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
+        [HttpGet("featured")]
+        public async Task<ActionResult<ServiceResponse<List<Product>>>> GetFeaturedProducts()
+        {
+            var response = await _productService.GetFeaturedProducts();
+            return Ok(response);
+        }
+
         [HttpPut("update")]
         public IActionResult Update(ProductDTO product)
         {

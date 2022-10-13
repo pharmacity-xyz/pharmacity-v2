@@ -64,6 +64,11 @@ namespace StoreAPI.Services
             return response;
         }
 
+        public async Task<ServiceResponse<ProductSearchResult>> SearchProducts(string searchText, int page)
+        {
+            throw new NotImplementedException();
+        }
+
         public void UpdateProduct(ProductDTO productDTO)
         {
             // Product product = ProductDAO.Instance.FindProductById(productDTO.ProductId);
@@ -92,10 +97,7 @@ namespace StoreAPI.Services
 
 
 
-        public Task<ServiceResponse<ProductSearchResult>> SearchProducts(string searchText, int page)
-        {
-            throw new NotImplementedException();
-        }
+
 
         public Task<ServiceResponse<List<string>>> GetProductSearchSuggestions(string searchText)
         {
@@ -115,6 +117,14 @@ namespace StoreAPI.Services
         public Task<ServiceResponse<bool>> DeleteProduct(int productId)
         {
             throw new NotImplementedException();
+        }
+
+        private async Task<List<Product>> FindProductsBySearchText(string searchText)
+        {
+            return await _context.Products!
+                                .Where(p => p.ProductName.ToLower().Contains(searchText.ToLower()) ||
+                                    p.ProductDescription.ToLower().Contains(searchText.ToLower()))
+                                .ToListAsync();
         }
     }
 }
