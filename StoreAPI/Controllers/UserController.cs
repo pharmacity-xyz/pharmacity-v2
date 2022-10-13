@@ -20,14 +20,14 @@ namespace StoreAPI.Controllers
             _userService = userService;
         }
 
-        [HttpGet("get_all"), Authorize(Roles = "Admin")]
+        [HttpGet, Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResponse<List<User>>>> GetAll()
         {
             var response = await _userService.GetAll();
             return Ok(response);
         }
 
-        [HttpPut("update"), Authorize]
+        [HttpPut, Authorize]
         public async Task<ActionResult<ServiceResponse<User>>> AddOrUpdate(UserUpdate request)
         {
             var response = await _userService.Update(request);
