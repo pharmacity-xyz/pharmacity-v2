@@ -1,17 +1,10 @@
 ﻿using StoreAPI.Utils;
-using StoreAPI.DTO;
 using StoreAPI.Models;
 
 namespace StoreAPI.Services
 {
     public interface IProductService
     {
-        List<ProductDTO> GetProducts();
-        List<ProductDTO> GetProductsByCategory(Guid id);
-        ProductDTO GetProductById(Guid id);
-        void UpdateProduct(ProductDTO p);
-        void DeleteProduct(Guid id);
-
         Task<ServiceResponse<List<Product>>> GetProductsAsync();
         Task<ServiceResponse<Product>> GetProductAsync(int productId);
         Task<ServiceResponse<List<Product>>> GetProductsByCategory(string categoryUrl);

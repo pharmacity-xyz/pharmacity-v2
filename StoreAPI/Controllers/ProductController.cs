@@ -45,8 +45,8 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("get_by_id/{id}")]
-        public IActionResult GetId(Guid id)
+        [HttpGet("{productId}")]
+        public IActionResult GetProduct(Guid id)
         {
             try
             {
