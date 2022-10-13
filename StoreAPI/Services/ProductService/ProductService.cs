@@ -23,22 +23,6 @@ namespace StoreAPI.Services
             return new ServiceResponse<Product> { Data = product };
         }
 
-        public ProductDTO AddNewProduct(ProductDTO productDTO)
-        {
-            // Product new_product = new Product
-            // {
-            //     ProductId = Guid.NewGuid(),
-            //     ProductName = productDTO.ProductName,
-            //     ProductDescription = productDTO.ProductDescription,
-            //     Price = productDTO.Price,
-            //     Stock = productDTO.Stock,
-            //     CategoryId = productDTO.CategoryId
-            // };
-            // ProductDAO.Instance.SaveProduct(new_product);
-            // return ProductMapper.mapToDTO(new_product);
-            throw new NotImplementedException();
-        }
-
         public ProductDTO GetProductById(Guid id)
         {
             // return ProductMapper.mapToDTO(ProductDAO.Instance.FindProductById(id));

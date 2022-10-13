@@ -38,8 +38,8 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("get_all")]
-        public IActionResult GetAll()
+        [HttpGet]
+        public IActionResult GetProducts()
         {
             try
             {
