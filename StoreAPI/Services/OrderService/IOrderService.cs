@@ -1,14 +1,11 @@
-﻿using StoreAPI.DTO;
-using StoreAPI.Models;
+﻿using StoreAPI.Utils;
+
 namespace StoreAPI.Services
 {
     public interface IOrderService
     {
-        Guid Add(OrderDTO order);
-        IEnumerable<OrderDTO> GetAllOrders();
-        IEnumerable<OrderDTO> GetAllOrdersByUserId(Guid id);
-        OrderDTO GetOrderById(Guid id);
-        void Update(OrderDTO order);
-        void Delete(Guid id);
+        Task<ServiceResponse<bool>> PlaceOrder(Guid userId);
+        Task<ServiceResponse<List<OrderOverviewResponse>>> GetOrders();
+        Task<ServiceResponse<OrderDetailsResponse>> GetOrderDetails(Guid orderId);
     }
 }
