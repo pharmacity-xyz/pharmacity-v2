@@ -37,20 +37,15 @@ namespace StoreAPI.Controllers
         [HttpGet]
         public IActionResult GetOrders()
         {
-            IEnumerable<OrderDTO> orderList = _orderService.GetAllOrders();
-            foreach (OrderDTO orderDTO in orderList)
-            {
-                // orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
-            }
-            return Ok(orderList);
+
+            return Ok();
         }
 
         [HttpGet("{id}")]
         public IActionResult GetOrderDetails(Guid orderId)
         {
-            OrderDTO orderDTO = _orderService.GetOrderById(orderId);
 
-            return Ok(orderDTO);
+            return Ok();
 
         }
 
