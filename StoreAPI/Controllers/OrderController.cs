@@ -46,10 +46,9 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetId(Guid orderId)
+        public IActionResult GetOrderDetails(Guid orderId)
         {
             OrderDTO orderDTO = _orderService.GetOrderById(orderId);
-            // orderDTO.OrderDetail = orderDetailRepository.GetOrderDetailByOrderID(orderDTO.OrderId);
 
             return Ok(orderDTO);
 
