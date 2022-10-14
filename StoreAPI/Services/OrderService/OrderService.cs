@@ -17,9 +17,45 @@ namespace StoreAPI.Services
             _authService = authService;
         }
 
-        public Task<ServiceResponse<OrderDetailsResponse>> GetOrderDetails(Guid orderId)
+        public async Task<ServiceResponse<OrderDetailsResponse>> GetOrderDetails(Guid orderId)
         {
-            throw new NotImplementedException();
+            var response = new ServiceResponse<OrderDetailsResponse>();
+            var order = await _context.Orders!
+                .Include(o => o.OrderItems!)
+                .ThenInclude(oi => oi.Product)
+                .Include(o => o.OrderItems)
+                .Where(o => o.UserId == _authService.GetUserId() && o.OrderId == orderId)
+                .OrderByDescending(o => o.OrderDate)
+                .FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                response.Success = false;
+                response.Message = "Order not found.";
+                return response;
+            }
+
+            var orderDetailsResponse = new OrderDetailsResponse
+            {
+                OrderDate = order.OrderDate,
+                TotalPrice = order.TotalPrice,
+                Products = new List<OrderDetailsProductResponse>()
+            };
+
+            order.OrderItems!.ForEach(item =>
+                orderDetailsResponse.Products.Add(new OrderDetailsProductResponse
+                {
+                    ProductId = item.ProductId,
+                    ImageUrl = item.Product!.ImageUrl,
+                    Quantity = item.Quantity,
+                    ProductName = item.Product.ProductName,
+                    TotalPrice = item.TotalPrice,
+                })
+            );
+
+            response.Data = orderDetailsResponse;
+
+            return response;
         }
 
         public Task<ServiceResponse<List<OrderOverviewResponse>>> GetOrders()

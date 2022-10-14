@@ -11,7 +11,7 @@ namespace StoreAPI.Models
         public virtual User? User { get; set; }
 
         [Required]
-        public float Amount { get; set; }
+        public decimal TotalPrice { get; set; }
 
         [Required]
         public string ShipAddress { get; set; } = default!;
