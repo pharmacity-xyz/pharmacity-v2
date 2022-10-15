@@ -7,8 +7,11 @@ namespace StoreAPI.Models
         [Key]
         public Guid OrderId { get; set; }
 
+        public Guid UserId { get; set; }
+        public virtual User? User { get; set; }
+
         [Required]
-        public float Amount { get; set; }
+        public decimal TotalPrice { get; set; }
 
         [Required]
         public string ShipAddress { get; set; } = default!;
@@ -19,9 +22,6 @@ namespace StoreAPI.Models
         [Required]
         public DateTime ShippedDate { get; set; }
 
-        public Guid UserId { get; set; }
-        public virtual User? User { get; set; }
-
-        public virtual OrderDetail? OrderDetail { get; set; }
+        public List<OrderItem>? OrderItems { get; set; }
     }
 }

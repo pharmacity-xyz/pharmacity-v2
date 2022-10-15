@@ -11,7 +11,10 @@ namespace StoreAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // modelBuilder.Entity<>
+            modelBuilder.Entity<CartItem>().HasKey(ci => new { ci.UserId, ci.ProductId });
+
+            modelBuilder.Entity<OrderItem>().HasKey(oi => new { oi.OrderId, oi.ProductId });
+
             modelBuilder.ApplyConfiguration(new UserConfiguration());
             base.OnModelCreating(modelBuilder);
         }
@@ -29,8 +32,9 @@ namespace StoreAPI.Data
         public virtual DbSet<Category>? Categories { get; set; }
         public virtual DbSet<Product>? Products { get; set; }
         public virtual DbSet<ProductImage>? ProductImages { get; set; }
+        public virtual DbSet<CartItem>? CartItems { get; set; }
         public virtual DbSet<Order>? Orders { get; set; }
-        public virtual DbSet<OrderDetail>? OrderDetails { get; set; }
+        public virtual DbSet<OrderItem>? OrderItems { get; set; }
 
     }
 }

@@ -1,64 +1,121 @@
 ﻿using StoreAPI.DTO;
 using StoreAPI.Models;
+using StoreAPI.Utils;
 
 namespace StoreAPI.Services
 {
     public class OrderService : IOrderService
     {
-        public Guid Add(OrderDTO orderDTO)
+        private readonly DataContext _context;
+        private readonly ICartService _cartService;
+        private readonly IAuthService _authService;
+
+        public OrderService(DataContext context, ICartService cartService, IAuthService authService)
         {
-            // Order newOrder = new Order
-            // {
-            //     OrderId = Guid.NewGuid(),
-            //     Amount = orderDTO.Amount,
-            //     ShipAddress = orderDTO.ShipAddress,
-            //     OrderDate = DateTime.UtcNow,
-            //     ShippedDate = orderDTO.ShippedDate,
-            //     UserId = orderDTO.UserId,
-            // };
-            // OrderDAO.Instance.Add(newOrder);
-            // return newOrder.OrderId;
-            throw new NotImplementedException();
+            _context = context;
+            _cartService = cartService;
+            _authService = authService;
         }
 
-        public IEnumerable<OrderDTO> GetAllOrders()
+        public async Task<ServiceResponse<OrderDetailsResponse>> GetOrderDetails(Guid orderId)
         {
-            // return OrderDAO.Instance.GetAllOrders().Select(p => OrderMapper.mapToDTO(p)).ToList();
-            throw new NotImplementedException();
+            var response = new ServiceResponse<OrderDetailsResponse>();
+            var order = await _context.Orders!
+                .Include(o => o.OrderItems!)
+                .ThenInclude(oi => oi.Product)
+                .Include(o => o.OrderItems)
+                .Where(o => o.UserId == _authService.GetUserId() && o.OrderId == orderId)
+                .OrderByDescending(o => o.OrderDate)
+                .FirstOrDefaultAsync();
+
+            if (order == null)
+            {
+                response.Success = false;
+                response.Message = "Order not found.";
+                return response;
+            }
+
+            var orderDetailsResponse = new OrderDetailsResponse
+            {
+                OrderDate = order.OrderDate,
+                TotalPrice = order.TotalPrice,
+                Products = new List<OrderDetailsProductResponse>()
+            };
+
+            order.OrderItems!.ForEach(item =>
+                orderDetailsResponse.Products.Add(new OrderDetailsProductResponse
+                {
+                    ProductId = item.ProductId,
+                    ImageUrl = item.Product!.ImageUrl,
+                    Quantity = item.Quantity,
+                    ProductName = item.Product.ProductName,
+                    TotalPrice = item.TotalPrice,
+                })
+            );
+
+            response.Data = orderDetailsResponse;
+
+            return response;
         }
 
-        public IEnumerable<OrderDTO> GetAllOrdersByUserId(Guid id)
+        public async Task<ServiceResponse<List<OrderOverviewResponse>>> GetOrders()
         {
-            // return OrderDAO.Instance.SearchByUserId(id).Select(p => OrderMapper.mapToDTO(p)).ToList();
-            throw new NotImplementedException();
+            var response = new ServiceResponse<List<OrderOverviewResponse>>();
+            var orders = await _context.Orders!
+                .Include(o => o.OrderItems!)
+                .ThenInclude(oi => oi.Product)
+                .Where(o => o.UserId == _authService.GetUserId())
+                .OrderByDescending(o => o.OrderDate)
+                .ToListAsync();
+
+            var orderResponse = new List<OrderOverviewResponse>();
+            orders.ForEach(o => orderResponse.Add(new OrderOverviewResponse
+            {
+                Id = o.OrderId,
+                OrderDate = o.OrderDate,
+                TotalPrice = o.TotalPrice,
+                Product = o.OrderItems!.Count > 1 ?
+                    $"{o.OrderItems.First().Product!.ProductName} and" +
+                    $" {o.OrderItems.Count - 1} more..." :
+                    o.OrderItems.First().Product!.ProductName,
+                ProductImageUrl = o.OrderItems.First().Product!.ImageUrl
+            }));
+
+            response.Data = orderResponse;
+
+            return response;
         }
 
-        public OrderDTO GetOrderById(Guid id)
+        public async Task<ServiceResponse<bool>> PlaceOrder(Guid userId)
         {
-            // return OrderMapper.mapToDTO(OrderDAO.Instance.GetById(id));
-            throw new NotImplementedException();
-        }
+            var products = (await _cartService.GetDbCartProducts(userId)).Data;
+            decimal totalPrice = 0;
+            products!.ForEach(product => totalPrice += product.Price * product.Quantity);
 
-        public void Update(OrderDTO orderDTO)
-        {
-            // Order order = OrderDAO.Instance.GetById(orderDTO.OrderId);
-            // Order tempOrder = new Order
-            // {
-            //     OrderId = order.OrderId,
-            //     Amount = orderDTO.Amount,
-            //     ShipAddress = orderDTO.ShipAddress,
-            //     OrderDate = order.OrderDate,
-            //     ShippedDate = orderDTO.ShippedDate,
-            //     UserId = orderDTO.UserId,
-            // };
-            // OrderDAO.Instance.Update(tempOrder);
-            throw new NotImplementedException();
-        }
+            var orderItems = new List<OrderItem>();
+            products.ForEach(product => orderItems.Add(new OrderItem
+            {
+                ProductId = product.ProductId,
+                Quantity = product.Quantity,
+                TotalPrice = product.Price * product.Quantity
+            }));
 
-        public void Delete(Guid id)
-        {
-            // OrderDAO.Instance.Delete(id);
-            throw new NotImplementedException();
+            var order = new Order
+            {
+                UserId = userId,
+                OrderDate = DateTime.Now,
+                TotalPrice = totalPrice,
+                OrderItems = orderItems
+            };
+
+            _context.Orders!.Add(order);
+
+            _context.CartItems!.RemoveRange(_context.CartItems
+                .Where(ci => ci.UserId == userId));
+
+            await _context.SaveChangesAsync();
+
+            return new ServiceResponse<bool> { Data = true };
         }
     }
 }
