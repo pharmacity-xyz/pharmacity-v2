@@ -1,5 +1,6 @@
 // using Stripe.Checkout;
 using StoreAPI.Utils;
+using Stripe.Checkout;
 
 namespace StoreAPI.Services
 {

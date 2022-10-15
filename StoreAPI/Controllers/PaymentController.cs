@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using Stripe;
 
 using StoreAPI.Utils;
 using StoreAPI.Services;
