@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using StoreAPI.Utils;
 using StoreAPI.Services;
 using Stripe;
@@ -10,14 +11,19 @@ namespace StoreAPI.Utils
         private readonly ICartService _cartService;
         private readonly IAuthService _authService;
         private readonly IOrderService _orderService;
+        private readonly IHostingEnvironment _env;
 
-        const string secret = "whsec_cq1WH9CX9U1zxU9EpbBVvWOhfb6e5ysR";
+        const string secret = _env.SECRET_KEY;
 
-        public PaymentService(ICartService cartService,
+        public PaymentService(
+            ICartService cartService,
             IAuthService authService,
-            IOrderService orderService)
+            IOrderService orderService,
+            IHostingEnvironment env
+        )
         {
-            StripeConfiguration.ApiKey = "sk_test_51HnFFuJWja1dketA1LY3VQds3XWpByD5GE8laKrxyNldWKnXXdktvITJiG3PYNDMwpSkrAv33d7JjvHDEUGPPo2E00vkDMlVIb";
+            _env = env;
+            StripeConfiguration.ApiKey = _env.PUBLISHABLE_KEY;
 
             _cartService = cartService;
             _authService = authService;
