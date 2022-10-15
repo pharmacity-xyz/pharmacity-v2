@@ -1,4 +1,3 @@
-// using Stripe.Checkout;
 using StoreAPI.Utils;
 using Stripe.Checkout;
 
