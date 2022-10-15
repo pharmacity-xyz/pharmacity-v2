@@ -10,6 +10,6 @@ namespace StoreAPI.Services
         Task<ServiceResponse<bool>> ChangePassword(Guid userId, string newPassword);
         Guid GetUserId();
         string GetUserEmail();
-        // Task<User> GetUserByEmail();
+        Task<User?> GetUserByEmail(string email);
     }
 }
