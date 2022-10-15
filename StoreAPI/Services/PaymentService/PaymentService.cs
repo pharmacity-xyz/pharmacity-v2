@@ -36,7 +36,7 @@ namespace StoreAPI.Utils
                     Currency = "usd",
                     ProductData = new SessionLineItemPriceDataProductDataOptions
                     {
-                        Name = product.Title,
+                        Name = product.ProductName,
                         Images = new List<string> { product.ImageUrl }
                     }
                 },
@@ -80,8 +80,8 @@ namespace StoreAPI.Utils
                 if (stripeEvent.Type == Events.CheckoutSessionCompleted)
                 {
                     var session = stripeEvent.Data.Object as Session;
-                    var user = await _authService.GetUserByEmail(session.CustomerEmail);
-                    await _orderService.PlaceOrder(user.Id);
+                    var user = await _authService.GetUserByEmail(session!.CustomerEmail);
+                    await _orderService.PlaceOrder(user!.UserId);
                 }
 
                 return new ServiceResponse<bool> { Data = true };
