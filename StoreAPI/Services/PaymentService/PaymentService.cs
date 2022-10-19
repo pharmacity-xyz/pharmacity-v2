@@ -11,19 +11,19 @@ namespace StoreAPI.Utils
         private readonly ICartService _cartService;
         private readonly IAuthService _authService;
         private readonly IOrderService _orderService;
-        private readonly IHostingEnvironment _env;
+        // private readonly IHostingEnvironment _env;
 
-        const string secret = _env.SECRET_KEY;
+        // const string secret = _env.SECRET_KEY;
 
         public PaymentService(
             ICartService cartService,
             IAuthService authService,
-            IOrderService orderService,
-            IHostingEnvironment env
+            IOrderService orderService
+            // IHostingEnvironment env
         )
         {
-            _env = env;
-            StripeConfiguration.ApiKey = _env.PUBLISHABLE_KEY;
+            // _env = env;
+            // StripeConfiguration.ApiKey = _env.PUBLISHABLE_KEY;
 
             _cartService = cartService;
             _authService = authService;
@@ -77,18 +77,18 @@ namespace StoreAPI.Utils
             var json = await new StreamReader(request.Body).ReadToEndAsync();
             try
             {
-                var stripeEvent = EventUtility.ConstructEvent(
-                        json,
-                        request.Headers["Stripe-Signature"],
-                        secret
-                    );
+                // var stripeEvent = EventUtility.ConstructEvent(
+                //         json,
+                //         request.Headers["Stripe-Signature"],
+                //         secret
+                //     );
 
-                if (stripeEvent.Type == Events.CheckoutSessionCompleted)
-                {
-                    var session = stripeEvent.Data.Object as Session;
-                    var user = await _authService.GetUserByEmail(session!.CustomerEmail);
-                    await _orderService.PlaceOrder(user!.UserId);
-                }
+                // if (stripeEvent.Type == Events.CheckoutSessionCompleted)
+                // {
+                //     var session = stripeEvent.Data.Object as Session;
+                //     var user = await _authService.GetUserByEmail(session!.CustomerEmail);
+                //     await _orderService.PlaceOrder(user!.UserId);
+                // }
 
                 return new ServiceResponse<bool> { Data = true };
             }
