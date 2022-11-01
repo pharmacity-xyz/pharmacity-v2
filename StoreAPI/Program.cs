@@ -85,4 +85,6 @@ app.UseCors();
 
 app.MapControllers();
 
+app.Urls.Add($"http://0.0.0.0:8000");
+
 app.Run();
