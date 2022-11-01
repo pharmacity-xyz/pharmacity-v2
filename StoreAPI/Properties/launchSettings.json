@@ -8,8 +8,7 @@
         "PUBLISHABLE_KEY": "pk_test_51Lt6NAGlVubd39S7IEdDGdPrGQbvBafjeOoomCVpM79fz3J8Z6ipJR37aSKSu16vKNMVX1mNSp2bRcv5Ml0cKFF600pTUT0g49",
         "SECRET_KEY": "sk_test_51Lt6NAGlVubd39S7721SdXDerAaaGPYD4oovoDhRKiXJASrObodzE9uUYavkk7ztBpgMdECUsjvNJSSA6jhD5wqA00CKYcuGlO"
       },
-      "dotnetRunMessages": true,
-      "applicationUrl": "https://localhost:7088;http://localhost:5088"
+      "dotnetRunMessages": true
     },
     "IIS Express": {
       "commandName": "IISExpress",
