@@ -7,6 +7,8 @@
 - [.NET6.0](https://learn.microsoft.com/en-us/dotnet/)
 - [ASP.NET](https://learn.microsoft.com/en-us/aspnet/core/?view=aspnetcore-6.0)
 - [Docker](https://www.docker.com/)
+- [Stripe API](https://stripe.com/docs/api/authentication?lang=dotnet)
+- [Render](https://render.com)
 
 ## Getting Started
 
@@ -18,20 +20,14 @@
 
 If you have not installed docker, please [install](https://www.docker.com/)
 
-2. Move StoreAPI folder
+2. Run the project
 
 ```bash
-cd StoreClient
+./scripts/start_project.sh
 ```
 
-3. Build the project
+## Stripe CLI
 
 ```bash
-dotnet build
-```
-
-4. Run the project
-
-```bash
-dotnet run
+ stripe listen --forward-to localhost:8000/api/payment/webhook
 ```

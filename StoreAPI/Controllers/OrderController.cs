@@ -24,10 +24,10 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("{orderId}")]
+        [HttpGet("orderid/{orderId}")]
         public async Task<ActionResult<ServiceResponse<OrderDetailsResponse>>> GetOrderDetails(Guid orderId)
         {
-            var response = await _orderService.GetOrders();
+            var response = await _orderService.GetOrderDetails(orderId);
             return Ok(response);
         }
     }

@@ -1,30 +1,26 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using StoreAPI.Utils;
+using StoreAPI.Models;
 using StoreAPI.Services;
 using Stripe;
 using Stripe.Checkout;
 
-namespace StoreAPI.Utils
+namespace StoreAPI.Services
 {
     public class PaymentService : IPaymentService
     {
         private readonly ICartService _cartService;
         private readonly IAuthService _authService;
         private readonly IOrderService _orderService;
-        // private readonly IHostingEnvironment _env;
 
-        // const string secret = _env.SECRET_KEY;
+        const string secret = "whsec_f805a6ec3cf411e6009bf9223cd93b58d5e462707ebecf9564232d9c3903e169";
 
         public PaymentService(
             ICartService cartService,
             IAuthService authService,
             IOrderService orderService
-            // IHostingEnvironment env
         )
         {
-            // _env = env;
-            // StripeConfiguration.ApiKey = _env.PUBLISHABLE_KEY;
-
             _cartService = cartService;
             _authService = authService;
             _orderService = orderService;
@@ -63,8 +59,8 @@ namespace StoreAPI.Utils
                 },
                 LineItems = lineItems,
                 Mode = "payment",
-                SuccessUrl = "https://localhost:7226/order-success",
-                CancelUrl = "https://localhost:7226/cart"
+                SuccessUrl = "http://localhost:3000/checkout/order-success",
+                CancelUrl = "http://localhost:3000/cart"
             };
 
             var service = new SessionService();
@@ -77,18 +73,18 @@ namespace StoreAPI.Utils
             var json = await new StreamReader(request.Body).ReadToEndAsync();
             try
             {
-                // var stripeEvent = EventUtility.ConstructEvent(
-                //         json,
-                //         request.Headers["Stripe-Signature"],
-                //         secret
-                //     );
+                var stripeEvent = EventUtility.ConstructEvent(
+                        json,
+                        request.Headers["Stripe-Signature"],
+                        secret
+                );
 
-                // if (stripeEvent.Type == Events.CheckoutSessionCompleted)
-                // {
-                //     var session = stripeEvent.Data.Object as Session;
-                //     var user = await _authService.GetUserByEmail(session!.CustomerEmail);
-                //     await _orderService.PlaceOrder(user!.UserId);
-                // }
+                if (stripeEvent.Type == Events.CheckoutSessionCompleted)
+                {
+                    var session = stripeEvent.Data.Object as Session;
+                    var user = await _authService.GetUserByEmail(session!.CustomerEmail);
+                    await _orderService.PlaceOrder(user!.UserId);
+                }
 
                 return new ServiceResponse<bool> { Data = true };
             }

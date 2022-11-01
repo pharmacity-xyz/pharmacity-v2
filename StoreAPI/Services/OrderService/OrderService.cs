@@ -103,8 +103,9 @@ namespace StoreAPI.Services
             var order = new Order
             {
                 UserId = userId,
-                OrderDate = DateTime.Now,
+                OrderDate = DateTime.UtcNow,
                 TotalPrice = totalPrice,
+                ShipAddress = "Tokyo",
                 OrderItems = orderItems
             };
 

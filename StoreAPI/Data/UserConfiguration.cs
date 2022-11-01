@@ -10,6 +10,5 @@ namespace StoreAPI.Data
         {
             builder.HasIndex(user => user.Email).IsUnique();
         }
-
     }
 }
