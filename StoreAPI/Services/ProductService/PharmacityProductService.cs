@@ -4,13 +4,12 @@ using StoreAPI.Utils;
 
 namespace StoreAPI.Services
 {
-    public class ProductService : IProductService
+    public class PharmacityProductService : IProductService
     {
-
         private readonly DataContext _context;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public ProductService(DataContext context, IHttpContextAccessor httpContextAccessor)
+        public PharmacityProductService(DataContext context, IHttpContextAccessor httpContextAccessor)
         {
             _context = context;
             _httpContextAccessor = httpContextAccessor;
