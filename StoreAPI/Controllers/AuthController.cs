@@ -47,7 +47,7 @@ namespace StoreAPI.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<ServiceResponse<string>>> Login(UserLogin request)
+        public async Task<ActionResult<ServiceResponse<LoginResponse>>> Login(UserLogin request)
         {
             var response = await _authService.Login(request.Email, request.Password);
             if (!response.Success)

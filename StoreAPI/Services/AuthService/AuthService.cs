@@ -42,9 +42,9 @@ namespace StoreAPI.Services
             return new ServiceResponse<Guid> { Data = user.UserId, Message = "Registration successful" };
         }
 
-        public async Task<ServiceResponse<string>> Login(string email, string password)
+        public async Task<ServiceResponse<LoginResponse>> Login(string email, string password)
         {
-            var response = new ServiceResponse<string>();
+            var response = new ServiceResponse<LoginResponse>();
             var user = await _context.Users!.FirstOrDefaultAsync(x => x.Email.ToLower().Equals(email.ToLower()));
             if (user == null)
             {
@@ -58,7 +58,12 @@ namespace StoreAPI.Services
             }
             else
             {
-                response.Data = CreateToken(user);
+                var loginResponse = new LoginResponse
+                {
+                    UserId = user.UserId,
+                    Token = CreateToken(user)
+                };
+                response.Data = loginResponse;
             }
 
             return response;
@@ -135,7 +140,7 @@ namespace StoreAPI.Services
 
         public async Task<User?> GetUserByEmail(string email)
         {
-            return await _context.Users!.FirstOrDefaultAsync(u => 
+            return await _context.Users!.FirstOrDefaultAsync(u =>
                 u.Email.Equals(email)
             );
         }
