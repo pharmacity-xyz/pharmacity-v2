@@ -29,5 +29,5 @@ If you have not installed docker, please [install](https://www.docker.com/)
 ## Stripe CLI
 
 ```bash
- stripe listen --forward-to localhost:8000/api/payment/webhook
+ stripe listen --forward-to localhost:8000/api/payment
 ```
