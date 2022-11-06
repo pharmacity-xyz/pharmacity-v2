@@ -73,5 +73,31 @@ namespace StoreAPI.Controllers
             }
             return Ok(response);
         }
+
+        [HttpGet("get_email")]
+        public async Task<ActionResult<ServiceResponse<bool>>> GetEmail(string email)
+        {
+            var user = await _authService.GetUserByEmail(email);
+            return new ServiceResponse<bool>
+            {
+                Data = user != null ? true : false,
+                Success = user != null ? true : false,
+                Message = user != null ? "" : "Can not find the user"
+            };
+        }
+
+        [HttpPost("forgot_password")]
+        public async Task<ActionResult<ServiceResponse<bool>>> ForgotPassword(string email, string newPassword)
+        {
+            var user = await _authService.GetUserByEmail(email);
+            var response = await _authService.ChangePassword(user!.UserId, newPassword);
+
+            if (!response.Success)
+            {
+
+                return BadRequest(response);
+            }
+            return Ok(response);
+        }
     }
 }
