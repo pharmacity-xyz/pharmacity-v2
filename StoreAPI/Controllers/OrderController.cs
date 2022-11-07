@@ -34,7 +34,7 @@ namespace StoreAPI.Controllers
         [HttpGet("admin"), Authorize(Roles = "Admin")]
         public async Task<ActionResult<ServiceResponse<List<OrderOverviewResponse>>>> GetOrdersForAdmin()
         {
-            var response = await _orderService.GetOrders();
+            var response = await _orderService.GetOrdersForAdmin();
             return Ok(response);
         }
     }
