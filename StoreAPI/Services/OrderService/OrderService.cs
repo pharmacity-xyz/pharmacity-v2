@@ -113,6 +113,22 @@ namespace StoreAPI.Services
             return response;
         }
 
+        public async Task<ServiceResponse<uint[]>> GetOrdersPerMonth()
+        {
+            var response = new ServiceResponse<uint[]>();
+            var orders = await _context.Orders!.ToListAsync();
+
+            uint[] orderData = new uint[12]; 
+            orders.ForEach(o => {
+                var month = o.OrderDate.Month;
+                orderData[month-1] += 1; 
+            });
+
+            response.Data = orderData;
+
+            return response;
+        }
+
         public async Task<ServiceResponse<bool>> PlaceOrder(Guid userId)
         {
             var products = (await _cartService.GetDbCartProducts(userId)).Data;
