@@ -113,18 +113,40 @@ namespace StoreAPI.Services
             return response;
         }
 
-        public async Task<ServiceResponse<uint[]>> GetOrdersPerMonth()
+        public async Task<ServiceResponse<uint[]>> GetOrdersPerMonth(uint year, uint month)
         {
             var response = new ServiceResponse<uint[]>();
             var orders = await _context.Orders!.ToListAsync();
 
-            uint[] orderData = new uint[12]; 
-            orders.ForEach(o => {
-                var month = o.OrderDate.Month;
-                orderData[month-1] += 1; 
-            });
+            // Get the data of specific year, return month data
+            if (year != 0 && month == 0)
+            {
+                uint[] orderData = new uint[12];
+                orders.ForEach(o =>
+                {
+                    if (o.OrderDate.Year == year)
+                    {
+                        var month = o.OrderDate.Month;
+                        orderData[month - 1] += 1;
+                    }
+                });
+                response.Data = orderData;
+            }
 
-            response.Data = orderData;
+            // Get the data of specific month, return day data
+            if (year != 0 && month != 0)
+            {
+                uint[] orderData = new uint[31];
+                orders.ForEach(o =>
+                {
+                    if (o.OrderDate.Year == year && o.OrderDate.Month == month)
+                    {
+                        var day = o.OrderDate.Day;
+                        orderData[day - 1] += 1;
+                    }
+                });
+                response.Data = orderData;
+            }
 
             return response;
         }

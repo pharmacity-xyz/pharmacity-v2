@@ -38,10 +38,10 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
-        [HttpGet("charts/month"), Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ServiceResponse<uint[]>>> GetOrdersPerMonth()
+        [HttpGet("charts"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<uint[]>>> GetOrdersPerMonth(uint year, uint month)
         {
-            var response = await _orderService.GetOrdersPerMonth();
+            var response = await _orderService.GetOrdersPerMonth(year, month);
             return Ok(response);
         }
     }
