@@ -9,5 +9,6 @@ namespace StoreAPI.Services
         Task<ServiceResponse<OrderDetailsResponse>> GetOrderDetails(Guid orderId);
         Task<ServiceResponse<List<OrderOverviewResponse>>> GetOrdersForAdmin();
         Task<ServiceResponse<uint[]>> GetOrdersPerMonth(uint year, uint month);
+        Task<ServiceResponse<OrderByCategoryResponse>> GetOrdersForPieChart();
     }
 }
