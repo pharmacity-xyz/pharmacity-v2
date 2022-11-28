@@ -113,6 +113,50 @@ namespace StoreAPI.Services
             return response;
         }
 
+        public async Task<ServiceResponse<OrderByCategoryResponse>> GetOrdersForPieChart()
+        {
+            var response = new ServiceResponse<OrderByCategoryResponse>();
+            var orders = await _context.Orders!
+                            .Include(o => o.OrderItems!)
+                            .ThenInclude(oi => oi.Product)
+                            .OrderByDescending(o => o.OrderDate)
+                            .ToListAsync();
+
+            var categories = await _context.Categories!.ToListAsync();
+
+            var labelList = new List<string>();
+            var colorsList = new List<string>();
+            var numbersList = new List<int>();
+            numbersList.AddRange(Enumerable.Repeat(0, categories.Count));
+
+            categories.ForEach(c =>
+            {
+                labelList.Add(c.Name);
+                Random rnd = new Random();
+                colorsList.Add($"rgb({rnd.Next(0, 255)}, {rnd.Next(0, 255)}, {rnd.Next(0, 255)})");
+            });
+
+            orders.ForEach(o =>
+            {
+                for (int i = 0; i < labelList.Count; i++)
+                {
+                    if (labelList[i] == o.OrderItems!.First().Product!.Category!.Name)
+                    {
+                        numbersList[i] += 1;
+                    }
+                }
+            });
+
+            var orderByCategoryRes = new OrderByCategoryResponse
+            {
+                Labels = labelList,
+                Colors = colorsList,
+                Numbers = numbersList,
+            };
+            response.Data = orderByCategoryRes;
+            return response;
+        }
+
         public async Task<ServiceResponse<uint[]>> GetOrdersPerMonth(uint year, uint month)
         {
             var response = new ServiceResponse<uint[]>();

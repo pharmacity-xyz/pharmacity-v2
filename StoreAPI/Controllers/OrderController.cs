@@ -39,9 +39,16 @@ namespace StoreAPI.Controllers
         }
 
         [HttpGet("charts"), Authorize(Roles = "Admin")]
-        public async Task<ActionResult<ServiceResponse<uint[]>>> GetOrdersPerMonth(uint year, uint month)
+        public async Task<ActionResult<ServiceResponse<uint[]>>> GetOrdersForChart(uint year, uint month)
         {
             var response = await _orderService.GetOrdersPerMonth(year, month);
+            return Ok(response);
+        }
+
+        [HttpGet("piecharts"), Authorize(Roles = "Admin")]
+        public async Task<ActionResult<ServiceResponse<OrderByCategoryResponse>>> GetOrdersForPieChart(uint year, uint month)
+        {
+            var response = await _orderService.GetOrdersForPieChart();
             return Ok(response);
         }
     }
