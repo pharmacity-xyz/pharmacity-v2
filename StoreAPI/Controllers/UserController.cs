@@ -27,6 +27,13 @@ namespace StoreAPI.Controllers
             return Ok(response);
         }
 
+        [HttpGet("{userId}")]
+        public async Task<ActionResult<ServiceResponse<User>>> GetUser()
+        {
+            var response = await _userService.GetUser();
+            return Ok(response);
+        }
+
         [HttpPut, Authorize]
         public async Task<ActionResult<ServiceResponse<User>>> AddOrUpdate(UserUpdate request)
         {
