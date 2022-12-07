@@ -23,5 +23,7 @@ namespace StoreAPI.Models
         public DateTime ShippedDate { get; set; }
 
         public List<OrderItem>? OrderItems { get; set; }
+
+        public string StatusOrder { get; set; } = default!;
     }
 }

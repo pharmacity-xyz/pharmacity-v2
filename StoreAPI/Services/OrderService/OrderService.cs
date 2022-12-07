@@ -39,6 +39,7 @@ namespace StoreAPI.Services
             {
                 OrderDate = order.OrderDate,
                 TotalPrice = order.TotalPrice,
+                StatusOrder = order.StatusOrder,
                 Products = new List<OrderDetailsProductResponse>()
             };
 
@@ -74,6 +75,7 @@ namespace StoreAPI.Services
                 Id = o.OrderId,
                 OrderDate = o.OrderDate,
                 TotalPrice = o.TotalPrice,
+                StatusOrder = o.StatusOrder,
                 Product = o.OrderItems!.Count > 1 ?
                     $"{o.OrderItems.First().Product!.ProductName} and" +
                     $" {o.OrderItems.Count - 1} more..." :
@@ -100,6 +102,7 @@ namespace StoreAPI.Services
             {
                 Id = o.OrderId,
                 OrderDate = o.OrderDate,
+                StatusOrder = o.StatusOrder,
                 TotalPrice = o.TotalPrice,
                 Product = o.OrderItems!.Count > 1 ?
                     $"{o.OrderItems.First().Product!.ProductName} and" +
@@ -215,7 +218,8 @@ namespace StoreAPI.Services
                 OrderDate = DateTime.UtcNow,
                 TotalPrice = totalPrice,
                 ShipAddress = shipAddress,
-                OrderItems = orderItems
+                OrderItems = orderItems,
+                StatusOrder = "PAID"
             };
 
             _context.Orders!.Add(order);
