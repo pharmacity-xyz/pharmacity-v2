@@ -83,7 +83,14 @@ namespace StoreAPI.Services
                 {
                     var session = stripeEvent.Data.Object as Session;
                     var user = await _authService.GetUserByEmail(session!.CustomerEmail);
-                    await _orderService.PlaceOrder(user!.UserId);
+                    var address = session.ShippingDetails.Address;
+                    var addressLine1 = address.Line1 != string.Empty || address.Line1 != null ? address.Line1 + ", " : "";
+                    // var addressLine2 = address.Line2 != string.Empty || address.Line2 != null ? address.Line2 + ", " : "";
+                    var city = address.City != string.Empty || address.City != null ? address.City + ", " : "";
+                    var country = address.Country != string.Empty || address.Country != null ? address.Country : "";
+                    var shipAddress = $"{addressLine1}{city}{country}";
+
+                    await _orderService.PlaceOrder(user!.UserId, shipAddress);
                 }
 
                 return new ServiceResponse<bool> { Data = true };

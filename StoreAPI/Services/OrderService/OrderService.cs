@@ -195,7 +195,7 @@ namespace StoreAPI.Services
             return response;
         }
 
-        public async Task<ServiceResponse<bool>> PlaceOrder(Guid userId)
+        public async Task<ServiceResponse<bool>> PlaceOrder(Guid userId, string shipAddress)
         {
             var products = (await _cartService.GetDbCartProducts(userId)).Data;
             decimal totalPrice = 0;
@@ -214,7 +214,7 @@ namespace StoreAPI.Services
                 UserId = userId,
                 OrderDate = DateTime.UtcNow,
                 TotalPrice = totalPrice,
-                ShipAddress = "Tokyo",
+                ShipAddress = shipAddress,
                 OrderItems = orderItems
             };
 
