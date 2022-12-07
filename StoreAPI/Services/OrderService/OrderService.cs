@@ -231,5 +231,24 @@ namespace StoreAPI.Services
 
             return new ServiceResponse<bool> { Data = true };
         }
+
+        public async Task<ServiceResponse<OrderDetailsResponse>> UpdateStatusOrder(Guid orderId, string statusOrder)
+        {
+            var res = new ServiceResponse<OrderDetailsResponse>();
+            var oldOrder = await _context!.Orders!.FindAsync(orderId);
+
+            if (oldOrder == null)
+            {
+                res.Success = false;
+                res.Message = "Can not find order";
+                return res;
+            }
+
+            oldOrder.StatusOrder = statusOrder;
+
+            await _context.SaveChangesAsync();
+
+            return await GetOrderDetails(orderId);
+        }
     }
 }

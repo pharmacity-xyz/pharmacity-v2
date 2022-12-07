@@ -1,4 +1,5 @@
 ﻿using StoreAPI.Utils;
+using StoreAPI.Models;
 
 namespace StoreAPI.Services
 {
@@ -10,5 +11,6 @@ namespace StoreAPI.Services
         Task<ServiceResponse<List<OrderOverviewResponse>>> GetOrdersForAdmin();
         Task<ServiceResponse<uint[]>> GetOrdersPerMonth(uint year, uint month);
         Task<ServiceResponse<OrderByCategoryResponse>> GetOrdersForPieChart();
+        Task<ServiceResponse<OrderDetailsResponse>> UpdateStatusOrder(Guid orderId, string statusOrder);
     }
 }

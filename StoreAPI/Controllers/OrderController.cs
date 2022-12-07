@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 
 using StoreAPI.Utils;
 using StoreAPI.Services;
+using StoreAPI.Models;
 
 namespace StoreAPI.Controllers
 {
@@ -49,6 +50,13 @@ namespace StoreAPI.Controllers
         public async Task<ActionResult<ServiceResponse<OrderByCategoryResponse>>> GetOrdersForPieChart(uint year, uint month)
         {
             var response = await _orderService.GetOrdersForPieChart();
+            return Ok(response);
+        }
+
+        [HttpPut]
+        public async Task<ActionResult<ServiceResponse<OrderDetailsResponse>>> UpdateStatusOrder(Guid orderId, string statusOrder)
+        {
+            var response = await _orderService.UpdateStatusOrder(orderId, statusOrder);
             return Ok(response);
         }
     }
